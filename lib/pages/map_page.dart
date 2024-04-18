@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 // import 'package:flutter_map/flutter_map.dart';
 // import 'package:latlong2/latlong.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -97,47 +99,77 @@ class MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 17.0,
-            ),
-            zoomControlsEnabled: false,
-            polylines: _polylines,
-            onCameraMove: (CameraPosition position) {
-              LatLng newCenter = position.target;
-              _updatePolyline(newCenter, qiblaCoordinates);
-            },
-            circles: _circles,
-          ),
-          const SafeArea(
-            child: AddressSearchBar(),
-          ),
-        ],
-      ),
-      floatingActionButton: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Center(
+        child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(35, 0, 0, 0),
-              child: InfoButton(
-                distanceToKaaba: "3578 km", // This would be dynamic in a real app
-                onCenterMap: _centerMapToUserLocation,
+            const SafeArea(
+              bottom: false,
+              child: AddressSearchBar(),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(28),
+                  child: GoogleMap(
+                    onMapCreated: _onMapCreated,
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    initialCameraPosition: CameraPosition(
+                      target: _center,
+                      zoom: 17.0,
+                    ),
+                    zoomControlsEnabled: false,
+                    polylines: _polylines,
+                    onCameraMove: (CameraPosition position) {
+                      LatLng newCenter = position.target;
+                      _updatePolyline(newCenter, qiblaCoordinates);
+                    },
+                    circles: _circles,
+                  ),
+                ),
               ),
             ),
-            FloatingActionButton(
-              onPressed: _centerMapToUserLocation,
-              child: const Icon(Icons.my_location),
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InfoButton(
+                      distanceToKaaba: "3578 km", // This would be dynamic in a real app
+                      onCenterMap: _centerMapToUserLocation,
+                    ),
+                    FloatingActionButton(
+                      onPressed: _centerMapToUserLocation,
+                      child: const Icon(Icons.my_location),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
       ),
+      // floatingActionButton: SafeArea(
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.fromLTRB(35, 0, 0, 0),
+      //         child: InfoButton(
+      //           distanceToKaaba: "3578 km", // This would be dynamic in a real app
+      //           onCenterMap: _centerMapToUserLocation,
+      //         ),
+      //       ),
+      //       FloatingActionButton(
+      //         onPressed: _centerMapToUserLocation,
+      //         child: const Icon(Icons.my_location),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
