@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-// import 'package:flutter_map/flutter_map.dart';
-// import 'package:latlong2/latlong.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:simply_qibla/compositions/sq_app_bar.dart';
 import 'package:simply_qibla/pages/address_search_bar.dart';
 import 'package:simply_qibla/pages/info_button.dart';
 
@@ -39,6 +37,12 @@ class MapPageState extends State<MapPage> {
       zIndex: 10000,
     ),
   };
+
+  @override
+  void initState() {
+    _centerMapToUserLocation();
+    super.initState();
+  }
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -87,28 +91,28 @@ class MapPageState extends State<MapPage> {
     var currentLocation = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high);
 
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        target: LatLng(currentLocation.latitude, currentLocation.longitude),
-        zoom: 19.0,
-      ),
-    ));
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(currentLocation.latitude, currentLocation.longitude),
+          zoom: 19.0,
+        ),
+      )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: const SQAppBar(),
       body: Center(
         child: Column(
           children: [
-            const SafeArea(
-              bottom: false,
-              child: AddressSearchBar(),
-            ),
+            const AddressSearchBar(),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                padding: const EdgeInsets.only(left: 20, right: 20,),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(28),
                   child: GoogleMap(
@@ -152,24 +156,6 @@ class MapPageState extends State<MapPage> {
           ],
         ),
       ),
-      // floatingActionButton: SafeArea(
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       Padding(
-      //         padding: const EdgeInsets.fromLTRB(35, 0, 0, 0),
-      //         child: InfoButton(
-      //           distanceToKaaba: "3578 km", // This would be dynamic in a real app
-      //           onCenterMap: _centerMapToUserLocation,
-      //         ),
-      //       ),
-      //       FloatingActionButton(
-      //         onPressed: _centerMapToUserLocation,
-      //         child: const Icon(Icons.my_location),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
