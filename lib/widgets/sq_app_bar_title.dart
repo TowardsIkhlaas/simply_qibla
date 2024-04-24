@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simply_qibla/styles/style.dart';
 
 class SQAppBarTitle extends StatelessWidget {
   const SQAppBarTitle({super.key});
@@ -9,13 +10,10 @@ class SQAppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(bottom: 4.0),
-          child: Icon(
-            TablerIcons.building_mosque,
-            size: 32.0,
-            color: Colors.white,
-          ),
+        const Icon(
+          TablerIcons.location,
+          size: AppDimensions.appBarIconSize,
+          color: Colors.white,
         ),
         Text(
           'SimplyQibla',
