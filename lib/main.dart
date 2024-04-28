@@ -13,6 +13,7 @@ Future main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   await dotenv.load(fileName: ".env");
+
   runApp(const MyApp());
 }
 
