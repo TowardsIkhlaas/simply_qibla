@@ -13,7 +13,10 @@ Future main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+
+  // Force portrait orientation
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+    .then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
