@@ -14,9 +14,7 @@ Future main() async {
 
   await dotenv.load(fileName: ".env");
 
-  // Force portrait orientation
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-    .then((value) => runApp(const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
