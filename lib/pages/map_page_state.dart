@@ -3,6 +3,7 @@ part of 'map_page.dart';
 class MapPageState extends State<MapPage> {
   late GoogleMapController mapController;
   String? _mapStyle;
+  MapType _currentMapType = MapType.normal;
   LatLng qiblaCoordinates = const LatLng(
     DefaultCoordinates.qiblaLatitude,
     DefaultCoordinates.qiblaLongitude,
@@ -110,8 +111,10 @@ class MapPageState extends State<MapPage> {
               onMapCreated: _onMapCreated,
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
+              compassEnabled: true,
               polylines: _polylines,
               style: _mapStyle,
+              mapType: _currentMapType,
               zoomControlsEnabled: false,
               initialCameraPosition: CameraPosition(target: _center, zoom: 19.0),
               onCameraMove: (CameraPosition position) {
@@ -143,12 +146,24 @@ class MapPageState extends State<MapPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FloatingActionButton(
-              onPressed: () => {},
-              child: const Icon(TablerIcons.map),
+              onPressed: () => {
+                setState(() {
+                  _currentMapType = (_currentMapType == MapType.normal)
+                      ? MapType.hybrid
+                      : MapType.normal;
+                })
+              },
+              child: const Icon(
+                TablerIcons.map,
+                size: AppDimensions.appBarIconSize,
+              ),
             ),
             FloatingActionButton(
               onPressed: () => centerMapToUserLocation(),
-              child: const Icon(TablerIcons.current_location),
+              child: const Icon(
+                TablerIcons.current_location,
+                size: AppDimensions.appBarIconSize,
+              ),
             ),
           ],
         ),
