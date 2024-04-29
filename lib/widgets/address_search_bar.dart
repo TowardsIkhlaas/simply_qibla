@@ -72,7 +72,9 @@ class _AddressSearchBarState extends State<AddressSearchBar> {
       padding: const EdgeInsets.all(AppPadding.standard),
       child: SearchAnchor(
         isFullScreen: false,
-        viewConstraints: BoxConstraints(maxHeight: screenHeight * 0.3),
+        viewConstraints: BoxConstraints(
+          maxHeight: screenHeight * AppDimensions.suggestionsHeightMultiplier,
+        ),
         builder: (BuildContext context, SearchController controller) {
           return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Expanded(
