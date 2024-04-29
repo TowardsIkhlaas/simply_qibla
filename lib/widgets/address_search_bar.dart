@@ -66,10 +66,13 @@ class _AddressSearchBarState extends State<AddressSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
       padding: const EdgeInsets.all(AppPadding.standard),
       child: SearchAnchor(
         isFullScreen: false,
+        viewConstraints: BoxConstraints(maxHeight: screenHeight * 0.3),
         builder: (BuildContext context, SearchController controller) {
           return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Expanded(
