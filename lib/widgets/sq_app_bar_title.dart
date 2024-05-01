@@ -12,7 +12,7 @@ class SQAppBarTitle extends StatelessWidget {
       children: [
         const Icon(
           TablerIcons.location,
-          size: AppDimensions.appBarIconSize,
+          size: AppDimensions.iconSizeLg,
           color: Colors.white,
         ),
         Text(

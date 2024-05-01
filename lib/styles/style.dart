@@ -6,6 +6,7 @@ class AppPadding {
 
 class AppDimensions {
   static const double appBarPreferredSize = 80.0;
-  static const double appBarIconSize = 32.0;
+  static const double iconSizeLg = 32.0;
+  static const double iconSizeMd = 26.0;
   static const double suggestionsHeightMultiplier = 0.3;
 }
