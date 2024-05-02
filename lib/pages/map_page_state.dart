@@ -124,7 +124,7 @@ class MapPageState extends State<MapPage> {
             const Center(
               child: Icon(
                 TablerIcons.current_location,
-                size: AppDimensions.appBarIconSize,
+                size: AppDimensions.iconSizeLg,
               ),
             ),
           ],
@@ -155,14 +155,14 @@ class MapPageState extends State<MapPage> {
               },
               child: const Icon(
                 TablerIcons.map,
-                size: AppDimensions.appBarIconSize,
+                size: AppDimensions.iconSizeLg,
               ),
             ),
             FloatingActionButton(
               onPressed: () => centerMapToUserLocation(),
               child: const Icon(
                 TablerIcons.current_location,
-                size: AppDimensions.appBarIconSize,
+                size: AppDimensions.iconSizeLg,
               ),
             ),
           ],

@@ -1,5 +1,5 @@
 name: simply_qibla
-description: "A minimalist, reliable, open source app for finding the Qibla."
+description: "A simple, reliable, and open-source app for finding the Qibla."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -43,10 +43,12 @@ dependencies:
   http: ^1.2.1
   uuid: ^4.4.0
   flutter_dotenv: ^5.1.0
+  package_info_plus: ^8.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -96,3 +98,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/app_icon/app_icon.png"
+  adaptive_icon_background: "assets/app_icon/background.png"
+  adaptive_icon_foreground: "assets/app_icon/foreground.png"
+  min_sdk_android: 21
