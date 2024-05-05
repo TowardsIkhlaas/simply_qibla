@@ -19,4 +19,9 @@ class AppThemes {
       ),
     ),
   );
+
+  static const Color githubPrimaryColor = Colors.white;
+  static const Color githubSecondaryColor = Color.fromRGBO(14, 17, 23, 1.0);
+  static const Color donationServicePrimaryColor = Colors.white;
+  static const Color donationServiceSecondaryColor = Color.fromRGBO(83, 183, 248, 1.0);
 }
