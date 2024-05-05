@@ -44,6 +44,7 @@ dependencies:
   uuid: ^4.4.0
   flutter_dotenv: ^5.1.0
   package_info_plus: ^8.0.0
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,7 @@ flutter:
   assets:
     - .env
     - assets/map_style.txt
+    - assets/app_icon/app_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
