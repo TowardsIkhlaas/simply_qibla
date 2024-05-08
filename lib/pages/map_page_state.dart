@@ -4,12 +4,12 @@ class MapPageState extends State<MapPage> {
   late GoogleMapController mapController;
   MapType _currentMapType = MapType.normal;
   LatLng qiblaCoordinates = const LatLng(
-    DefaultCoordinates.qiblaLatitude,
-    DefaultCoordinates.qiblaLongitude,
+    MapConstants.qiblaLatitude,
+    MapConstants.qiblaLongitude,
   );
   final LatLng _center = const LatLng(
-    DefaultCoordinates.defaultLatitude,
-    DefaultCoordinates.defaultLongitude,
+    MapConstants.defaultLatitude,
+    MapConstants.defaultLongitude,
   );
   final Set<Polyline> _polylines = <Polyline>{};
 
@@ -46,7 +46,7 @@ class MapPageState extends State<MapPage> {
 
   void animateToLocation(LatLng coordinates) {
     mapController.animateCamera(
-      CameraUpdate.newCameraPosition(CameraPosition(target: coordinates, zoom: 19.0)),
+      CameraUpdate.newCameraPosition(CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
     );
   }
 
@@ -60,7 +60,7 @@ class MapPageState extends State<MapPage> {
     _polylines.add(
       Polyline(
         polylineId: const PolylineId(polylineIdVal),
-        width: 10,
+        width: MapConstants.polylineWidth,
         color: Colors.amber,
         points: [from, to],
         geodesic: true,
@@ -96,7 +96,7 @@ class MapPageState extends State<MapPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.standard),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusXl),
         child: Stack(
           children: [
             GoogleMap(
@@ -107,7 +107,7 @@ class MapPageState extends State<MapPage> {
               polylines: _polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
-              initialCameraPosition: CameraPosition(target: _center, zoom: 19.0),
+              initialCameraPosition: CameraPosition(target: _center, zoom: MapConstants.zoomLevel),
               onCameraMove: (CameraPosition position) {
                  _updatePolyline(position.target, qiblaCoordinates);
               },
