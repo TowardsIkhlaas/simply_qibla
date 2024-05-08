@@ -25,9 +25,11 @@ class MapPageState extends State<MapPage> {
       status = await handleLocationPermission(status);
     }
     if (status == LocationPermission.deniedForever) {
-      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
     }
-    var currentLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    var currentLocation = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
 
     LatLng currentLocationLatLng = LatLng(
       currentLocation.latitude,
@@ -37,7 +39,8 @@ class MapPageState extends State<MapPage> {
     animateToLocation(currentLocationLatLng);
   }
 
-  Future<LocationPermission> handleLocationPermission(LocationPermission status) async {
+  Future<LocationPermission> handleLocationPermission(
+      LocationPermission status) async {
     if (status == LocationPermission.denied) {
       return await Geolocator.requestPermission();
     }
@@ -46,7 +49,8 @@ class MapPageState extends State<MapPage> {
 
   void animateToLocation(LatLng coordinates) {
     mapController.animateCamera(
-      CameraUpdate.newCameraPosition(CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
+      CameraUpdate.newCameraPosition(
+          CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
     );
   }
 
@@ -107,9 +111,10 @@ class MapPageState extends State<MapPage> {
               polylines: _polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
-              initialCameraPosition: CameraPosition(target: _center, zoom: MapConstants.zoomLevel),
+              initialCameraPosition:
+                  CameraPosition(target: _center, zoom: MapConstants.zoomLevel),
               onCameraMove: (CameraPosition position) {
-                 _updatePolyline(position.target, qiblaCoordinates);
+                _updatePolyline(position.target, qiblaCoordinates);
               },
             ),
             const Center(
