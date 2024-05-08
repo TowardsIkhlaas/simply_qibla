@@ -14,4 +14,14 @@ class AppStrings {
   static const String donateButtonText = 'Support us on Ko-Fi';
   static const String githubUriPath = 'https://github.com/TowardsIkhlaas/simply_qibla';
   static const String donateUriPath = 'https://ko-fi.com/towardsikhlaas';
+  static const String changeLocationBarText = 'Jump to a specific location? :)';
+}
+
+class InputValidation {
+  static RegExp latitudeValidatorPattern = RegExp(
+    r'^(\+|-)?(?:90(?:(?:\.0{1,15})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,15})?))$'
+  );
+  static RegExp longitudeValidatorPattern = RegExp(
+    r'^(\+|-)?(?:180(?:(?:\.0{1,15})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,15})?))$'
+  );
 }

@@ -93,7 +93,7 @@ class MapPageState extends State<MapPage> {
     return Center(
       child: Column(
         children: [
-          AddressSearchBar(onSuggestionSelected: handleAddressSelection),
+          CoordinatesFormBar(onCoordinatesSubmit: handleChangeLocation),
           Expanded(child: buildMap()),
         ],
       ),
@@ -133,7 +133,7 @@ class MapPageState extends State<MapPage> {
     );
   }
 
-  void handleAddressSelection(LatLng coordinates) {
+  void handleChangeLocation(LatLng coordinates) {
     animateToLocation(coordinates);
   }
 

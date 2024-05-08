@@ -13,8 +13,30 @@ class AppThemes {
         color: Colors.white,
         letterSpacing: -2,
       ),
+      titleMedium: TextStyle(
+        fontSize: 24.0,
+        letterSpacing: -1,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 18.0,
+        letterSpacing: -0.50,
+      ),
+      bodyLarge: TextStyle(
+        letterSpacing: -0.25,
+      ),
       bodyMedium: TextStyle(
-        fontSize: 14.0,
+        letterSpacing: -0.25,
+      ),
+      bodySmall: TextStyle(
+        letterSpacing: -0.25,
+      ),
+      labelLarge: TextStyle(
+        letterSpacing: -0.25,
+      ),
+      labelMedium: TextStyle(
+        letterSpacing: -0.25,
+      ),
+      labelSmall: TextStyle(
         letterSpacing: -0.25,
       ),
     ),
