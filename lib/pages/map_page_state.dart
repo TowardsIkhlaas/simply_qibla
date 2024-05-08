@@ -2,7 +2,6 @@ part of 'map_page.dart';
 
 class MapPageState extends State<MapPage> {
   late GoogleMapController mapController;
-  String? _mapStyle;
   MapType _currentMapType = MapType.normal;
   LatLng qiblaCoordinates = const LatLng(
     DefaultCoordinates.qiblaLatitude,
@@ -17,14 +16,7 @@ class MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
-    loadMapStyle();
     centerMapToUserLocation();
-  }
-
-  void loadMapStyle() {
-    rootBundle.loadString('assets/map_style.txt').then((string) {
-      setState(() => _mapStyle = string);
-    });
   }
 
   Future<void> centerMapToUserLocation() async {
@@ -113,7 +105,6 @@ class MapPageState extends State<MapPage> {
               myLocationButtonEnabled: false,
               compassEnabled: true,
               polylines: _polylines,
-              style: _mapStyle,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
               initialCameraPosition: CameraPosition(target: _center, zoom: 19.0),
