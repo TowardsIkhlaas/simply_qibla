@@ -40,7 +40,7 @@ class _InfoButtonState extends State<InfoButton> {
         context: context,
         builder: (_) => const AlertDialog(
           content: CircularProgressIndicator(),
-          title: Text("Loading"),
+          title: Text('Loading'),
         ),
       );
     } else {
