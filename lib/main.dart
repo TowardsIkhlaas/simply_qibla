@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:simply_qibla/pages/map_page.dart';
 import 'package:simply_qibla/theme/theme.dart';
 
@@ -11,8 +10,6 @@ Future main() async {
     systemNavigationBarColor: Colors.transparent,
   ));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
-  await dotenv.load(fileName: ".env");
 
   runApp(const MyApp());
 }
