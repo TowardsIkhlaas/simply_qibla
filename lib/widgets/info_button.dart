@@ -3,8 +3,8 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/styles/style.dart';
-import 'package:simply_qibla/widgets/donate_button.dart';
-import 'package:simply_qibla/widgets/github_button.dart';
+import 'package:simply_qibla/theme/theme.dart';
+import 'package:simply_qibla/widgets/link_icon_button.dart';
 
 class InfoButton extends StatefulWidget {
   const InfoButton({super.key});
@@ -86,8 +86,26 @@ class _InfoButtonState extends State<InfoButton> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              GitHubButton(),
-              DonateButton(),
+              LinkIconButton(
+                url: Uri.parse(AppStrings.githubUriPath),
+                labelText: AppStrings.githubButtonText,
+                leadingIcon: const Icon(
+                  TablerIcons.brand_github,
+                  size: AppDimensions.iconSizeMd,
+                ),
+                buttonForegroundColor: AppThemes.githubPrimaryColor,
+                buttonBackgroundColor: AppThemes.githubSecondaryColor,
+              ),
+              LinkIconButton(
+                url: Uri.parse(AppStrings.donateUriPath),
+                labelText: AppStrings.donateButtonText,
+                leadingIcon: const Icon(
+                  TablerIcons.coffee,
+                  size: AppDimensions.iconSizeMd,
+                ),
+                buttonForegroundColor: AppThemes.donationServicePrimaryColor,
+                buttonBackgroundColor: AppThemes.donationServiceSecondaryColor,
+              ),
             ],
           )
         ],
