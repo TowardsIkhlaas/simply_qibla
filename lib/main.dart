@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:simply_qibla/globals/globals.dart';
 import 'package:simply_qibla/pages/map_page.dart';
 import 'package:simply_qibla/theme/theme.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       darkTheme: AppThemes.darkTheme,
       home: const MapPage(),
+      scaffoldMessengerKey: snackbarKey,
     );
   }
 }
