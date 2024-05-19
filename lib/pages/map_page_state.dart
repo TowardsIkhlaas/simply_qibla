@@ -2,41 +2,87 @@ part of 'map_page.dart';
 
 class MapPageState extends State<MapPage> {
   late GoogleMapController mapController;
+  LatLng? userLocation;
   MapType _currentMapType = MapType.normal;
-  LatLng qiblaCoordinates = const LatLng(
-    MapConstants.qiblaLatitude,
-    MapConstants.qiblaLongitude,
-  );
+  final Set<Polyline> _polylines = <Polyline>{};
   final LatLng _center = const LatLng(
     MapConstants.defaultLatitude,
     MapConstants.defaultLongitude,
   );
-  final Set<Polyline> _polylines = <Polyline>{};
+  LatLng qiblaCoordinates = const LatLng(
+    MapConstants.qiblaLatitude,
+    MapConstants.qiblaLongitude,
+  );
 
-  @override
-  void initState() {
-    super.initState();
-    centerMapToUserLocation();
+  void _showSnackBar(String message,
+      {String? actionLabel, VoidCallback? action}) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusXs),
+      ),
+      action: actionLabel != null && action != null
+          ? SnackBarAction(
+              label: actionLabel,
+              onPressed: action,
+            )
+          : null,
+    );
+    snackbarKey.currentState?.showSnackBar(snackBar);
+  }
+
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      _showSnackBar(
+        'Your location is off.',
+        actionLabel: 'ENABLE',
+        action: () => Geolocator.openLocationSettings(),
+      );
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        _showSnackBar(
+          'Please allow the app to use your location. Your data is not collected or sold.',
+        );
+        return Future.error('Location permissions are denied.');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      _showSnackBar(
+        'Please allow location permission for the app to use this function.',
+        actionLabel: 'ALLOW',
+        action: () => Geolocator.openAppSettings(),
+      );
+      return Future.error('Location permissions are permanently denied.');
+    }
+
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   Future<void> centerMapToUserLocation() async {
-    var status = await Geolocator.checkPermission();
-    if (status == LocationPermission.denied) {
-      status = await handleLocationPermission(status);
-    }
-    if (status == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    var currentLocation = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    try {
+      Position currentLocation = await _determinePosition();
 
-    LatLng currentLocationLatLng = LatLng(
-      currentLocation.latitude,
-      currentLocation.longitude,
-    );
+      userLocation = LatLng(
+        currentLocation.latitude,
+        currentLocation.longitude,
+      );
 
-    animateToLocation(currentLocationLatLng);
+      animateToLocation(userLocation!);
+    } catch (e) {
+      debugPrint('Error getting user location: $e');
+    }
   }
 
   Future<LocationPermission> handleLocationPermission(
@@ -56,7 +102,11 @@ class MapPageState extends State<MapPage> {
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
-    animateToLocation(_center);
+    if (userLocation != null) {
+      animateToLocation(userLocation!);
+    } else {
+      centerMapToUserLocation();
+    }
   }
 
   void _updatePolyline(LatLng from, LatLng to) {
