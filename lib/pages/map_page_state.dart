@@ -1,6 +1,8 @@
 part of 'map_page.dart';
 
 class MapPageState extends State<MapPage> {
+  // State Declaration and Variables
+
   late GoogleMapController mapController;
   LatLng? userLocation;
   MapType _currentMapType = MapType.normal;
@@ -14,22 +16,38 @@ class MapPageState extends State<MapPage> {
     MapConstants.qiblaLongitude,
   );
 
-  void _showSnackBar(String message,
-      {String? actionLabel, VoidCallback? action}) {
-    final snackBar = SnackBar(
-      content: Text(message),
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusXs),
-      ),
-      action: actionLabel != null && action != null
-          ? SnackBarAction(
-              label: actionLabel,
-              onPressed: action,
-            )
-          : null,
+  // Build Method
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: const SQAppBar(),
+      body: buildMapBody(context),
+      bottomNavigationBar: buildBottomBar(context),
     );
-    snackbarKey.currentState?.showSnackBar(snackBar);
+  }
+
+  // Event Handlers and Callbacks
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+    if (userLocation != null) {
+      animateToLocation(userLocation!);
+    } else {
+      centerMapToUserLocation();
+    }
+  }
+
+  void handleChangeLocation(LatLng coordinates) {
+    animateToLocation(coordinates);
+  }
+
+  void animateToLocation(LatLng coordinates) {
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+          CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
+    );
   }
 
   Future<Position> _determinePosition() async {
@@ -85,28 +103,24 @@ class MapPageState extends State<MapPage> {
     }
   }
 
-  Future<LocationPermission> handleLocationPermission(
-      LocationPermission status) async {
-    if (status == LocationPermission.denied) {
-      return await Geolocator.requestPermission();
-    }
-    return status;
-  }
+  // Helper Methods
 
-  void animateToLocation(LatLng coordinates) {
-    mapController.animateCamera(
-      CameraUpdate.newCameraPosition(
-          CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
+  void _showSnackBar(String message,
+      {String? actionLabel, VoidCallback? action}) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusXs),
+      ),
+      action: actionLabel != null && action != null
+          ? SnackBarAction(
+              label: actionLabel,
+              onPressed: action,
+            )
+          : null,
     );
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-    if (userLocation != null) {
-      animateToLocation(userLocation!);
-    } else {
-      centerMapToUserLocation();
-    }
+    snackbarKey.currentState?.showSnackBar(snackBar);
   }
 
   void _updatePolyline(LatLng from, LatLng to) {
@@ -123,27 +137,6 @@ class MapPageState extends State<MapPage> {
       ),
     );
     setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: const SQAppBar(),
-      body: buildMapBody(context),
-      bottomNavigationBar: buildBottomBar(context),
-    );
-  }
-
-  Widget buildMapBody(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          CoordinatesFormBar(onCoordinatesSubmit: handleChangeLocation),
-          Expanded(child: buildMap()),
-        ],
-      ),
-    );
   }
 
   Widget buildMap() {
@@ -179,8 +172,15 @@ class MapPageState extends State<MapPage> {
     );
   }
 
-  void handleChangeLocation(LatLng coordinates) {
-    animateToLocation(coordinates);
+  Widget buildMapBody(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          CoordinatesFormBar(onCoordinatesSubmit: handleChangeLocation),
+          Expanded(child: buildMap()),
+        ],
+      ),
+    );
   }
 
   Widget buildBottomBar(BuildContext context) {
