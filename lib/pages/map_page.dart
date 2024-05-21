@@ -12,6 +12,7 @@ part 'map_page_state.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
+
   @override
   MapPageState createState() => MapPageState();
 }
