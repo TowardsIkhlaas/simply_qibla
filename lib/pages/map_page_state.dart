@@ -1,6 +1,7 @@
 part of 'map_page.dart';
 
 class MapPageState extends State<MapPage> {
+
   // State Declaration and Variables
 
   late GoogleMapController mapController;
