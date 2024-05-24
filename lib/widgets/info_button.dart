@@ -1,7 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:simply_qibla/constants/constants.dart';
+import 'package:simply_qibla/helpers/url_launcher_helper.dart';
 import 'package:simply_qibla/styles/style.dart';
 import 'package:simply_qibla/theme/theme.dart';
 import 'package:simply_qibla/widgets/link_icon_button.dart';
@@ -87,17 +90,26 @@ class _InfoButtonState extends State<InfoButton> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               LinkIconButton(
-                url: Uri.parse(AppStrings.githubUriPath),
-                labelText: AppStrings.githubButtonText,
-                leadingIcon: const Icon(
-                  TablerIcons.brand_github,
+                onPressed: () async {
+                  String shareString;
+                  if (Platform.isIOS) {
+                    shareString =
+                        '${AppStrings.shareContentText}: ${AppStrings.iosAppLink}';
+                  } else {
+                    shareString =
+                        '${AppStrings.shareContentText}: ${AppStrings.androidAppLink}';
+                  }
+                  await Share.share(shareString);
+                },
+                labelText: AppStrings.shareButtonText,
+                leadingIcon: Icon(
+                  Platform.isIOS ? TablerIcons.share_2 : TablerIcons.share,
                   size: AppDimensions.iconSizeMd,
                 ),
-                buttonForegroundColor: AppThemes.githubPrimaryColor,
-                buttonBackgroundColor: AppThemes.githubSecondaryColor,
               ),
               LinkIconButton(
-                url: Uri.parse(AppStrings.donateUriPath),
+                onPressed: () =>
+                    launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
                 labelText: AppStrings.donateButtonText,
                 leadingIcon: const Icon(
                   TablerIcons.coffee,
@@ -105,6 +117,17 @@ class _InfoButtonState extends State<InfoButton> {
                 ),
                 buttonForegroundColor: AppThemes.donationServicePrimaryColor,
                 buttonBackgroundColor: AppThemes.donationServiceSecondaryColor,
+              ),
+              LinkIconButton(
+                onPressed: () =>
+                    launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
+                labelText: AppStrings.githubButtonText,
+                leadingIcon: const Icon(
+                  TablerIcons.brand_github,
+                  size: AppDimensions.iconSizeMd,
+                ),
+                buttonForegroundColor: AppThemes.githubPrimaryColor,
+                buttonBackgroundColor: AppThemes.githubSecondaryColor,
               ),
             ],
           )
