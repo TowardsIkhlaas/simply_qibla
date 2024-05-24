@@ -151,7 +151,7 @@ class MapPageState extends State<MapPage> {
               onMapCreated: _onMapCreated,
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
-              compassEnabled: true,
+              compassEnabled: false,
               polylines: _polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
