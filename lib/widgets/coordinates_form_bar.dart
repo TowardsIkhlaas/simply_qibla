@@ -31,7 +31,7 @@ class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
 
   @override
   Widget build(BuildContext context) {
-    void showLatLngDialog(BuildContext context) {
+    void showLatLngDialog(BuildContext context) async {
       showDialog(
           context: context,
           builder: (BuildContext context) => CoordinatesInputForm(

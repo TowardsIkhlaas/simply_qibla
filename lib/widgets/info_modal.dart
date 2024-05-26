@@ -64,14 +64,14 @@ Widget _buildButtonColumn() {
           icon: Platform.isIOS ? TablerIcons.share_2 : TablerIcons.share,
         ),
         _buildLinkIconButton(
-          onPressed: () => launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
+          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
           labelText: AppStrings.donateButtonText,
           icon: TablerIcons.coffee,
           foregroundColor: AppThemes.donationServicePrimaryColor,
           backgroundColor: AppThemes.donationServiceSecondaryColor,
         ),
         _buildLinkIconButton(
-          onPressed: () => launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
+          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
           labelText: AppStrings.githubButtonText,
           icon: TablerIcons.brand_github,
           foregroundColor: AppThemes.githubPrimaryColor,

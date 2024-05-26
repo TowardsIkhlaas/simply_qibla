@@ -31,7 +31,7 @@ class MapPageState extends State<MapPage> {
 
   // Event Handlers and Callbacks
 
-  void _onMapCreated(GoogleMapController controller) {
+  void _onMapCreated(GoogleMapController controller) async {
     mapController = controller;
     if (userLocation != null) {
       animateToLocation(userLocation!);
@@ -44,7 +44,7 @@ class MapPageState extends State<MapPage> {
     animateToLocation(coordinates);
   }
 
-  void animateToLocation(LatLng coordinates) {
+  void animateToLocation(LatLng coordinates) async {
     mapController.animateCamera(
       CameraUpdate.newCameraPosition(
           CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
@@ -206,7 +206,7 @@ class MapPageState extends State<MapPage> {
               ),
             ),
             FloatingActionButton(
-              onPressed: () => centerMapToUserLocation(),
+              onPressed: () async => centerMapToUserLocation(),
               child: const Icon(
                 TablerIcons.current_location,
                 size: AppDimensions.iconSizeLg,
