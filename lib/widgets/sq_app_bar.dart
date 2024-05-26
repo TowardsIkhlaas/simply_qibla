@@ -18,7 +18,7 @@ class SQAppBar extends StatelessWidget implements PreferredSizeWidget {
           elevation: 0.0,
           title: const SQAppBarTitle(),
           titleSpacing: AppPadding.standard,
-          actions: const [
+          actions: const <Widget>[
             Padding(
               padding: EdgeInsets.only(right: AppPadding.appBarActionRight),
               child: InfoButton(),

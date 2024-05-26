@@ -18,7 +18,7 @@ class CoordinatesFormBar extends StatefulWidget {
 }
 
 class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
 
@@ -34,7 +34,7 @@ class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
     void showLatLngDialog(BuildContext context) {
       showDialog(
           context: context,
-          builder: (context) => CoordinatesInputForm(
+          builder: (BuildContext context) => CoordinatesInputForm(
                 formKey: _formKey,
                 latitudeController: latitudeController,
                 longitudeController: longitudeController,
@@ -46,7 +46,7 @@ class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
       padding: const EdgeInsets.all(AppPadding.standard),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Expanded(
             child: SizedBox(
               height: AppDimensions.pillBarSize,

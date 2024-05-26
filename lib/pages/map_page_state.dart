@@ -62,7 +62,7 @@ class MapPageState extends State<MapPage> {
         actionLabel: 'ENABLE',
         action: () => Geolocator.openLocationSettings(),
       );
-      return Future.error('Location services are disabled.');
+      return Future<Position>.error('Location services are disabled.');
     }
 
     permission = await Geolocator.checkPermission();
@@ -72,7 +72,7 @@ class MapPageState extends State<MapPage> {
         _showSnackBar(
           'Please allow the app to use your location. Your data is not collected or sold.',
         );
-        return Future.error('Location permissions are denied.');
+        return Future<Position>.error('Location permissions are denied.');
       }
     }
 
@@ -82,7 +82,7 @@ class MapPageState extends State<MapPage> {
         actionLabel: 'ALLOW',
         action: () => Geolocator.openAppSettings(),
       );
-      return Future.error('Location permissions are permanently denied.');
+      return Future<Position>.error('Location permissions are permanently denied.');
     }
 
     return await Geolocator.getCurrentPosition(
@@ -108,7 +108,7 @@ class MapPageState extends State<MapPage> {
 
   void _showSnackBar(String message,
       {String? actionLabel, VoidCallback? action}) {
-    final snackBar = SnackBar(
+    final SnackBar snackBar = SnackBar(
       content: Text(message),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
@@ -131,7 +131,7 @@ class MapPageState extends State<MapPage> {
         polylineId: const PolylineId(polylineIdVal),
         width: MapConstants.polylineWidth,
         color: Colors.amber,
-        points: [from, to],
+        points: <LatLng>[from, to],
         geodesic: true,
         startCap: Cap.roundCap,
         endCap: Cap.roundCap,
@@ -146,7 +146,7 @@ class MapPageState extends State<MapPage> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppDimensions.borderRadiusXl),
         child: Stack(
-          children: [
+          children: <Widget>[
             GoogleMap(
               onMapCreated: _onMapCreated,
               myLocationEnabled: true,
@@ -176,7 +176,7 @@ class MapPageState extends State<MapPage> {
   Widget buildMapBody(BuildContext context) {
     return Center(
       child: Column(
-        children: [
+        children: <Widget>[
           CoordinatesFormBar(onCoordinatesSubmit: handleChangeLocation),
           Expanded(child: buildMap()),
         ],
@@ -191,9 +191,9 @@ class MapPageState extends State<MapPage> {
         padding: const EdgeInsets.all(AppPadding.standard),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             FloatingActionButton(
-              onPressed: () => {
+              onPressed: () => <void>{
                 setState(() {
                   _currentMapType = (_currentMapType == MapType.normal)
                       ? MapType.hybrid

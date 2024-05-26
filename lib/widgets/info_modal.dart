@@ -15,7 +15,7 @@ void showInfoModal(BuildContext context, String version, String buildNumber) {
     applicationIcon: _buildAppIcon(),
     applicationVersion: 'v$version',
     applicationLegalese: AppStrings.appAboutLegalese,
-    children: [
+    children: <Widget>[
       _buildTextSection('Build: $buildNumber'),
       _buildTextSection(AppStrings.thankYouText, isBold: true),
       _buildTextSection(AppStrings.supportAppealText),
@@ -57,7 +57,7 @@ Widget _buildButtonColumn() {
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+      children: <Widget>[
         _buildLinkIconButton(
           onPressed: _shareApp,
           labelText: AppStrings.shareButtonText,
@@ -99,7 +99,7 @@ Widget _buildLinkIconButton({
 }
 
 Future<void> _shareApp() async {
-  final shareString = Platform.isIOS
+  final String shareString = Platform.isIOS
       ? '${AppStrings.shareContentText}: ${AppStrings.iosAppLink}'
       : '${AppStrings.shareContentText}: ${AppStrings.androidAppLink}';
   await Share.share(shareString);

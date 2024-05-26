@@ -8,7 +8,7 @@ import 'package:simply_qibla/helpers/maps_renderer_helper.dart';
 import 'package:simply_qibla/pages/map_page.dart';
 import 'package:simply_qibla/theme/theme.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
