@@ -5,6 +5,18 @@ class AppThemes {
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.amberAccent),
     useMaterial3: true,
     scaffoldBackgroundColor: const Color.fromRGBO(21, 18, 19, 1.0),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color.fromRGBO(21, 18, 19, 1.0),
+      titleTextStyle: TextStyle(
+        fontSize: 24.0,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+        letterSpacing: -1,
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.white,
+      )
+    ),
     fontFamily: 'Inter',
     textTheme: const TextTheme(
       titleLarge: TextStyle(
