@@ -10,7 +10,7 @@ class SQAppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
+      children: <Widget>[
         const Icon(
           TablerIcons.location,
           size: AppDimensions.iconSizeLg,

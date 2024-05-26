@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:simply_qibla/widgets/coordinates_input_form.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/styles/style.dart';
+import 'package:simply_qibla/widgets/coordinates_input_form.dart';
 
 class CoordinatesFormBar extends StatefulWidget {
   final Function(LatLng) onCoordinatesSubmit;
 
   const CoordinatesFormBar({
-    super.key,
     required this.onCoordinatesSubmit,
+    super.key,
   });
 
   @override
@@ -18,7 +18,7 @@ class CoordinatesFormBar extends StatefulWidget {
 }
 
 class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
 
@@ -31,10 +31,10 @@ class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
 
   @override
   Widget build(BuildContext context) {
-    void showLatLngDialog(BuildContext context) {
+    void showLatLngDialog(BuildContext context) async {
       showDialog(
           context: context,
-          builder: (context) => CoordinatesInputForm(
+          builder: (BuildContext context) => CoordinatesInputForm(
                 formKey: _formKey,
                 latitudeController: latitudeController,
                 longitudeController: longitudeController,
@@ -46,7 +46,7 @@ class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
       padding: const EdgeInsets.all(AppPadding.standard),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Expanded(
             child: SizedBox(
               height: AppDimensions.pillBarSize,

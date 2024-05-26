@@ -8,12 +8,12 @@ class LinkIconButton extends StatelessWidget {
   final Color? buttonBackgroundColor;
 
   const LinkIconButton({
-    super.key,
     required this.onPressed,
     required this.labelText,
     required this.leadingIcon,
     this.buttonForegroundColor,
     this.buttonBackgroundColor,
+    super.key,
   });
 
   @override

@@ -15,7 +15,7 @@ void showInfoModal(BuildContext context, String version, String buildNumber) {
     applicationIcon: _buildAppIcon(),
     applicationVersion: 'v$version',
     applicationLegalese: AppStrings.appAboutLegalese,
-    children: [
+    children: <Widget>[
       _buildTextSection('Build: $buildNumber'),
       _buildTextSection(AppStrings.thankYouText, isBold: true),
       _buildTextSection(AppStrings.supportAppealText),
@@ -57,21 +57,21 @@ Widget _buildButtonColumn() {
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+      children: <Widget>[
         _buildLinkIconButton(
           onPressed: _shareApp,
           labelText: AppStrings.shareButtonText,
           icon: Platform.isIOS ? TablerIcons.share_2 : TablerIcons.share,
         ),
         _buildLinkIconButton(
-          onPressed: () => launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
+          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
           labelText: AppStrings.donateButtonText,
           icon: TablerIcons.coffee,
           foregroundColor: AppThemes.donationServicePrimaryColor,
           backgroundColor: AppThemes.donationServiceSecondaryColor,
         ),
         _buildLinkIconButton(
-          onPressed: () => launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
+          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
           labelText: AppStrings.githubButtonText,
           icon: TablerIcons.brand_github,
           foregroundColor: AppThemes.githubPrimaryColor,
@@ -99,7 +99,7 @@ Widget _buildLinkIconButton({
 }
 
 Future<void> _shareApp() async {
-  final shareString = Platform.isIOS
+  final String shareString = Platform.isIOS
       ? '${AppStrings.shareContentText}: ${AppStrings.iosAppLink}'
       : '${AppStrings.shareContentText}: ${AppStrings.androidAppLink}';
   await Share.share(shareString);
