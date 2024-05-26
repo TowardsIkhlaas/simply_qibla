@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:simply_qibla/widgets/coordinates_input_form.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/styles/style.dart';
+import 'package:simply_qibla/widgets/coordinates_input_form.dart';
 
 class CoordinatesFormBar extends StatefulWidget {
   final Function(LatLng) onCoordinatesSubmit;

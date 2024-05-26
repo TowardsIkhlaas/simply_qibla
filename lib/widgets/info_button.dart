@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:simply_qibla/widgets/info_modal.dart';
 import 'package:simply_qibla/styles/style.dart';
+import 'package:simply_qibla/widgets/info_modal.dart';
 
 class InfoButton extends StatefulWidget {
   const InfoButton({super.key});
