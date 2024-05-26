@@ -9,8 +9,8 @@ class CoordinatesFormBar extends StatefulWidget {
   final Function(LatLng) onCoordinatesSubmit;
 
   const CoordinatesFormBar({
-    super.key,
     required this.onCoordinatesSubmit,
+    super.key,
   });
 
   @override

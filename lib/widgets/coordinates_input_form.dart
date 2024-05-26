@@ -11,11 +11,11 @@ class CoordinatesInputForm extends StatelessWidget {
   final Function(LatLng) onCoordinatesSubmit;
 
   const CoordinatesInputForm({
-    super.key,
     required this.formKey,
     required this.latitudeController,
     required this.longitudeController,
     required this.onCoordinatesSubmit,
+    super.key,
   });
 
   @override
