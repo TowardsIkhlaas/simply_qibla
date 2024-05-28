@@ -1,20 +1,17 @@
 part of 'map_page.dart';
 
 class MapPageState extends State<MapPage> {
-
   // State Declaration and Variables
 
   late GoogleMapController mapController;
   LatLng? userLocation;
   MapType _currentMapType = MapType.normal;
+  bool _isCameraMoving = false;
+  CenterConsoleState _centerConsoleState = CenterConsoleState.idle;
   final Set<Polyline> _polylines = <Polyline>{};
-  final LatLng _center = const LatLng(
-    MapConstants.defaultLatitude,
-    MapConstants.defaultLongitude,
-  );
-  LatLng qiblaCoordinates = const LatLng(
-    MapConstants.qiblaLatitude,
-    MapConstants.qiblaLongitude,
+  CameraPosition _currentCameraPosition = const CameraPosition(
+    target: MapConstants.defaultPosition,
+    zoom: MapConstants.zoomLevel,
   );
 
   // Build Method
@@ -45,10 +42,14 @@ class MapPageState extends State<MapPage> {
   }
 
   void animateToLocation(LatLng coordinates) async {
-    mapController.animateCamera(
+    await mapController.animateCamera(
       CameraUpdate.newCameraPosition(
           CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
     );
+
+    setState(() {
+      _centerConsoleState = CenterConsoleState.idle;
+    });
   }
 
   Future<Position> _determinePosition() async {
@@ -58,7 +59,7 @@ class MapPageState extends State<MapPage> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       _showSnackBar(
-        'Your location is off.',
+        AppStrings.locationDisabled,
         actionLabel: 'ENABLE',
         action: () => Geolocator.openLocationSettings(),
       );
@@ -70,7 +71,7 @@ class MapPageState extends State<MapPage> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         _showSnackBar(
-          'Please allow the app to use your location. Your data is not collected or sold.',
+          AppStrings.locationDeniedInitial,
         );
         return Future<Position>.error('Location permissions are denied.');
       }
@@ -78,11 +79,12 @@ class MapPageState extends State<MapPage> {
 
     if (permission == LocationPermission.deniedForever) {
       _showSnackBar(
-        'Please allow location permission for the app to use this function.',
+        AppStrings.locationDeniedPermanent,
         actionLabel: 'ALLOW',
         action: () => Geolocator.openAppSettings(),
       );
-      return Future<Position>.error('Location permissions are permanently denied.');
+      return Future<Position>.error(
+          'Location permissions are permanently denied.');
     }
 
     return await Geolocator.getCurrentPosition(
@@ -91,6 +93,10 @@ class MapPageState extends State<MapPage> {
 
   Future<void> centerMapToUserLocation() async {
     try {
+      setState(() {
+        _centerConsoleState = CenterConsoleState.centering;
+      });
+
       Position currentLocation = await _determinePosition();
 
       userLocation = LatLng(
@@ -126,18 +132,43 @@ class MapPageState extends State<MapPage> {
 
   void _updatePolyline(LatLng from, LatLng to) {
     const String polylineIdVal = 'polyline_center_to_qibla';
-    _polylines.add(
-      Polyline(
-        polylineId: const PolylineId(polylineIdVal),
-        width: MapConstants.polylineWidth,
-        color: Colors.amber,
-        points: <LatLng>[from, to],
-        geodesic: true,
-        startCap: Cap.roundCap,
-        endCap: Cap.roundCap,
-      ),
+    final Polyline polyline = Polyline(
+      polylineId: const PolylineId(polylineIdVal),
+      width: MapConstants.polylineWidth,
+      color: Colors.amber,
+      points: <LatLng>[from, to],
+      geodesic: true,
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
     );
-    setState(() {});
+    setState(() {
+      _polylines.removeWhere(
+          (Polyline poly) => poly.polylineId.value == polylineIdVal);
+      _polylines.add(polyline);
+    });
+  }
+
+  void _onCameraMoveStarted() {
+    setState(() {
+      _isCameraMoving = true;
+      _polylines.clear();
+    });
+  }
+
+  void _onCameraMove(CameraPosition position) {
+    setState(() {
+      _centerConsoleState = CenterConsoleState.dragging;
+      _currentCameraPosition = position;
+    });
+  }
+
+  Future<void> _onCameraIdle() async {
+    setState(() {
+      _centerConsoleState = CenterConsoleState.idle;
+      _isCameraMoving = false;
+      _updatePolyline(
+          _currentCameraPosition.target, MapConstants.qiblaPosition);
+    });
   }
 
   Widget buildMap() {
@@ -155,11 +186,11 @@ class MapPageState extends State<MapPage> {
               polylines: _polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
-              initialCameraPosition:
-                  CameraPosition(target: _center, zoom: MapConstants.zoomLevel),
-              onCameraMove: (CameraPosition position) {
-                _updatePolyline(position.target, qiblaCoordinates);
-              },
+              initialCameraPosition: _currentCameraPosition,
+              onCameraMoveStarted: _onCameraMoveStarted,
+              onCameraMove: (CameraPosition position) =>
+                  _onCameraMove(position),
+              onCameraIdle: _onCameraIdle,
             ),
             const Center(
               child: Icon(
@@ -203,6 +234,17 @@ class MapPageState extends State<MapPage> {
               child: const Icon(
                 TablerIcons.map,
                 size: AppDimensions.iconSizeLg,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppPadding.standard),
+                child: CenterConsole(
+                  state: _centerConsoleState,
+                  currentCameraPosition: _currentCameraPosition,
+                  isCameraMoving: _isCameraMoving,
+                ),
               ),
             ),
             FloatingActionButton(

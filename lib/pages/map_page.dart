@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/globals/globals.dart';
 import 'package:simply_qibla/styles/style.dart';
+import 'package:simply_qibla/widgets/center_console.dart';
 import 'package:simply_qibla/widgets/coordinates_form_bar.dart';
 import 'package:simply_qibla/widgets/sq_app_bar.dart';
 
