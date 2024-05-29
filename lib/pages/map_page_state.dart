@@ -7,6 +7,7 @@ class MapPageState extends State<MapPage> {
   LatLng? userLocation;
   MapType _currentMapType = MapType.normal;
   bool _isCameraMoving = false;
+  bool _enableLocationButton = true;
   CenterConsoleState _centerConsoleState = CenterConsoleState.idle;
   final Set<Polyline> _polylines = <Polyline>{};
   CameraPosition _currentCameraPosition = const CameraPosition(
@@ -49,6 +50,7 @@ class MapPageState extends State<MapPage> {
 
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
+      _enableLocationButton = true;
     });
   }
 
@@ -93,6 +95,7 @@ class MapPageState extends State<MapPage> {
     try {
       setState(() {
         _centerConsoleState = CenterConsoleState.centering;
+        _enableLocationButton = false;
       });
 
       Position currentLocation = await _determinePosition();
@@ -104,6 +107,10 @@ class MapPageState extends State<MapPage> {
 
       animateToLocation(userLocation!);
     } catch (e) {
+      setState(() {
+        _centerConsoleState = CenterConsoleState.idle;
+        _enableLocationButton = true;
+      });
       debugPrint('Error getting user location: $e');
     }
   }
@@ -246,7 +253,9 @@ class MapPageState extends State<MapPage> {
               ),
             ),
             FloatingActionButton(
-              onPressed: () async => centerMapToUserLocation(),
+              onPressed: _enableLocationButton
+                  ? () async => centerMapToUserLocation()
+                  : null,
               child: const Icon(
                 TablerIcons.current_location,
                 size: AppDimensions.iconSizeLg,
