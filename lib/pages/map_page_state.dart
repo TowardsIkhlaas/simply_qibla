@@ -87,8 +87,7 @@ class MapPageState extends State<MapPage> {
           'Location permissions are permanently denied.');
     }
 
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    return await Geolocator.getCurrentPosition();
   }
 
   Future<void> centerMapToUserLocation() async {
