@@ -60,6 +60,12 @@ class AppStrings {
   static const String iosAppLink = 'appstore/SimplyQibla';
 }
 
+class AppStatusCodes {
+  static const int locationDisabled = 701;
+  static const int locationDeniedInitial = 702;
+  static const int locationDeniedPermanent = 704;
+}
+
 class InputValidation {
   static RegExp latitudeValidatorPattern = RegExp(
       r'^(\+|-)?(?:90(?:(?:\.0{1,15})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,15})?))$');

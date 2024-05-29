@@ -60,10 +60,10 @@ class MapPageState extends State<MapPage> {
     if (!serviceEnabled) {
       _showSnackBar(
         AppStrings.locationDisabled,
-        actionLabel: 'ENABLE',
+        actionLabel: 'TURN ON',
         action: () => Geolocator.openLocationSettings(),
       );
-      return Future<Position>.error('Location services are disabled.');
+      return Future<Position>.error(AppStatusCodes.locationDisabled);
     }
 
     permission = await Geolocator.checkPermission();
@@ -73,7 +73,7 @@ class MapPageState extends State<MapPage> {
         _showSnackBar(
           AppStrings.locationDeniedInitial,
         );
-        return Future<Position>.error('Location permissions are denied.');
+        return Future<Position>.error(AppStatusCodes.locationDeniedInitial);
       }
     }
 
@@ -83,8 +83,7 @@ class MapPageState extends State<MapPage> {
         actionLabel: 'ALLOW',
         action: () => Geolocator.openAppSettings(),
       );
-      return Future<Position>.error(
-          'Location permissions are permanently denied.');
+      return Future<Position>.error(AppStatusCodes.locationDeniedPermanent);
     }
 
     return await Geolocator.getCurrentPosition();
