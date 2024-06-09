@@ -6,8 +6,12 @@ import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platf
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/globals/globals.dart';
 import 'package:simply_qibla/helpers/maps_renderer_helper.dart';
+import 'package:simply_qibla/helpers/shared_preferences_helper.dart';
 import 'package:simply_qibla/pages/map_page.dart';
+import 'package:simply_qibla/pages/onboarding_page.dart';
 import 'package:simply_qibla/theme/theme.dart';
+
+bool hasSeenOnboarding = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +30,7 @@ Future<void> main() async {
     }
   }
 
+  hasSeenOnboarding = await getOnboardingStatus();
   runApp(const MyApp());
 }
 
@@ -38,7 +43,7 @@ class MyApp extends StatelessWidget {
       title: AppStrings.appNamePascalCase,
       themeMode: ThemeMode.dark,
       darkTheme: AppThemes.darkTheme,
-      home: const MapPage(),
+      home: hasSeenOnboarding ? const MapPage() : const OnboardingPage(),
       scaffoldMessengerKey: snackbarKey,
     );
   }
