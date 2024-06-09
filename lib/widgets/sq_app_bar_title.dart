@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/styles/style.dart';
 
@@ -18,9 +17,9 @@ class SQAppBarTitle extends StatelessWidget {
         ),
         Text(
           AppStrings.appNamePascalCase,
-          style: GoogleFonts.inter(
-            textStyle: Theme.of(context).textTheme.titleLarge,
-          ),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: Colors.white,
+              ),
         )
       ],
     );
