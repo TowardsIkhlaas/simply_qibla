@@ -15,14 +15,13 @@ class AppThemes {
       ),
       iconTheme: IconThemeData(
         color: Colors.white,
-      )
+      ),
     ),
     fontFamily: 'Inter',
     textTheme: const TextTheme(
       titleLarge: TextStyle(
         fontSize: 32.0,
         fontWeight: FontWeight.w900,
-        color: Colors.white,
         letterSpacing: -2,
       ),
       titleMedium: TextStyle(
@@ -34,7 +33,7 @@ class AppThemes {
         letterSpacing: -0.50,
       ),
       bodyLarge: TextStyle(
-        letterSpacing: -0.25,
+        letterSpacing: -0.50,
       ),
       bodyMedium: TextStyle(
         letterSpacing: -0.25,
@@ -57,5 +56,6 @@ class AppThemes {
   static const Color githubPrimaryColor = Colors.white;
   static const Color githubSecondaryColor = Color.fromRGBO(14, 17, 23, 1.0);
   static const Color donationServicePrimaryColor = Colors.white;
-  static const Color donationServiceSecondaryColor = Color.fromRGBO(83, 183, 248, 1.0);
+  static const Color donationServiceSecondaryColor =
+      Color.fromRGBO(83, 183, 248, 1.0);
 }

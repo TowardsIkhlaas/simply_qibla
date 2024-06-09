@@ -49,6 +49,15 @@ class AppStrings {
   static const String githubButtonText = 'Support us on GitHub';
   static const String donateButtonText = 'Support us on Ko-Fi';
   static const String shareButtonText = 'Share with Friends';
+  static const String onboardingUsageTitle = 'How does this work?';
+  static const String onboardingLocationTitle = 'Let the app find you.';
+  static const String onboardingSupportTitle = 'Support our mission!';
+  static const String onboardingUsageBody =
+      'Thanks for downloading SimplyQibla! To use the app, orient yourself to the qibla direction by observing surrounding landmarks (like roads and buildings).';
+  static const String onboardingLocationBody =
+      'Location permissions are needed for the app to function ideally. Rest assured, your data is neither collected nor sold.';
+  static const String onboardingSupportBody =
+      'SimplyQibla is ad-free and open-source. If you like what you see, please support us through the in-app links. Your support will be used to run the app, and excess will be donated to registered charities.';
 
   // Links
 

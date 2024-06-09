@@ -36,7 +36,7 @@ class CenterConsole extends StatelessWidget {
         text = AppStrings.centerConsoleDraggingText;
         break;
       case CenterConsoleState.idle:
-        consoleColor = Colors.amber;
+        consoleColor = Theme.of(context).colorScheme.primaryContainer;
         text = '$formattedDistance ${AppStrings.centerConsoleIdleText}';
         break;
     }

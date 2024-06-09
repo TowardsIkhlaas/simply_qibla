@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/styles/style.dart';
@@ -23,9 +22,7 @@ class CoordinatesInputForm extends StatelessWidget {
     return AlertDialog(
       title: Text(
         'Enter Coordinates',
-        style: GoogleFonts.inter(
-          textStyle: Theme.of(context).textTheme.titleMedium,
-        ),
+        style: Theme.of(context).textTheme.titleMedium,
       ),
       content: Form(
         key: formKey,
