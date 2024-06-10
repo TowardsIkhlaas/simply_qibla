@@ -167,7 +167,7 @@ class MapPageState extends State<MapPage> {
     });
   }
 
-  Future<void> _onCameraIdle() async {
+  void _onCameraIdle() {
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _isCameraMoving = false;
@@ -187,7 +187,7 @@ class MapPageState extends State<MapPage> {
               onMapCreated: _onMapCreated,
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
-              compassEnabled: false,
+              compassEnabled: true,
               polylines: _polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
