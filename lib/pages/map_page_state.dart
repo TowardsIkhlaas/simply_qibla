@@ -182,6 +182,7 @@ class MapPageState extends State<MapPage> {
             GoogleMap(
               onMapCreated: _onMapCreated,
               compassEnabled: true,
+              myLocationButtonEnabled: false,
               polylines: _polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
