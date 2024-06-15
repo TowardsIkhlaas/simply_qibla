@@ -29,8 +29,7 @@ class AppStrings {
 
   static const String changeLocationBarText = 'Jump to a specific location? :)';
   static const String centerConsoleCenteringText = 'Locating you...';
-  static const String centerConsoleDraggingText =
-      'Lift finger to show Qibla line';
+  static const String centerConsoleDraggingText = 'Lift to show Qibla line';
   static const String centerConsoleIdleText = 'km to the Kaaba';
 
   // Errors and Warnings
