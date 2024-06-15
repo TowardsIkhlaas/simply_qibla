@@ -54,12 +54,13 @@ class CenterConsole extends StatelessWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.all(AppPadding.centerConsoleInternal),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: consoleColor,
+      child: Center(
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: consoleColor,
+          ),
         ),
       ),
     );

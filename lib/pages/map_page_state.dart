@@ -38,10 +38,6 @@ class MapPageState extends State<MapPage> {
     }
   }
 
-  void handleChangeLocation(LatLng coordinates) {
-    animateToLocation(coordinates);
-  }
-
   void animateToLocation(LatLng coordinates) async {
     await mapController.animateCamera(
       CameraUpdate.newCameraPosition(
@@ -185,8 +181,6 @@ class MapPageState extends State<MapPage> {
           children: <Widget>[
             GoogleMap(
               onMapCreated: _onMapCreated,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: false,
               compassEnabled: true,
               polylines: _polylines,
               mapType: _currentMapType,
@@ -201,6 +195,7 @@ class MapPageState extends State<MapPage> {
               child: Icon(
                 TablerIcons.current_location,
                 size: AppDimensions.iconSizeLg,
+                color: Colors.black,
               ),
             ),
           ],
@@ -213,7 +208,7 @@ class MapPageState extends State<MapPage> {
     return Center(
       child: Column(
         children: <Widget>[
-          CoordinatesFormBar(onCoordinatesSubmit: handleChangeLocation),
+          CoordinatesFormBar(onCoordinatesSubmit: animateToLocation),
           Expanded(child: buildMap()),
         ],
       ),
@@ -225,43 +220,46 @@ class MapPageState extends State<MapPage> {
       top: false,
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.standard),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: () => <void>{
-                setState(() {
-                  _currentMapType = (_currentMapType == MapType.normal)
-                      ? MapType.hybrid
-                      : MapType.normal;
-                })
-              },
-              child: const Icon(
-                TablerIcons.map,
-                size: AppDimensions.iconSizeLg,
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppPadding.standard),
-                child: CenterConsole(
-                  state: _centerConsoleState,
-                  currentCameraPosition: _currentCameraPosition,
-                  isCameraMoving: _isCameraMoving,
+        child: IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              FloatingActionButton(
+                onPressed: () => <void>{
+                  setState(() {
+                    _currentMapType = (_currentMapType == MapType.normal)
+                        ? MapType.hybrid
+                        : MapType.normal;
+                  })
+                },
+                child: const Icon(
+                  TablerIcons.map,
+                  size: AppDimensions.iconSizeLg,
                 ),
               ),
-            ),
-            FloatingActionButton(
-              onPressed: _enableLocationButton
-                  ? () async => centerMapToUserLocation()
-                  : null,
-              child: const Icon(
-                TablerIcons.current_location,
-                size: AppDimensions.iconSizeLg,
+              Expanded(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppPadding.standard),
+                  child: CenterConsole(
+                    state: _centerConsoleState,
+                    currentCameraPosition: _currentCameraPosition,
+                    isCameraMoving: _isCameraMoving,
+                  ),
+                ),
               ),
-            ),
-          ],
+              FloatingActionButton(
+                onPressed: _enableLocationButton
+                    ? () async => centerMapToUserLocation()
+                    : null,
+                child: const Icon(
+                  TablerIcons.current_location,
+                  size: AppDimensions.iconSizeLg,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
