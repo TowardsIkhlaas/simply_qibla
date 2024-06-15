@@ -11,7 +11,8 @@
 migrate_working_dir/
 .env
 .env.local
-keys.properties
+android/keys.properties
+ios/Runner/APIKey.plist
 
 # IntelliJ related
 *.iml
