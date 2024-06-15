@@ -38,10 +38,6 @@ class MapPageState extends State<MapPage> {
     }
   }
 
-  void handleChangeLocation(LatLng coordinates) {
-    animateToLocation(coordinates);
-  }
-
   void animateToLocation(LatLng coordinates) async {
     await mapController.animateCamera(
       CameraUpdate.newCameraPosition(
@@ -185,8 +181,6 @@ class MapPageState extends State<MapPage> {
           children: <Widget>[
             GoogleMap(
               onMapCreated: _onMapCreated,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: false,
               compassEnabled: true,
               polylines: _polylines,
               mapType: _currentMapType,
@@ -201,6 +195,7 @@ class MapPageState extends State<MapPage> {
               child: Icon(
                 TablerIcons.current_location,
                 size: AppDimensions.iconSizeLg,
+                color: Colors.black,
               ),
             ),
           ],
@@ -213,7 +208,7 @@ class MapPageState extends State<MapPage> {
     return Center(
       child: Column(
         children: <Widget>[
-          CoordinatesFormBar(onCoordinatesSubmit: handleChangeLocation),
+          CoordinatesFormBar(onCoordinatesSubmit: animateToLocation),
           Expanded(child: buildMap()),
         ],
       ),
