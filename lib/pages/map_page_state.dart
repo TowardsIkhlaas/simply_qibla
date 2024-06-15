@@ -220,43 +220,46 @@ class MapPageState extends State<MapPage> {
       top: false,
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.standard),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: () => <void>{
-                setState(() {
-                  _currentMapType = (_currentMapType == MapType.normal)
-                      ? MapType.hybrid
-                      : MapType.normal;
-                })
-              },
-              child: const Icon(
-                TablerIcons.map,
-                size: AppDimensions.iconSizeLg,
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppPadding.standard),
-                child: CenterConsole(
-                  state: _centerConsoleState,
-                  currentCameraPosition: _currentCameraPosition,
-                  isCameraMoving: _isCameraMoving,
+        child: IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              FloatingActionButton(
+                onPressed: () => <void>{
+                  setState(() {
+                    _currentMapType = (_currentMapType == MapType.normal)
+                        ? MapType.hybrid
+                        : MapType.normal;
+                  })
+                },
+                child: const Icon(
+                  TablerIcons.map,
+                  size: AppDimensions.iconSizeLg,
                 ),
               ),
-            ),
-            FloatingActionButton(
-              onPressed: _enableLocationButton
-                  ? () async => centerMapToUserLocation()
-                  : null,
-              child: const Icon(
-                TablerIcons.current_location,
-                size: AppDimensions.iconSizeLg,
+              Expanded(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppPadding.standard),
+                  child: CenterConsole(
+                    state: _centerConsoleState,
+                    currentCameraPosition: _currentCameraPosition,
+                    isCameraMoving: _isCameraMoving,
+                  ),
+                ),
               ),
-            ),
-          ],
+              FloatingActionButton(
+                onPressed: _enableLocationButton
+                    ? () async => centerMapToUserLocation()
+                    : null,
+                child: const Icon(
+                  TablerIcons.current_location,
+                  size: AppDimensions.iconSizeLg,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
