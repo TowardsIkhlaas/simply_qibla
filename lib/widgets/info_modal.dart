@@ -32,7 +32,7 @@ Widget _buildAppIcon() {
       borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMd),
     ),
     clipBehavior: Clip.antiAlias,
-    child: Image.asset('assets/app_icon/app_icon.png'),
+    child: Image.asset('assets/app-icon/app-icon.png'),
   );
 }
 
