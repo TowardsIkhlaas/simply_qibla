@@ -227,6 +227,7 @@ class MapPageState extends State<MapPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               FloatingActionButton(
+                heroTag: 'mapTypeToggle',
                 onPressed: () => <void>{
                   setState(() {
                     _currentMapType = (_currentMapType == MapType.normal)
@@ -251,6 +252,7 @@ class MapPageState extends State<MapPage> {
                 ),
               ),
               FloatingActionButton(
+                heroTag: 'centerMapToUser',
                 onPressed: _enableLocationButton
                     ? () async => centerMapToUserLocation()
                     : null,
