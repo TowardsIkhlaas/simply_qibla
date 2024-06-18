@@ -44,7 +44,7 @@ class AppStrings {
 
   static const String thankYouText = 'JazakAllahu Khayran for using this app!';
   static const String supportAppealText =
-      'This app costs to run and maintain (Google Maps API). Please consider supporting the project through the below buttons.';
+      'This app costs to run and maintain (Google Maps API). Please consider supporting the project through the below buttons (excess amounts will be donated to registered charities).';
   static const String githubButtonText = 'Support us on GitHub';
   static const String donateButtonText = 'Support us on Ko-Fi';
   static const String shareButtonText = 'Share with Friends';
@@ -52,7 +52,7 @@ class AppStrings {
   static const String onboardingLocationTitle = 'Let the app find you.';
   static const String onboardingSupportTitle = 'Support our mission!';
   static const String onboardingUsageBody =
-      'Thanks for downloading SimplyQibla! To use the app, orient yourself to the qibla direction by observing surrounding landmarks (like roads and buildings).';
+      'Thanks for downloading SimplyQibla! Hold your device flat and orient yourself to the qibla direction by observing landmarks like nearby streets and buildings.';
   static const String onboardingLocationBody =
       'Location permissions are needed for the app to function ideally. Rest assured, your data is neither collected nor sold.';
   static const String onboardingSupportBody =
@@ -61,7 +61,7 @@ class AppStrings {
   // Links
 
   static const String githubUriPath =
-      'https://github.com/sponsors/TowardsIkhlaas';
+      'https://github.com/TowardsIkhlaas/simply_qibla/blob/master/.github/CONTRIBUTING.md';
   static const String donateUriPath = 'https://ko-fi.com/TowardsIkhlaas';
   static const String shareContentText = 'Check out this convenient Qibla app';
   static const String androidAppLink = 'playstore/SimplyQibla';

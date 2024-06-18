@@ -1,11 +1,30 @@
 # Contributing Guidelines
 
+## :thumbsup: Ways to Contribute
+
+There are a few ways to contribute to the project:
+
+### Star the repository
+
+If you find SimplyQibla useful, please consider starring the repository by clicking the ' :star: Star' button near the top of the page:
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/TowardsIkhlaas/simply_qibla)](https://github.com/TowardsIkhlaas/simply_qibla/stargazers)
+
+### Sponsor the project
+
+If you would like to support the project financially, you can become a sponsor by clicking the ' :heart: Sponsor' button near the top of the page:
+
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/TowardsIkhlaas)](https://github.com/sponsors/TowardsIkhlaas/simply_qibla)
+
+### Contribute new features and/or open issues
+
+Please feel free to contribute new features, report bugs, or open issues. More details on how to do this are provided below.
+
 *Pull requests, bug reports, and all other forms of contribution are welcomed and highly encouraged!* :octocat:
 
 ### Contents
 
 - [Code of Conduct](#book-code-of-conduct)
-- [Ways to Contribute](#star-ways-to-contribute)
 - [Asking Questions](#bulb-asking-questions)
 - [Opening an Issue](#inbox_tray-opening-an-issue)
 - [Feature Requests](#love_letter-feature-requests)
@@ -22,27 +41,6 @@
 ## :book: Code of Conduct
 
 Please review our [Code of Conduct](https://github.com/TowardsIkhlaas/simply_qibla/blob/master/.github/CODE_OF_CONDUCT.md). It is in effect at all times. We expect it to be honored by everyone who contributes to this project. Acting like an asshole will not be tolerated.
-
-## :thumbsup: Ways to Contribute
-
-There are a few ways to contribute to the project:
-
-### Star the repository
-
-If you find SimplyQibla useful, please consider starring the repository by clicking the ':star: Star' button near the top of the page:
-
-[![GitHub Repo stars](https://img.shields.io/github/stars/TowardsIkhlaas/simply_qibla)](https://github.com/TowardsIkhlaas/simply_qibla/stargazers)
-
-### Sponsor the project
-
-If you would like to support the project financially, you can become a sponsor by clicking the ':heart: Sponsor' button near the top of the page:
-
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/TowardsIkhlaas)](https://github.com/sponsors/TowardsIkhlaas/simply_qibla)
-
-
-### Contribute new features and/or open issues
-
-Please feel free to contribute new features, report bugs, or open issues. More details on how to do this are provided below.
 
 ## :bulb: Asking Questions
 
