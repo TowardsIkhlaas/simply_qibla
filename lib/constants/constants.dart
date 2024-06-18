@@ -61,7 +61,7 @@ class AppStrings {
   // Links
 
   static const String githubUriPath =
-      'https://github.com/sponsors/TowardsIkhlaas';
+      'https://github.com/TowardsIkhlaas/simply_qibla/blob/master/.github/CONTRIBUTING.md';
   static const String donateUriPath = 'https://ko-fi.com/TowardsIkhlaas';
   static const String shareContentText = 'Check out this convenient Qibla app';
   static const String androidAppLink = 'playstore/SimplyQibla';
