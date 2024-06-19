@@ -102,12 +102,19 @@ class MapPageState extends State<MapPage> {
       );
 
       animateToLocation(userLocation!);
-    } catch (e) {
+    } catch (e, stackTrace) {
       setState(() {
         _centerConsoleState = CenterConsoleState.idle;
         _enableLocationButton = true;
       });
-      debugPrint('Error getting user location: $e');
+
+      if(!kReleaseMode) {
+        developer.log(
+          'Error getting user location: $e',
+          name: 'location.error',
+          error: stackTrace,
+        );
+      }
     }
   }
 
@@ -242,8 +249,8 @@ class MapPageState extends State<MapPage> {
               ),
               Expanded(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppPadding.standard),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppPadding.standard),
                   child: CenterConsole(
                     state: _centerConsoleState,
                     currentCameraPosition: _currentCameraPosition,
