@@ -108,7 +108,7 @@ class MapPageState extends State<MapPage> {
         _enableLocationButton = true;
       });
 
-      if(!kReleaseMode) {
+      if (!kReleaseMode) {
         developer.log(
           'Error getting user location: $e',
           name: 'location.error',
