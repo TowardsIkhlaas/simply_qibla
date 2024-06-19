@@ -1,4 +1,4 @@
-package com.example.simply_qibla
+package com.towardsikhlaas.simplyqibla
 
 import io.flutter.embedding.android.FlutterActivity
 
