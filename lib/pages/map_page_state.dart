@@ -194,7 +194,7 @@ class MapPageState extends State<MapPage> {
             ),
             const Center(
               child: Icon(
-                TablerIcons.current_location,
+                TablerIcons.circle_dot,
                 size: AppDimensions.iconSizeLg,
                 color: Colors.black,
               ),
