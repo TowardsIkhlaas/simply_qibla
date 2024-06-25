@@ -22,7 +22,7 @@ Please feel free to contribute new features, report bugs, or open issues. More d
 
 *Pull requests, bug reports, and all other forms of contribution are welcomed and highly encouraged!* :octocat:
 
-### Contents
+## Contents
 
 - [Code of Conduct](#book-code-of-conduct)
 - [Asking Questions](#bulb-asking-questions)
