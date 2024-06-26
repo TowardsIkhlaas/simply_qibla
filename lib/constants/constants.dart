@@ -63,9 +63,11 @@ class AppStrings {
   static const String githubUriPath =
       'https://github.com/TowardsIkhlaas/simply_qibla/blob/master/.github/CONTRIBUTING.md';
   static const String donateUriPath = 'https://ko-fi.com/TowardsIkhlaas';
-  static const String shareContentText = 'Check out this convenient Qibla app';
-  static const String androidAppLink = 'playstore/SimplyQibla';
-  static const String iosAppLink = 'appstore/SimplyQibla';
+  static const String shareContentText =
+      'As salaam alaykum warahmatullahi wabarakatuh! Check out this beautiful and accurate Qibla app';
+  static const String androidAppLink =
+      'https://play.google.com/store/apps/details?id=com.towardsikhlaas.SimplyQibla';
+  static const String iosAppLink = 'https://apps.apple.com/app/id6504881956';
 }
 
 class AppStatusCodes {
