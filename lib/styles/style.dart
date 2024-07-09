@@ -1,6 +1,7 @@
 class AppPadding {
   static const double standard = 20.0;
   static const double appBarTop = 30.0;
+  static const double bottomNav = 45.0;
   static const double appBarActionRight = 12.0;
 }
 
