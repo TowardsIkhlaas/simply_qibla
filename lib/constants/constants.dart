@@ -36,18 +36,19 @@ class AppStrings {
 
   static const String locationDisabled = 'Your location is off.';
   static const String locationDeniedInitial =
-      'Please allow the app to use your location. Your data is not collected or sold.';
+      'Please allow location permission to use this feature. We do not store or sell your data. :)';
   static const String locationDeniedPermanent =
-      'Please allow location permission for the app to use this function.';
+      'Please allow location permission to use this feature.';
 
   // User Experience
 
   static const String thankYouText = 'JazakAllahu Khayran for using this app!';
   static const String supportAppealText =
-      'This app costs to run and maintain (Google Maps API). Please consider supporting the project through the below buttons (excess amounts will be donated to registered charities).';
+      'This app costs to run and maintain (Google Maps API). Please consider supporting the project through the buttons below (excess amounts will be donated to registered charities).';
   static const String githubButtonText = 'Support us on GitHub';
   static const String donateButtonText = 'Support us on Ko-Fi';
   static const String shareButtonText = 'Share with Friends';
+  static const String socialInstagramButtonText = 'Follow us on Instagram';
   static const String onboardingUsageTitle = 'How does this work?';
   static const String onboardingLocationTitle = 'Let the app find you.';
   static const String onboardingSupportTitle = 'Support our mission!';
@@ -63,6 +64,7 @@ class AppStrings {
   static const String githubUriPath =
       'https://github.com/TowardsIkhlaas/simply_qibla/blob/master/.github/CONTRIBUTING.md';
   static const String donateUriPath = 'https://ko-fi.com/TowardsIkhlaas';
+  static const String socialInstagramUriPath = 'https://www.instagram.com/towardsikhlaas';
   static const String shareContentText =
       'As salaam alaykum warahmatullahi wabarakatuh! Check out this beautiful and accurate Qibla app';
   static const String androidAppLink =
