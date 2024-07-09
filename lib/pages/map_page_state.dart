@@ -245,6 +245,7 @@ class MapPageState extends State<MapPage> {
                 child: const Icon(
                   TablerIcons.map,
                   size: AppDimensions.iconSizeLg,
+                  semanticLabel: 'Toggle map type',
                 ),
               ),
               Expanded(
@@ -266,6 +267,7 @@ class MapPageState extends State<MapPage> {
                 child: const Icon(
                   TablerIcons.current_location,
                   size: AppDimensions.iconSizeLg,
+                  semanticLabel: 'Center map to current location',
                 ),
               ),
             ],
