@@ -30,6 +30,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       'assets/$assetName',
       width: dim,
       height: dim,
+      semanticLabel: 'Welcome screen illustration',
     );
   }
 
@@ -85,6 +86,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       next: Icon(
         Icons.arrow_forward,
         color: Theme.of(context).colorScheme.primaryContainer,
+        semanticLabel: 'Next page',
       ),
       done: Text(
         'Done',
@@ -93,7 +95,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
         ),
       ),
       curve: Curves.fastLinearToSlowEaseIn,
-      controlsPadding: const EdgeInsets.all(AppPadding.standard),
+      controlsPadding: const EdgeInsets.only(
+        left: AppPadding.standard,
+        top: AppPadding.standard,
+        right: AppPadding.standard,
+        bottom: AppPadding.bottomNav,
+      ),
       dotsDecorator: DotsDecorator(
         size: const Size(10.0, 10.0),
         color: Colors.white,

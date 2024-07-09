@@ -39,6 +39,7 @@ class _InfoButtonState extends State<InfoButton> {
         TablerIcons.info_circle,
         size: AppDimensions.iconSizeMd,
         color: Colors.white,
+        semanticLabel: 'Info Button',
       ),
     );
   }
