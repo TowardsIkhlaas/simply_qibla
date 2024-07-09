@@ -58,4 +58,6 @@ class AppThemes {
   static const Color donationServicePrimaryColor = Colors.white;
   static const Color donationServiceSecondaryColor =
       Color.fromRGBO(83, 183, 248, 1.0);
+  static const Color socialInstagramPrimaryColor = Colors.pink;
+  static const Color socialInstagramSecondaryColor = Colors.white;
 }

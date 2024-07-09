@@ -77,6 +77,13 @@ Widget _buildButtonColumn() {
           foregroundColor: AppThemes.githubPrimaryColor,
           backgroundColor: AppThemes.githubSecondaryColor,
         ),
+        _buildLinkIconButton(
+          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.socialInstagramUriPath)),
+          labelText: AppStrings.socialInstagramButtonText,
+          icon: TablerIcons.brand_instagram,
+          foregroundColor: AppThemes.socialInstagramPrimaryColor,
+          backgroundColor: AppThemes.socialInstagramSecondaryColor,
+        ),
       ],
     ),
   );
