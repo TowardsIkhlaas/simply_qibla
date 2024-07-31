@@ -68,7 +68,7 @@ class AppStrings {
   static const String shareContentText =
       'As salaam alaykum warahmatullahi wabarakatuh! Check out this beautiful and accurate Qibla app';
   static const String androidAppLink =
-      'https://play.google.com/store/apps/details?id=com.towardsikhlaas.SimplyQibla';
+      'https://play.google.com/store/apps/details?id=com.towardsikhlaas.simplyqibla';
   static const String iosAppLink = 'https://apps.apple.com/app/id6504881956';
 }
 
