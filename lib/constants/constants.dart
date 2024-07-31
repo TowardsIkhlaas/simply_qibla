@@ -53,9 +53,9 @@ class AppStrings {
   static const String onboardingLocationTitle = 'Let the app find you.';
   static const String onboardingSupportTitle = 'Support our mission!';
   static const String onboardingUsageBody =
-      'Thanks for downloading SimplyQibla! Hold your device flat and orient yourself to the qibla direction by observing landmarks like nearby streets and buildings.';
+      'Salaam! To use the app, hold your device flat and rotate it to align with nearby landmarks shown in the map, like streets and buildings around you.';
   static const String onboardingLocationBody =
-      'Location permissions are needed for the app to function ideally. Rest assured, your data is neither collected nor sold.';
+      'Location permissions are needed for the app to function ideally, but not required. Rest assured, your data is neither collected nor sold.';
   static const String onboardingSupportBody =
       'SimplyQibla is ad-free and open-source. If you like what you see, please support us through the in-app links. Your support will be used to run the app, and excess will be donated to registered charities.';
 
