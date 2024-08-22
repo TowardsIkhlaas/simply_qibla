@@ -10,3 +10,14 @@ Future<void> setOnboardingStatus(bool value) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool('hasSeenOnboarding', value);
 }
+
+Future<int> getLaunchCount() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.reload();
+
+  int launchCount = prefs.getInt('launchCount') ?? 0;
+  launchCount++;
+  prefs.setInt('launchCount', launchCount);
+
+  return launchCount;
+}
