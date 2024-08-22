@@ -36,6 +36,7 @@ class MapPageState extends State<MapPage> {
     } else {
       centerMapToUserLocation();
     }
+    _requestReview();
   }
 
   void animateToLocation(LatLng coordinates) async {
@@ -114,6 +115,17 @@ class MapPageState extends State<MapPage> {
           name: 'location.error',
           error: stackTrace,
         );
+      }
+    }
+  }
+
+  Future<void> _requestReview() async {
+    int launchCount = await getLaunchCount();
+
+    if (launchCount >= 3 && launchCount % 3 == 0) {
+      final InAppReview inAppReview = InAppReview.instance;
+      if (await inAppReview.isAvailable()) {
+        inAppReview.requestReview();
       }
     }
   }
