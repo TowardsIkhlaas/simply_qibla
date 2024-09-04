@@ -27,6 +27,14 @@ SimplyQibla is a no-frills qibla finder app that lets you find the exact prayer 
 - **Ad-free and Open-Source**: We don't nag you with annoying ads, and we don't collect your data either. Our source-code is public and easily auditable.
 - **Minimalist Design**: Built with Google's latest design language.
 
+<a href="https://star-history.com/#TowardsIkhlaas/simply_qibla&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=TowardsIkhlaas/simply_qibla&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=TowardsIkhlaas/simply_qibla&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=TowardsIkhlaas/simply_qibla&type=Date" />
+ </picture>
+</a>
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
