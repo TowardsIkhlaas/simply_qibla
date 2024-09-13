@@ -106,8 +106,6 @@ Widget _buildLinkIconButton({
 }
 
 Future<void> _shareApp() async {
-  final String shareString = Platform.isIOS
-      ? '${AppStrings.shareContentText}: ${AppStrings.iosAppLink}'
-      : '${AppStrings.shareContentText}: ${AppStrings.androidAppLink}';
+  const String shareString = '${AppStrings.shareContentText}: ${AppStrings.landingPageLink}';
   await Share.share(shareString);
 }
