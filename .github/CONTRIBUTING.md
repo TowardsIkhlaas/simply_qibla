@@ -120,48 +120,23 @@ For most contributions, after your first pull request is accepted and merged, yo
 
 ## :memo: Writing Commit Messages
 
-Please [write a great commit message](https://chris.beams.io/posts/git-commit/).
+Please follow the [Conventional Commits spec](https://www.conventionalcommits.org/en/v1.0.0/) for your commit messages. Additionally, please ensure:
 
+1. Prefix the title with the relevant type. (examples: "feat: add translator", "ci: update deploy")
 1. Separate subject from body with a blank line
 1. Limit the subject line to 50 characters
-1. Capitalize the subject line
+1. Do not capitalize the subject line
 1. Do not end the subject line with a period
 1. Use the imperative mood in the subject line (example: "Fix networking issue")
 1. Wrap the body at about 72 characters
-1. Use the body to explain **why**, *not what and how* (the code shows that!)
-1. If applicable, prefix the title with the relevant component name. (examples: "[Docs] Fix typo", "[Profile] Fix missing avatar")
+1. Use the body to explain **why**, *not what and how*. (the code shows that!)
 
 ```
-[TAG] Short summary of changes in 50 chars or less
+<type>[optional scope]: short summary of changes in 50 chars or less
 
-Add a more detailed explanation here, if necessary. Possibly give 
-some background about the issue being fixed, etc. The body of the 
-commit message can be several paragraphs. Further paragraphs come 
-after blank lines and please do proper word-wrap.
+[optional body]
 
-Wrap it to about 72 characters or so. In some contexts, 
-the first line is treated as the subject of the commit and the 
-rest of the text as the body. The blank line separating the summary 
-from the body is critical (unless you omit the body entirely); 
-various tools like `log`, `shortlog` and `rebase` can get confused 
-if you run the two together.
-
-Explain the problem that this commit is solving. Focus on why you
-are making this change as opposed to how or what. The code explains 
-how or what. Reviewers and your future self can read the patch, 
-but might not understand why a particular solution was implemented.
-Are there side effects or other unintuitive consequences of this
-change? Here's the place to explain them.
-
- - Bullet points are okay, too
-
- - A hyphen or asterisk should be used for the bullet, preceded
-   by a single space, with blank lines in between
-
-Note the fixed or relevant GitHub issues at the end:
-
-Resolves: #123
-See also: #456, #789
+[optional footer(s)]
 ```
 
 ## :white_check_mark: Code Review
