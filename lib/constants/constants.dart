@@ -67,6 +67,7 @@ class AppStrings {
   static const String socialInstagramUriPath = 'https://www.instagram.com/towardsikhlaas';
   static const String shareContentText =
       'As salaam alaykum warahmatullahi wabarakatuh! Check out this beautiful and accurate Qibla app';
+  static const String landingPageLink = 'https://simplyqibla.towardsikhlaas.com';
   static const String androidAppLink =
       'https://play.google.com/store/apps/details?id=com.towardsikhlaas.simplyqibla';
   static const String iosAppLink = 'https://apps.apple.com/app/id6504881956';
