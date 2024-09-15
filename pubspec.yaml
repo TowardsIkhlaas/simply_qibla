@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
 
   google_maps_flutter: ^2.9.0
-  google_maps_flutter_platform_interface: ^2.9.0
+  google_maps_flutter_platform_interface: ^2.9.2
   google_maps_flutter_android: ^2.14.3
   geolocator: ^13.0.1
   flutter_tabler_icons: ^1.40.0
