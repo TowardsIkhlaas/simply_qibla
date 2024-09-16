@@ -10,5 +10,5 @@ updates:
     schedule:
       interval: "weekly"
     commit_message:
-          prefix: "chore"
-          include_scope: true
+      prefix: "chore"
+      include_scope: true
