@@ -9,6 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    commit_message:
+    commit-message:
       prefix: "chore"
       include_scope: true
