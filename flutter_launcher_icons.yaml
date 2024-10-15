@@ -1,11 +1,19 @@
 flutter_launcher_icons:
   # dart run flutter_launcher_icons -f flutter_launcher_icons.yaml
-  android: true
-  ios: true
-  remove_alpha_ios: true
   image_path: "assets/app-icon/app-icon.png"
+
+  # Android specific config
+  android: true
+  min_sdk_android: 21
   image_path_android: "assets/app-icon/app-icon.png"
-  image_path_ios: "assets/app-icon/app-icon-ios.png"
   adaptive_icon_background: "assets/app-icon/background.png"
   adaptive_icon_foreground: "assets/app-icon/foreground.png"
-  min_sdk_android: 21
+
+  # iOS specific config
+  ios: true
+  remove_alpha_ios: true
+  image_path_ios: "assets/app-icon/app-icon-ios.png"
+  # iOS 18 and above
+  image_path_ios_dark_transparent: "assets/app-icon/app-icon-ios-dark.png"
+  image_path_ios_tinted_grayscale: "assets/app-icon/app-icon-ios-tinted.png"
+  desaturate_tinted_to_grayscale_ios: false
