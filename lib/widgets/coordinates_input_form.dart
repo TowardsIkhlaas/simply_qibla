@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/styles/style.dart';
@@ -21,7 +22,7 @@ class CoordinatesInputForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'Enter Coordinates',
+        AppLocalizations.of(context)!.coordinatesInputFormTitle,
         style: Theme.of(context).textTheme.titleMedium,
       ),
       content: Form(
@@ -29,48 +30,54 @@ class CoordinatesInputForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            TextFormField(
-              autofocus: true,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              controller: latitudeController,
-              decoration: InputDecoration(
-                labelText: 'Latitude',
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimensions.borderRadiusSm),
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: TextFormField(
+                autofocus: true,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: latitudeController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.latitudeFieldLabel,
+                  border: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.borderRadiusSm),
+                  ),
                 ),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                validator: (String? value) {
+                  if (InputValidation.latitudeValidatorPattern.hasMatch(value!)) {
+                    return null;
+                  }
+                  return AppLocalizations.of(context)!.latitudeErrorText;
+                },
               ),
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              validator: (String? value) {
-                if (InputValidation.latitudeValidatorPattern.hasMatch(value!)) {
-                  return null;
-                }
-                return 'Invalid latitude value';
-              },
             ),
             const SizedBox(
               height: AppPadding.standard,
             ),
-            TextFormField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              controller: longitudeController,
-              decoration: InputDecoration(
-                labelText: 'Longitude',
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimensions.borderRadiusSm),
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: longitudeController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.longitudeFieldLabel,
+                  border: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.borderRadiusSm),
+                  ),
                 ),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                validator: (String? value) {
+                  if (InputValidation.longitudeValidatorPattern
+                      .hasMatch(value!)) {
+                    return null;
+                  }
+                  return AppLocalizations.of(context)!.longitudeErrorText;
+                },
               ),
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              validator: (String? value) {
-                if (InputValidation.longitudeValidatorPattern
-                    .hasMatch(value!)) {
-                  return null;
-                }
-                return 'Invalid longitude value';
-              },
             ),
           ],
         ),
@@ -80,14 +87,14 @@ class CoordinatesInputForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             TextButton(
-              child: const Text('Clear'),
+              child: Text(AppLocalizations.of(context)!.clearText),
               onPressed: () {
                 latitudeController.clear();
                 longitudeController.clear();
               },
             ),
             TextButton(
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.cancelText),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -104,7 +111,7 @@ class CoordinatesInputForm extends StatelessWidget {
                   Navigator.of(context).pop();
                 }
               },
-              child: const Text('OK'),
+              child: Text(AppLocalizations.of(context)!.okText),
             ),
           ],
         ),
