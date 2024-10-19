@@ -1,0 +1,139 @@
+{
+  "@@locale": "en",
+  "appNamePascalCase": "SimplyQibla",
+  "@appNamePascalCase": {
+    "description": "Name of the app in PascalCase where supported."
+  },
+  "appAboutLegalese": "© 2024 TowardsIkhlaas",
+  "@appAboutLegalese": {
+    "description": "Legal text appearing in the About section of the app."
+  },
+  "changeLocationBarText": "Jump to a specific location? :)",
+  "@changeLocationBarText": {
+    "description": "Prompt asking the user if they want to navigate to a specific location."
+  },
+  "latitudeFieldLabel": "Latitude",
+  "@latitudeFieldLabel": {
+    "description": "Label for latitude input field."
+  },
+  "longitudeFieldLabel": "Longitude",
+  "@longitudeFieldLabel": {
+    "description": "Label for longitude input field."
+  },
+  "skipText": "Skip",
+  "@skipText": {
+    "description": "Text used as a button label, typically for skipping through something."
+  },
+  "doneText": "Done",
+  "@doneText": {
+    "description": "Text used as a button label, typically for finishing an action."
+  },
+  "okText": "OK",
+  "@okText": {
+    "description": "Text used as a button label, typically for confirming an action."
+  },
+  "cancelText": "Cancel",
+  "@cancelText": {
+    "description": "Text used as a button label, typically for canceling an action."
+  },
+  "clearText": "Clear",
+  "@clearText": {
+    "description": "Text used as a button label, typically for clearing a field."
+  },
+  "allowText": "ALLOW",
+  "@allowText": {
+    "description": "Text used as a button label, typically within a snackbar for allowing a permission."
+  },
+  "turnOnText": "TURN ON",
+  "@turnOnText": {
+    "description": "Text used as a button label, typically within a snackbar for turning on a service."
+  },
+  "coordinatesInputFormTitle": "Enter Coordinates",
+  "@coordinatesInputFormTitle": {
+    "description": "Text shown as the title of coordinates input form."
+  },
+  "centerConsoleCenteringText": "Locating you...",
+  "@centerConsoleCenteringText": {
+    "description": "Message displayed while the app is determining the user's current location."
+  },
+  "centerConsoleDraggingText": "Lift to show Qibla line",
+  "@centerConsoleDraggingText": {
+    "description": "Text indicating that the user should lift their finger to reveal the Qibla direction line."
+  },
+  "centerConsoleIdleText": "km to the Kaaba",
+  "@centerConsoleIdleText": {
+    "description": "Text displayed in idle state, showing the distance from the user's location to the Kaaba."
+  },
+  "locationDisabled": "Your location is off.",
+  "@locationDisabled": {
+    "description": "Warning message indicating that the user's location services are disabled."
+  },
+  "locationDeniedInitial": "Please allow location permission to use this feature. We do not store or sell your data. :)",
+  "@locationDeniedInitial": {
+    "description": "Message asking the user to allow location permission, with a privacy reassurance statement."
+  },
+  "locationDeniedPermanent": "Please allow location permission to use this feature.",
+  "@locationDeniedPermanent": {
+    "description": "Message requesting the user to allow location permission after they have previously denied it permanently."
+  },
+  "latitudeErrorText": "Invalid latitude value",
+  "@latitudeErrorText": {
+    "description": "Error message shown when inputting an invalid latitude."
+  },
+  "longitudeErrorText": "Invalid longitude value",
+  "@longitudeErrorText": {
+    "description": "Error message shown when inputting an invalid longitude."
+  },
+  "thankYouText": "JazakAllahu Khayran for using this app!",
+  "@thankYouText": {
+    "description": "Gratitude message shown to users, thanking them for using the app."
+  },
+  "supportAppealText": "This app costs to run and maintain (Google Maps API). Please consider supporting the project through the buttons below (excess amounts will be donated to registered charities).",
+  "@supportAppealText": {
+    "description": "Appeal asking users to support the app through donations, mentioning that excess funds will be donated to charity."
+  },
+  "githubButtonText": "Support us on GitHub",
+  "@githubButtonText": {
+    "description": "Button text that directs users to GitHub to support the project."
+  },
+  "donateButtonText": "Support us on Ko-Fi",
+  "@donateButtonText": {
+    "description": "Button text that directs users to Ko-Fi to support the project."
+  },
+  "socialInstagramButtonText": "Follow us on Instagram",
+  "@socialInstagramButtonText": {
+    "description": "Button text encouraging users to follow the project on Instagram."
+  },
+  "shareButtonText": "Share with Friends",
+  "@shareButtonText": {
+    "description": "Button text allowing users to share the app with friends."
+  },
+  "shareContentText": "As salaam alaykum warahmatullahi wabarakatuh! Check out this beautiful and accurate Qibla app",
+  "@shareContentText": {
+    "description": "Text content used when users share the app with others."
+  },
+  "onboardingUsageTitle": "How does this work?",
+  "@onboardingUsageTitle": {
+    "description": "Title for the onboarding section explaining how to use the app."
+  },
+  "onboardingLocationTitle": "Let the app find you.",
+  "@onboardingLocationTitle": {
+    "description": "Title for the onboarding section that explains the need for location permissions."
+  },
+  "onboardingSupportTitle": "Support our mission!",
+  "@onboardingSupportTitle": {
+    "description": "Title for the onboarding section that encourages users to support the project."
+  },
+  "onboardingUsageBody": "Salaam! To use the app, hold your device flat and rotate it to align with nearby landmarks shown in the map, like streets and buildings around you.",
+  "@onboardingUsageBody": {
+    "description": "Body text explaining to the user how to operate the app by aligning with landmarks on the map."
+  },
+  "onboardingLocationBody": "Location permissions are needed for the app to function ideally, but not required. Rest assured, your data is neither collected nor sold.",
+  "@onboardingLocationBody": {
+    "description": "Body text explaining why location permissions are requested and reassuring users about data privacy."
+  },
+  "onboardingSupportBody": "SimplyQibla is ad-free and open-source. If you like what you see, please support us through the in-app links. Your support will be used to run the app, and excess will be donated to registered charities.",
+  "@onboardingSupportBody": {
+    "description": "Body text encouraging users to support the project and explaining how donations will be used."
+  }
+}
