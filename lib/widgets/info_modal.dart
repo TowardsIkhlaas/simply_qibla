@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:simply_qibla/constants/constants.dart';
@@ -11,15 +12,15 @@ import 'package:simply_qibla/widgets/link_icon_button.dart';
 void showInfoModal(BuildContext context, String version, String buildNumber) {
   showAboutDialog(
     context: context,
-    applicationName: AppStrings.appNamePascalCase,
+    applicationName: AppLocalizations.of(context)!.appNamePascalCase,
     applicationIcon: _buildAppIcon(),
     applicationVersion: 'v$version',
-    applicationLegalese: AppStrings.appAboutLegalese,
+    applicationLegalese: AppLocalizations.of(context)!.appAboutLegalese,
     children: <Widget>[
       _buildTextSection('Build: $buildNumber'),
-      _buildTextSection(AppStrings.thankYouText, isBold: true),
-      _buildTextSection(AppStrings.supportAppealText),
-      _buildButtonColumn(),
+      _buildTextSection(AppLocalizations.of(context)!.thankYouText, isBold: true),
+      _buildTextSection(AppLocalizations.of(context)!.supportAppealText),
+      _buildButtonColumn(context),
     ],
   );
 }
@@ -50,7 +51,7 @@ Widget _buildTextSection(String text, {bool isBold = false}) {
   );
 }
 
-Widget _buildButtonColumn() {
+Widget _buildButtonColumn(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(
       top: AppPadding.standard,
@@ -59,27 +60,29 @@ Widget _buildButtonColumn() {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         _buildLinkIconButton(
-          onPressed: _shareApp,
-          labelText: AppStrings.shareButtonText,
+          onPressed: () async {
+            await _shareApp(context);
+          },
+          labelText: AppLocalizations.of(context)!.shareButtonText,
           icon: Platform.isIOS ? TablerIcons.share_2 : TablerIcons.share,
         ),
         _buildLinkIconButton(
           onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
-          labelText: AppStrings.donateButtonText,
+          labelText: AppLocalizations.of(context)!.donateButtonText,
           icon: TablerIcons.coffee,
           foregroundColor: AppThemes.donationServicePrimaryColor,
           backgroundColor: AppThemes.donationServiceSecondaryColor,
         ),
         _buildLinkIconButton(
           onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
-          labelText: AppStrings.githubButtonText,
+          labelText: AppLocalizations.of(context)!.githubButtonText,
           icon: TablerIcons.brand_github,
           foregroundColor: AppThemes.githubPrimaryColor,
           backgroundColor: AppThemes.githubSecondaryColor,
         ),
         _buildLinkIconButton(
           onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.socialInstagramUriPath)),
-          labelText: AppStrings.socialInstagramButtonText,
+          labelText: AppLocalizations.of(context)!.socialInstagramButtonText,
           icon: TablerIcons.brand_instagram,
           foregroundColor: AppThemes.socialInstagramPrimaryColor,
           backgroundColor: AppThemes.socialInstagramSecondaryColor,
@@ -105,7 +108,7 @@ Widget _buildLinkIconButton({
   );
 }
 
-Future<void> _shareApp() async {
-  const String shareString = '${AppStrings.shareContentText}: ${AppStrings.landingPageLink}';
+Future<void> _shareApp(BuildContext context) async {
+  String shareString = '${AppLocalizations.of(context)!.shareContentText}: ${AppStrings.landingPageLink}';
   await Share.share(shareString);
 }
