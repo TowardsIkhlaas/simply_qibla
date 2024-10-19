@@ -1,0 +1,40 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سمبلي قبلة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimplyQibla"
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يتم استخدام موقعك لتمركز الخريطة في منطقتك وتحديد اتجاه القبلة. بدلاً من ذلك، يمكنك تحريك الخريطة يدويًا أو إدخال إحداثيات محددة."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your location is used to center the map to your area and determine the Qibla direction. Alternatively, you can manually move the map or enter specific coordinates."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
