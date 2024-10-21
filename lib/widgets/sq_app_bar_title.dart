@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/styles/style.dart';
 
 class SQAppBarTitle extends StatelessWidget {
@@ -16,7 +16,7 @@ class SQAppBarTitle extends StatelessWidget {
           color: Colors.white,
         ),
         Text(
-          AppStrings.appNamePascalCase,
+          AppLocalizations.of(context)!.appNamePascalCase,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: Colors.white,
               ),

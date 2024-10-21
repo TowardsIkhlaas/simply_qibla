@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/helpers/shared_preferences_helper.dart';
 import 'package:simply_qibla/pages/map_page.dart';
 import 'package:simply_qibla/styles/style.dart';
@@ -53,20 +53,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
       allowImplicitScrolling: true,
       pages: <PageViewModel>[
         PageViewModel(
-          title: AppStrings.onboardingUsageTitle,
-          body: AppStrings.onboardingUsageBody,
+          title: AppLocalizations.of(context)!.onboardingUsageTitle,
+          body: AppLocalizations.of(context)!.onboardingUsageBody,
           image: _buildImage('illustrations/usage-illustration.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: AppStrings.onboardingLocationTitle,
-          body: AppStrings.onboardingLocationBody,
+          title: AppLocalizations.of(context)!.onboardingLocationTitle,
+          body: AppLocalizations.of(context)!.onboardingLocationBody,
           image: _buildImage('illustrations/location-illustration.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: AppStrings.onboardingSupportTitle,
-          body: AppStrings.onboardingSupportBody,
+          title: AppLocalizations.of(context)!.onboardingSupportTitle,
+          body: AppLocalizations.of(context)!.onboardingSupportBody,
           image: _buildImage('illustrations/support-illustration.png'),
           decoration: pageDecoration,
         ),
@@ -78,7 +78,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       nextFlex: 0,
       // dotsFlex: 4,
       skip: Text(
-        'Skip',
+        AppLocalizations.of(context)!.skipText,
         style: TextStyle(
           color: Theme.of(context).colorScheme.primaryContainer,
         ),
@@ -89,7 +89,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         semanticLabel: 'Next page',
       ),
       done: Text(
-        'Done',
+        AppLocalizations.of(context)!.doneText,
         style: TextStyle(
           color: Theme.of(context).colorScheme.primaryContainer,
         ),

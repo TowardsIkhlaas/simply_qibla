@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -29,15 +30,15 @@ class CenterConsole extends StatelessWidget {
     switch (state) {
       case CenterConsoleState.centering:
         consoleColor = Colors.green;
-        text = AppStrings.centerConsoleCenteringText;
+        text = AppLocalizations.of(context)!.centerConsoleCenteringText;
         break;
       case CenterConsoleState.dragging:
         consoleColor = Colors.blue;
-        text = AppStrings.centerConsoleDraggingText;
+        text = AppLocalizations.of(context)!.centerConsoleDraggingText;
         break;
       case CenterConsoleState.idle:
         consoleColor = Theme.of(context).colorScheme.primaryContainer;
-        text = '$formattedDistance ${AppStrings.centerConsoleIdleText}';
+        text = '$formattedDistance ${AppLocalizations.of(context)!.centerConsoleIdleText}';
         break;
     }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,6 +13,8 @@ void main() {
     Future<void> pumpMapPage(WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: MapPage(),
         ),
       );
@@ -19,7 +22,8 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    testWidgets('Toggles map type when the toggle button is pressed', (WidgetTester tester) async {
+    testWidgets('Toggles map type when the toggle button is pressed',
+        (WidgetTester tester) async {
       await pumpMapPage(tester);
 
       // Verify initial map type is normal
@@ -31,7 +35,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify map type is changed to hybrid
-      final GoogleMap googleMapAfterFirstTap = tester.widget(find.byType(GoogleMap));
+      final GoogleMap googleMapAfterFirstTap =
+          tester.widget(find.byType(GoogleMap));
       expect(googleMapAfterFirstTap.mapType, MapType.hybrid);
 
       // Tap the toggle button again
@@ -39,7 +44,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify map type is changed back to normal
-      final GoogleMap googleMapAfterSecondTap = tester.widget(find.byType(GoogleMap));
+      final GoogleMap googleMapAfterSecondTap =
+          tester.widget(find.byType(GoogleMap));
       expect(googleMapAfterSecondTap.mapType, MapType.normal);
     });
   });

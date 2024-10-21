@@ -20,45 +20,6 @@ enum CenterConsoleState {
 }
 
 class AppStrings {
-  // Meta
-
-  static const String appNamePascalCase = 'SimplyQibla';
-  static const String appAboutLegalese = '© 2024 TowardsIkhlaas';
-
-  // App Text
-
-  static const String changeLocationBarText = 'Jump to a specific location? :)';
-  static const String centerConsoleCenteringText = 'Locating you...';
-  static const String centerConsoleDraggingText = 'Lift to show Qibla line';
-  static const String centerConsoleIdleText = 'km to the Kaaba';
-
-  // Errors and Warnings
-
-  static const String locationDisabled = 'Your location is off.';
-  static const String locationDeniedInitial =
-      'Please allow location permission to use this feature. We do not store or sell your data. :)';
-  static const String locationDeniedPermanent =
-      'Please allow location permission to use this feature.';
-
-  // User Experience
-
-  static const String thankYouText = 'JazakAllahu Khayran for using this app!';
-  static const String supportAppealText =
-      'This app costs to run and maintain (Google Maps API). Please consider supporting the project through the buttons below (excess amounts will be donated to registered charities).';
-  static const String githubButtonText = 'Support us on GitHub';
-  static const String donateButtonText = 'Support us on Ko-Fi';
-  static const String shareButtonText = 'Share with Friends';
-  static const String socialInstagramButtonText = 'Follow us on Instagram';
-  static const String onboardingUsageTitle = 'How does this work?';
-  static const String onboardingLocationTitle = 'Let the app find you.';
-  static const String onboardingSupportTitle = 'Support our mission!';
-  static const String onboardingUsageBody =
-      'Salaam! To use the app, hold your device flat and rotate it to align with nearby landmarks shown in the map, like streets and buildings around you.';
-  static const String onboardingLocationBody =
-      'Location permissions are needed for the app to function ideally, but not required. Rest assured, your data is neither collected nor sold.';
-  static const String onboardingSupportBody =
-      'SimplyQibla is ad-free and open-source. If you like what you see, please support us through the in-app links. Your support will be used to run the app, and excess will be donated to registered charities.';
-
   // Links
 
   static const String githubUriPath =

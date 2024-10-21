@@ -54,12 +54,20 @@ class MapPageState extends State<MapPage> {
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
+    final String locationDisabledMessage =
+        AppLocalizations.of(context)!.locationDisabled;
+    final String turnOnText = AppLocalizations.of(context)!.turnOnText;
+    final String locationDeniedInitialMessage =
+        AppLocalizations.of(context)!.locationDeniedInitial;
+    final String locationDeniedPermanentMessage =
+        AppLocalizations.of(context)!.locationDeniedPermanent;
+    final String allowText = AppLocalizations.of(context)!.allowText;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       _showSnackBar(
-        AppStrings.locationDisabled,
-        actionLabel: 'TURN ON',
+        locationDisabledMessage,
+        actionLabel: turnOnText,
         action: () => Geolocator.openLocationSettings(),
       );
       return Future<Position>.error(AppStatusCodes.locationDisabled);
@@ -70,7 +78,7 @@ class MapPageState extends State<MapPage> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         _showSnackBar(
-          AppStrings.locationDeniedInitial,
+          locationDeniedInitialMessage,
         );
         return Future<Position>.error(AppStatusCodes.locationDeniedInitial);
       }
@@ -78,8 +86,8 @@ class MapPageState extends State<MapPage> {
 
     if (permission == LocationPermission.deniedForever) {
       _showSnackBar(
-        AppStrings.locationDeniedPermanent,
-        actionLabel: 'ALLOW',
+        locationDeniedPermanentMessage,
+        actionLabel: allowText,
         action: () => Geolocator.openAppSettings(),
       );
       return Future<Position>.error(AppStatusCodes.locationDeniedPermanent);
