@@ -44,7 +44,7 @@ class CoordinatesInputForm extends StatelessWidget {
                   ),
                 ),
                 keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                    const TextInputType.numberWithOptions(decimal: true, signed: true),
                 validator: (String? value) {
                   if (InputValidation.latitudeValidatorPattern.hasMatch(value!)) {
                     return null;
@@ -69,7 +69,7 @@ class CoordinatesInputForm extends StatelessWidget {
                   ),
                 ),
                 keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                    const TextInputType.numberWithOptions(decimal: true, signed: true),
                 validator: (String? value) {
                   if (InputValidation.longitudeValidatorPattern
                       .hasMatch(value!)) {
