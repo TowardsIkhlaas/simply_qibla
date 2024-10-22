@@ -15,6 +15,12 @@
             "state" : "translated",
             "value" : "SimplyQibla"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimplyQibla"
+          }
         }
       }
     },
@@ -31,6 +37,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your location is used to center the map to your area and determine the Qibla direction. Alternatively, you can manually move the map or enter specific coordinates."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre position est utilisée pour centrer la carte sur votre zone et déterminer la direction de la Qibla. Vous pouvez également déplacer la carte manuellement ou entrer des coordonnées spécifiques."
           }
         }
       }
