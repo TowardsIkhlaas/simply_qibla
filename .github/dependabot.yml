@@ -7,6 +7,7 @@ version: 2
 updates:
   - package-ecosystem: "pub"
     directory: "/"
+    target-branch: "develop"
     schedule:
       interval: "weekly"
     commit-message:
