@@ -2,7 +2,7 @@ PODS:
   - Flutter (1.0.0)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
-  - flutter_native_splash (0.0.1):
+  - flutter_native_splash (2.4.3):
     - Flutter
   - geolocator_apple (1.2.0):
     - Flutter
@@ -17,7 +17,7 @@ PODS:
   - GoogleMaps/Base (8.4.0)
   - GoogleMaps/Maps (8.4.0):
     - GoogleMaps/Base
-  - in_app_review (0.2.0):
+  - in_app_review (2.0.0):
     - Flutter
   - package_info_plus (0.4.5):
     - Flutter
@@ -77,12 +77,12 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
-  flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
-  geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
+  flutter_native_splash: e8a1e01082d97a8099d973f919f57904c925008a
+  geolocator_apple: 9bcea1918ff7f0062d98345d238ae12718acfbc1
   Google-Maps-iOS-Utils: 66d6de12be1ce6d3742a54661e7a79cb317a9321
   google_maps_flutter_ios: e31555a04d1986ab130f2b9f24b6cdc861acc6d3
   GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
-  in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
+  in_app_review: a31b5257259646ea78e0e35fc914979b0031d011
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   share_plus: 8b6f8b3447e494cca5317c8c3073de39b3600d1f

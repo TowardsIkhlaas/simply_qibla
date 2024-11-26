@@ -10,6 +10,12 @@
             "value" : "سمبلي قبلة"
           }
         },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimplyQibla"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31,6 +37,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "يتم استخدام موقعك لتمركز الخريطة في منطقتك وتحديد اتجاه القبلة. بدلاً من ذلك، يمكنك تحريك الخريطة يدويًا أو إدخال إحداثيات محددة."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihr Standort wird verwendet, um die Karte auf Ihre Region zu zentrieren und die Qibla-Richtung zu bestimmen. Alternativ können Sie die Karte manuell verschieben oder bestimmte Koordinaten eingeben."
           }
         },
         "en" : {
