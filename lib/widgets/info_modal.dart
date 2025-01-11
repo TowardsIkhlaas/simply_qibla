@@ -18,7 +18,8 @@ void showInfoModal(BuildContext context, String version, String buildNumber) {
     applicationLegalese: AppLocalizations.of(context)!.appAboutLegalese,
     children: <Widget>[
       _buildTextSection('Build: $buildNumber'),
-      _buildTextSection(AppLocalizations.of(context)!.thankYouText, isBold: true),
+      _buildTextSection(AppLocalizations.of(context)!.thankYouText,
+          isBold: true),
       _buildTextSection(AppLocalizations.of(context)!.supportAppealText),
       _buildButtonColumn(context),
     ],
@@ -67,21 +68,24 @@ Widget _buildButtonColumn(BuildContext context) {
           icon: Platform.isIOS ? TablerIcons.share_2 : TablerIcons.share,
         ),
         _buildLinkIconButton(
-          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
+          onPressed: () async =>
+              launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
           labelText: AppLocalizations.of(context)!.donateButtonText,
           icon: TablerIcons.coffee,
           foregroundColor: AppThemes.donationServicePrimaryColor,
           backgroundColor: AppThemes.donationServiceSecondaryColor,
         ),
         _buildLinkIconButton(
-          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
+          onPressed: () async =>
+              launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
           labelText: AppLocalizations.of(context)!.githubButtonText,
           icon: TablerIcons.brand_github,
           foregroundColor: AppThemes.githubPrimaryColor,
           backgroundColor: AppThemes.githubSecondaryColor,
         ),
         _buildLinkIconButton(
-          onPressed: () async => launchUrlHelper(Uri.parse(AppStrings.socialInstagramUriPath)),
+          onPressed: () async =>
+              launchUrlHelper(Uri.parse(AppStrings.socialInstagramUriPath)),
           labelText: AppLocalizations.of(context)!.socialInstagramButtonText,
           icon: TablerIcons.brand_instagram,
           foregroundColor: AppThemes.socialInstagramPrimaryColor,
@@ -102,13 +106,18 @@ Widget _buildLinkIconButton({
   return LinkIconButton(
     onPressed: onPressed,
     labelText: labelText,
-    leadingIcon: Icon(icon, size: AppDimensions.iconSizeMd),
+    leadingIcon: Icon(
+      icon,
+      size: AppDimensions.iconSizeMd,
+      color: foregroundColor,
+    ),
     buttonForegroundColor: foregroundColor,
     buttonBackgroundColor: backgroundColor,
   );
 }
 
 Future<void> _shareApp(BuildContext context) async {
-  String shareString = '${AppLocalizations.of(context)!.shareContentText}: ${AppStrings.landingPageLink}';
+  String shareString =
+      '${AppLocalizations.of(context)!.shareContentText}: ${AppStrings.landingPageLink}';
   await Share.share(shareString);
 }
