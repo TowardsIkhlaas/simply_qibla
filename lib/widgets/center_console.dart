@@ -51,7 +51,7 @@ class CenterConsole extends StatelessWidget {
         ),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: consoleColor.withOpacity(AppStyles.shadowOpacity),
+            color: consoleColor.withValues(alpha: AppStyles.shadowOpacity),
           ),
         ],
       ),
