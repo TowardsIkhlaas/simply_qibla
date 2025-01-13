@@ -50,7 +50,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.4
+  mockito: ^5.4.5
   flutter_launcher_icons: ^0.14.2
   flutter_native_splash: ^2.4.3
 
