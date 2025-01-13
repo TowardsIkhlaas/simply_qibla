@@ -44,7 +44,7 @@ dependencies:
   share_plus: ^10.1.2
   intl: ^0.19.0
   introduction_screen: ^3.1.14
-  shared_preferences: ^2.3.3
+  shared_preferences: ^2.3.5
   in_app_review: ^2.0.10
 
 dev_dependencies:
