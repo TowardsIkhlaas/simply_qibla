@@ -219,11 +219,34 @@ class MapPageState extends State<MapPage> {
                   _onCameraMove(position),
               onCameraIdle: _onCameraIdle,
             ),
-            const Center(
-              child: Icon(
-                TablerIcons.circle_dot,
-                size: AppDimensions.iconSizeLg,
-                color: Colors.black,
+            Center(
+              child: StreamBuilder<CompassEvent>(
+                stream: FlutterCompass.events,
+                builder: (BuildContext context,
+                    AsyncSnapshot<CompassEvent> snapshot) {
+                  if (snapshot.hasError) {
+                    return Icon(
+                      TablerIcons.circle_dot,
+                      size: AppDimensions.iconSizeLg,
+                      color: Colors.black,
+                    );
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting ||
+                      !snapshot.hasData) {
+                    return CircularProgressIndicator();
+                  }
+
+                  double heading = snapshot.data!.heading ?? 0;
+                  return Transform.rotate(
+                    angle: heading * (3.141592653589793 / 180),
+                    child: Icon(
+                      TablerIcons.circle_arrow_up,
+                      size: AppDimensions.iconSizeLg,
+                      color: Colors.black,
+                    ),
+                  );
+                },
               ),
             ),
           ],
