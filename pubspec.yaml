@@ -36,7 +36,7 @@ dependencies:
 
   google_maps_flutter: ^2.10.0
   google_maps_flutter_platform_interface: ^2.9.5
-  google_maps_flutter_android: ^2.14.11
+  google_maps_flutter_android: ^2.14.12
   geolocator: ^13.0.2
   flutter_tabler_icons: ^1.43.0
   package_info_plus: ^8.1.3
