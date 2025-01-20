@@ -46,6 +46,7 @@ dependencies:
   introduction_screen: ^3.1.14
   shared_preferences: ^2.3.5
   in_app_review: ^2.0.10
+  flutter_compass: ^0.8.1
 
 dev_dependencies:
   flutter_test:
