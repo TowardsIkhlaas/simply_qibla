@@ -19,7 +19,8 @@ void main() {
         ),
       );
 
-      await tester.pumpAndSettle();
+      // Allow the map to render
+      await tester.pump(const Duration(seconds: 1));
     }
 
     testWidgets('Toggles map type when the toggle button is pressed',
@@ -32,7 +33,7 @@ void main() {
 
       // Tap the toggle button
       await tester.tap(find.byIcon(TablerIcons.map));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 300)); // Add a short delay for the tap action
 
       // Verify map type is changed to hybrid
       final GoogleMap googleMapAfterFirstTap =
@@ -41,7 +42,7 @@ void main() {
 
       // Tap the toggle button again
       await tester.tap(find.byIcon(TablerIcons.map));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 300)); // Add a short delay for the tap action
 
       // Verify map type is changed back to normal
       final GoogleMap googleMapAfterSecondTap =
