@@ -51,7 +51,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.5
-  flutter_launcher_icons: ^0.14.2
+  flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.4
 
   # The "flutter_lints" package below contains a set of recommended lints to
