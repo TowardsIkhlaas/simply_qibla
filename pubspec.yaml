@@ -35,16 +35,16 @@ dependencies:
     sdk: flutter
 
   google_maps_flutter: ^2.10.0
-  google_maps_flutter_platform_interface: ^2.9.5
+  google_maps_flutter_platform_interface: ^2.10.0
   google_maps_flutter_android: ^2.14.12
   geolocator: ^13.0.2
   flutter_tabler_icons: ^1.43.0
-  package_info_plus: ^8.1.4
+  package_info_plus: ^8.2.1
   url_launcher: ^6.3.1
   share_plus: ^10.1.4
   intl: ^0.19.0
   introduction_screen: ^3.1.16
-  shared_preferences: ^2.5.1
+  shared_preferences: ^2.5.2
   in_app_review: ^2.0.10
   flutter_compass: ^0.8.1
 
@@ -53,7 +53,7 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.4.5
   flutter_launcher_icons: ^0.14.3
-  flutter_native_splash: ^2.4.4
+  flutter_native_splash: ^2.4.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
