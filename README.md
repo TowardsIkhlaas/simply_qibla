@@ -8,10 +8,6 @@
     <a href="https://play.google.com/store/apps/details?id=com.towardsikhlaas.simplyqibla">Android</a>
     ·  
     <a href="https://apps.apple.com/app/id6504881956">iOS</a>
-    ·  
-    <a href="https://www.instagram.com/towardsikhlaas">Instagram</a>
-    ·  
-    <a href="https://www.youtube.com/@towardsikhlaas">YouTube</a>
 </p>
 
 <h3 align="center"><img width="700" alt="app screenshots" src="./assets/repo/multi-device.png"></h3>
