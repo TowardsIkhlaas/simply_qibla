@@ -15,6 +15,7 @@ import 'package:simply_qibla/styles/style.dart';
 import 'package:simply_qibla/widgets/center_console.dart';
 import 'package:simply_qibla/widgets/coordinates_form_bar.dart';
 import 'package:simply_qibla/widgets/sq_app_bar.dart';
+import 'package:simply_qibla/widgets/user_location_icon.dart';
 
 part 'map_page_state.dart';
 

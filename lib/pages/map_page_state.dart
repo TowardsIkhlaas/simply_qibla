@@ -8,6 +8,7 @@ class MapPageState extends State<MapPage> {
   MapType _currentMapType = MapType.normal;
   bool _isCameraMoving = false;
   bool _enableLocationButton = true;
+  bool _isMapCenteredOnUser = false;
   CenterConsoleState _centerConsoleState = CenterConsoleState.idle;
   final Set<Polyline> _polylines = <Polyline>{};
   CameraPosition _currentCameraPosition = const CameraPosition(
@@ -48,6 +49,7 @@ class MapPageState extends State<MapPage> {
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _enableLocationButton = true;
+      _isMapCenteredOnUser = coordinates == userLocation;
     });
   }
 
@@ -180,6 +182,7 @@ class MapPageState extends State<MapPage> {
     setState(() {
       _isCameraMoving = true;
       _polylines.clear();
+      _isMapCenteredOnUser = false;
     });
   }
 
@@ -241,10 +244,9 @@ class MapPageState extends State<MapPage> {
                   double heading = snapshot.data!.heading ?? 0;
                   return Transform.rotate(
                     angle: heading * (pi / 180),
-                    child: Icon(
-                      TablerIcons.circle_arrow_up,
-                      size: AppDimensions.iconSizeLg,
-                      color: Colors.black,
+                    child: UserLocationIcon(
+                      primaryColor:
+                          _isMapCenteredOnUser ? Colors.blue : Colors.grey,
                     ),
                   );
                 },
