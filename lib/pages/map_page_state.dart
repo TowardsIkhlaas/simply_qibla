@@ -238,7 +238,11 @@ class MapPageState extends State<MapPage> {
 
                   if (snapshot.connectionState == ConnectionState.waiting ||
                       !snapshot.hasData) {
-                    return CircularProgressIndicator();
+                    return Icon(
+                      TablerIcons.circle_dot,
+                      size: AppDimensions.iconSizeLg,
+                      color: Colors.black,
+                    );
                   }
 
                   double heading = snapshot.data!.heading ?? 0;
