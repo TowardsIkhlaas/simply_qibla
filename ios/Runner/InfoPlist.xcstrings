@@ -28,6 +28,12 @@
             "value" : "SimplyQibla"
           }
         },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimplyQibla"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -67,6 +73,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Votre position est utilisée pour centrer la carte sur votre zone et déterminer la direction de la Qibla. Vous pouvez également déplacer la carte manuellement ou entrer des coordonnées spécifiques."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasi Anda digunakan untuk memusatkan peta ke area Anda dan menentukan arah Kiblat. Sebagai alternatif, Anda dapat memindahkan peta secara manual atau memasukkan koordinat tertentu."
           }
         },
         "pt-BR" : {
