@@ -34,6 +34,12 @@
             "value" : "SimplyQibla"
           }
         },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimplyQibla"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79,6 +85,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lokasi Anda digunakan untuk memusatkan peta ke area Anda dan menentukan arah Kiblat. Sebagai alternatif, Anda dapat memindahkan peta secara manual atau memasukkan koordinat tertentu."
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasi anda digunakan untuk memusatkan peta ke kawasan anda dan menentukan arah Kiblat. Sebagai alternatif, anda boleh menggerakkan peta secara manual atau memasukkan koordinat tertentu."
           }
         },
         "pt-BR" : {
