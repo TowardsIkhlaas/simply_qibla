@@ -1,10 +1,11 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/helpers/url_launcher_helper.dart';
+import 'package:simply_qibla/l10n/app_localizations.dart';
 import 'package:simply_qibla/styles/style.dart';
 import 'package:simply_qibla/theme/theme.dart';
 import 'package:simply_qibla/widgets/link_icon_button.dart';
@@ -119,5 +120,10 @@ Widget _buildLinkIconButton({
 Future<void> _shareApp(BuildContext context) async {
   String shareString =
       '${AppLocalizations.of(context)!.shareContentText}: ${AppStrings.landingPageLink}';
-  await Share.share(shareString);
+
+  await SharePlus.instance.share(
+    ShareParams(
+      text: shareString,
+    ),
+  );
 }
