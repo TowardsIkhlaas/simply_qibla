@@ -1,12 +1,13 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'package:simply_qibla/globals/globals.dart';
 import 'package:simply_qibla/helpers/maps_renderer_helper.dart';
 import 'package:simply_qibla/helpers/shared_preferences_helper.dart';
+import 'package:simply_qibla/l10n/app_localizations.dart';
 import 'package:simply_qibla/pages/map_page.dart';
 import 'package:simply_qibla/pages/onboarding_page.dart';
 import 'package:simply_qibla/theme/theme.dart';
@@ -43,13 +44,10 @@ class MyApp extends StatelessWidget {
       onGenerateTitle: (BuildContext context) {
         return AppLocalizations.of(context)!.appNamePascalCase;
       },
-
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-
       themeMode: ThemeMode.dark,
       darkTheme: AppThemes.darkTheme,
-
       home: hasSeenOnboarding ? const MapPage() : const OnboardingPage(),
       scaffoldMessengerKey: snackbarKey,
     );

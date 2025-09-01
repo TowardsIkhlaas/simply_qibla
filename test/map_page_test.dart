@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mockito/mockito.dart';
+import 'package:simply_qibla/l10n/app_localizations.dart';
 import 'package:simply_qibla/pages/map_page.dart';
 
 class MockGoogleMapController extends Mock implements GoogleMapController {}
@@ -33,7 +33,8 @@ void main() {
 
       // Tap the toggle button
       await tester.tap(find.byIcon(TablerIcons.map));
-      await tester.pump(const Duration(milliseconds: 300)); // Add a short delay for the tap action
+      await tester.pump(const Duration(
+          milliseconds: 300)); // Add a short delay for the tap action
 
       // Verify map type is changed to hybrid
       final GoogleMap googleMapAfterFirstTap =
@@ -42,7 +43,8 @@ void main() {
 
       // Tap the toggle button again
       await tester.tap(find.byIcon(TablerIcons.map));
-      await tester.pump(const Duration(milliseconds: 300)); // Add a short delay for the tap action
+      await tester.pump(const Duration(
+          milliseconds: 300)); // Add a short delay for the tap action
 
       // Verify map type is changed back to normal
       final GoogleMap googleMapAfterSecondTap =
