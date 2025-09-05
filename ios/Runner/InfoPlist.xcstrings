@@ -28,6 +28,18 @@
             "value" : "SimplyQibla"
           }
         },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimplyQibla"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimplyQibla"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38,6 +50,60 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SimplyQibla"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simply_qibla"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simply_qibla"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "simply_qibla"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simply_qibla"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simply_qibla"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simply_qibla"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simply_qibla"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simply_qibla"
           }
         }
       }
@@ -67,6 +133,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Votre position est utilisée pour centrer la carte sur votre zone et déterminer la direction de la Qibla. Vous pouvez également déplacer la carte manuellement ou entrer des coordonnées spécifiques."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasi Anda digunakan untuk memusatkan peta ke area Anda dan menentukan arah Kiblat. Sebagai alternatif, Anda dapat memindahkan peta secara manual atau memasukkan koordinat tertentu."
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasi anda digunakan untuk memusatkan peta ke kawasan anda dan menentukan arah Kiblat. Sebagai alternatif, anda boleh menggerakkan peta secara manual atau memasukkan koordinat tertentu."
           }
         },
         "pt-BR" : {

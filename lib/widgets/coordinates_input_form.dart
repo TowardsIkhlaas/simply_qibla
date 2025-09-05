@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simply_qibla/constants/constants.dart';
+import 'package:simply_qibla/l10n/app_localizations.dart';
 import 'package:simply_qibla/styles/style.dart';
 
 class CoordinatesInputForm extends StatelessWidget {
@@ -43,10 +43,11 @@ class CoordinatesInputForm extends StatelessWidget {
                         BorderRadius.circular(AppDimensions.borderRadiusSm),
                   ),
                 ),
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true, signed: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true, signed: true),
                 validator: (String? value) {
-                  if (InputValidation.latitudeValidatorPattern.hasMatch(value!)) {
+                  if (InputValidation.latitudeValidatorPattern
+                      .hasMatch(value!)) {
                     return null;
                   }
                   return AppLocalizations.of(context)!.latitudeErrorText;
@@ -68,8 +69,8 @@ class CoordinatesInputForm extends StatelessWidget {
                         BorderRadius.circular(AppDimensions.borderRadiusSm),
                   ),
                 ),
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true, signed: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true, signed: true),
                 validator: (String? value) {
                   if (InputValidation.longitudeValidatorPattern
                       .hasMatch(value!)) {
