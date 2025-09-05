@@ -250,7 +250,7 @@ class MapPageState extends State<MapPage> {
                     angle: heading * (pi / 180),
                     child: UserLocationIcon(
                       primaryColor:
-                          _isMapCenteredOnUser ? Colors.blue : Colors.grey,
+                          _isMapCenteredOnUser ? Colors.blueAccent : Colors.grey,
                     ),
                   );
                 },
