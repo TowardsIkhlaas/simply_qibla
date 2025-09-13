@@ -39,7 +39,7 @@ dependencies:
   google_maps_flutter_android: ^2.18.2
   geolocator: ^14.0.2
   flutter_tabler_icons: ^1.43.0
-  package_info_plus: ^8.3.0
+  package_info_plus: ^8.3.1
   url_launcher: ^6.3.1
   share_plus: ^11.1.0
   intl: ^0.20.2
