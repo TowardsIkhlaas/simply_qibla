@@ -41,7 +41,7 @@ dependencies:
   flutter_tabler_icons: ^1.43.0
   package_info_plus: ^8.3.1
   url_launcher: ^6.3.2
-  share_plus: ^11.1.0
+  share_plus: ^12.0.0
   intl: ^0.20.2
   introduction_screen: ^4.0.0
   shared_preferences: ^2.5.3
