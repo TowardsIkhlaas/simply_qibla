@@ -3,6 +3,7 @@ name: Deploy
 on:
   push:
     branches: ["master"]
+  workflow_dispatch:  # Allow manual triggering for testing
 
 # Prevent concurrent deployments
 concurrency:
@@ -108,7 +109,8 @@ jobs:
           PLAY_STORE_JSON_KEY_PATH: ${{ github.workspace }}/android/play-store-key.json
         run: |
           cd android
-          bundle exec fastlane deploy_production
+          # TODO: Change to deploy_production after testing
+          bundle exec fastlane deploy_internal
 
       # ===== Deploy iOS =====
       - name: Install iOS fastlane dependencies
