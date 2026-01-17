@@ -10,6 +10,9 @@ concurrency:
   group: deploy
   cancel-in-progress: false
 
+permissions:
+  contents: write  # Required to create releases and tags
+
 jobs:
   deploy:
     name: Build and Deploy Android
