@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Android
 
 on:
   push:
@@ -12,8 +12,8 @@ concurrency:
 
 jobs:
   deploy:
-    name: Build and Deploy
-    runs-on: macos-latest
+    name: Build and Deploy Android
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -72,31 +72,9 @@ jobs:
         run: |
           echo "${{ secrets.PLAY_STORE_JSON_KEY }}" | base64 --decode > android/play-store-key.json
 
-      # ===== iOS Setup =====
-      - name: Create iOS APIKey.plist
-        run: |
-          cat > ios/Runner/APIKey.plist << 'EOF'
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>GoogleMapsApiKeyiOS</key>
-            <string>${{ secrets.GOOGLE_MAPS_API_KEY_IOS }}</string>
-          </dict>
-          </plist>
-          EOF
-
-      - name: Install iOS CocoaPods
-        run: |
-          cd ios
-          pod install
-
       # ===== Build =====
       - name: Build Android AAB
         run: flutter build appbundle --release
-
-      - name: Build iOS Archive
-        run: flutter build ipa --release --no-codesign
 
       # ===== Deploy Android =====
       - name: Install Android fastlane dependencies
@@ -112,21 +90,6 @@ jobs:
           # TODO: Change to deploy_production after testing
           bundle exec fastlane deploy_internal
 
-      # ===== Deploy iOS =====
-      - name: Install iOS fastlane dependencies
-        run: |
-          cd ios
-          bundle install
-
-      - name: Deploy iOS to App Store
-        env:
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
-        run: |
-          cd ios
-          bundle exec fastlane deploy_production
-
       # ===== Create GitHub Release =====
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -139,10 +102,9 @@ jobs:
             Build: ${{ steps.version.outputs.version_code }}
 
             ### Deployed to:
-            - Google Play Store (Production)
-            - Apple App Store
+            - Google Play Store (Internal Testing)
 
-            See [CHANGELOG](https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md) for details.
+            iOS deployment via Xcode Cloud.
           draft: false
           prerelease: false
           generate_release_notes: true
