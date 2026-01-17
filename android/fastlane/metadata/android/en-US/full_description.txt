@@ -1,0 +1,32 @@
+<p>Download the most accurate, reliable, and trustworthy Qibla location finder for FREE today! Here's why:</p>
+<b>
+  <font color="Aquamarine">ACCURATE QIBLA</font>
+</b>
+<br>Accurate and trustworthy Qiblah direction anywhere you go! SimplyQibla uses a map instead of a compass, since the device compass easily fluctuates. Simply look at your surroundings and the Qibla direction shown in the map to orient your phone and find the right direction, hassle-free. No strings attached. </p>
+<p>
+  <b>
+    <font color="Aquamarine">FOR MUSLIMS, BY MUSLIMS</font>
+  </b>
+  <br>There are too many "Muslim" apps that are inaccurate and exploit Muslim users by collecting and selling user data. We don't like that. We aim to build a trustworthy and transparent name that Muslims across the globe can easily rely on.
+</p>
+<p>
+  <b>
+    <font color="Aquamarine">MINIMALIST AND SIMPLE</font>
+  </b>
+  <br>SimplyQibla is designed for one purpose and one purpose only: accurate Qibla location anywhere. Find the direction to the Kaabah with a clean design and without additional bloats that hog your device. SimplyQibla is a productive utility tool.
+</p>
+<p>
+  <b>
+    <font color="Aquamarine">AD-FREE AND OPEN-SOURCE</font>
+  </b>
+  <br>There is no other app that provides a map method of Qibla and does not show ads or track your data, which is why we built SimplyQibla. The source code of our app is easily available on our GitHub and we welcome contributions to make the app even better.
+</p>
+<p>
+  <b>
+    <font color="Aquamarine">PRIVACY FOCUSED</font>
+  </b>
+  <br>We do not collect your data. As you might have guessed, we do not sell your data either. You DON'T need to give up your location since you can enter any coordinates manually! Running the app does incur cost, and if you do like our effort, you can find many great ways to contribute in our app's info section.
+</p>
+<p>
+  <b>Please rate our app and tell us what you think! You can also reach out to us via email at <a href="mailto:towardsikhlaas+feedback@gmail.com">towardsikhlaas+feedback@gmail.com</a> for any feedback and support. JazakAllahu Khayran!</b>
+</p>

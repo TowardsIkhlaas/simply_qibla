@@ -1,0 +1,6 @@
+# Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+# CI: Set PLAY_STORE_JSON_KEY_PATH env var to the path of the JSON key file
+# Local: Uses default path below
+json_key_file(ENV["PLAY_STORE_JSON_KEY_PATH"] || "/Users/ahmedshaikh/Desktop/simplyqibla-map-022fb658cfe2.json")
+
+package_name("com.towardsikhlaas.simplyqibla")

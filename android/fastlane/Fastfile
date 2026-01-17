@@ -1,0 +1,82 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+# Helper to extract version code from pubspec.yaml
+def get_version_code_from_pubspec
+  pubspec_path = "../../pubspec.yaml"
+  pubspec_content = File.read(pubspec_path)
+  version_match = pubspec_content.match(/version:\s*\d+\.\d+\.\d+\+(\d+)/)
+  version_match[1].to_i
+end
+
+# Copy default.txt changelogs to <version_code>.txt for all locales
+def prepare_changelogs(version_code)
+  metadata_path = "metadata/android"
+  Dir.glob("#{metadata_path}/*/changelogs").each do |changelog_dir|
+    default_file = "#{changelog_dir}/default.txt"
+    version_file = "#{changelog_dir}/#{version_code}.txt"
+    if File.exist?(default_file)
+      FileUtils.cp(default_file, version_file)
+      UI.message("Created #{version_file}")
+    end
+  end
+end
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Upload store listing metadata only (descriptions, screenshots, images)"
+  lane :upload_metadata do
+    upload_to_play_store(
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_changelogs: true
+    )
+  end
+
+  desc "Deploy AAB to internal testing track (draft)"
+  lane :deploy_internal do
+    version_code = get_version_code_from_pubspec
+    prepare_changelogs(version_code)
+    upload_to_play_store(
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      track: 'internal',
+      release_status: 'draft',
+      version_code: version_code,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Deploy AAB to production"
+  lane :deploy_production do
+    version_code = get_version_code_from_pubspec
+    prepare_changelogs(version_code)
+    upload_to_play_store(
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      track: 'production',
+      version_code: version_code,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+end
