@@ -12,3 +12,7 @@ key.properties
 keys.properties
 **/*.keystore
 **/*.jks
+
+# Fastlane generated files
+fastlane/report.xml
+play-store-key.json

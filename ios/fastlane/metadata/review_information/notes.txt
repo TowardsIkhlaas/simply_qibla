@@ -1,0 +1,1 @@
+SimplyQibla does not have religious content. It is a geo-location app that only provides the direction facing an existing geographical location.

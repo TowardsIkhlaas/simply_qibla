@@ -1,0 +1,150 @@
+name: Deploy
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:  # Allow manual triggering for testing
+
+# Prevent concurrent deployments
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from pubspec.yaml
+        id: version
+        run: |
+          VERSION=$(grep "^version:" pubspec.yaml | sed 's/version: //' | tr -d ' ')
+          VERSION_NAME=$(echo $VERSION | cut -d'+' -f1)
+          VERSION_CODE=$(echo $VERSION | cut -d'+' -f2)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION_NAME ($VERSION_CODE)"
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Run analyze
+        run: flutter analyze
+
+      # ===== Android Setup =====
+      - name: Setup Android keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+
+      - name: Create Android key.properties
+        run: |
+          cat > android/key.properties << EOF
+          storeFile=upload-keystore.jks
+          storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
+          keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
+          GOOGLE_MAPS_API_KEY_ANDROID=${{ secrets.GOOGLE_MAPS_API_KEY_ANDROID }}
+          EOF
+
+      - name: Setup Play Store credentials
+        run: |
+          echo "${{ secrets.PLAY_STORE_JSON_KEY }}" | base64 --decode > android/play-store-key.json
+
+      # ===== iOS Setup =====
+      - name: Create iOS APIKey.plist
+        run: |
+          cat > ios/Runner/APIKey.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>GoogleMapsApiKeyiOS</key>
+            <string>${{ secrets.GOOGLE_MAPS_API_KEY_IOS }}</string>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Install iOS CocoaPods
+        run: |
+          cd ios
+          pod install
+
+      # ===== Build =====
+      - name: Build Android AAB
+        run: flutter build appbundle --release
+
+      - name: Build iOS Archive
+        run: flutter build ipa --release --no-codesign
+
+      # ===== Deploy Android =====
+      - name: Install Android fastlane dependencies
+        run: |
+          cd android
+          bundle install
+
+      - name: Deploy Android to Play Store
+        env:
+          PLAY_STORE_JSON_KEY_PATH: ${{ github.workspace }}/android/play-store-key.json
+        run: |
+          cd android
+          # TODO: Change to deploy_production after testing
+          bundle exec fastlane deploy_internal
+
+      # ===== Deploy iOS =====
+      - name: Install iOS fastlane dependencies
+        run: |
+          cd ios
+          bundle install
+
+      - name: Deploy iOS to App Store
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+        run: |
+          cd ios
+          bundle exec fastlane deploy_production
+
+      # ===== Create GitHub Release =====
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version_name }}
+          name: v${{ steps.version.outputs.version_name }}
+          body: |
+            ## SimplyQibla v${{ steps.version.outputs.version_name }}
+
+            Build: ${{ steps.version.outputs.version_code }}
+
+            ### Deployed to:
+            - Google Play Store (Production)
+            - Apple App Store
+
+            See [CHANGELOG](https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

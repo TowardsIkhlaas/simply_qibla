@@ -1,0 +1,8 @@
+app_identifier("com.towardsikhlaas.simplyqibla") # The bundle identifier of your app
+apple_id("towardsikhlaas@gmail.com") # Your Apple Developer Portal username
+
+itc_team_id("127164654") # App Store Connect Team ID
+team_id("A6PJ8JHF9Z") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
