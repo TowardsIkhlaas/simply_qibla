@@ -92,6 +92,28 @@ jobs:
           cd android
           bundle exec fastlane deploy_production
 
+      - name: Upload Android metadata
+        env:
+          PLAY_STORE_JSON_KEY_PATH: ${{ github.workspace }}/android/play-store-key.json
+        run: |
+          cd android
+          bundle exec fastlane upload_metadata
+
+      # ===== iOS Metadata Upload =====
+      - name: Install iOS fastlane dependencies
+        run: |
+          cd ios
+          bundle install
+
+      - name: Upload iOS metadata
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+        run: |
+          cd ios
+          bundle exec fastlane upload_metadata
+
       # ===== Create GitHub Release =====
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
