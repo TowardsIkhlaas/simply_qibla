@@ -66,13 +66,14 @@ platform :android do
     )
   end
 
-  desc "Deploy AAB to production"
+  desc "Deploy AAB to production (draft - requires manual review)"
   lane :deploy_production do
     version_code = get_version_code_from_pubspec
     prepare_changelogs(version_code)
     upload_to_play_store(
       aab: "../build/app/outputs/bundle/release/app-release.aab",
       track: 'production',
+      release_status: 'draft',
       version_code: version_code,
       skip_upload_metadata: true,
       skip_upload_images: true,

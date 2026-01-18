@@ -34,7 +34,16 @@ end
 platform :ios do
   desc "Upload store listing metadata only (descriptions, screenshots)"
   lane :upload_metadata do
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_CONTENT"],
+      is_key_content_base64: true
+    )
+
     deliver(
+      api_key: api_key,
+      app_version: get_version_name_from_pubspec,
       skip_binary_upload: true,
       skip_screenshots: false,
       skip_metadata: false,
