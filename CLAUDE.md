@@ -106,3 +106,55 @@ The project enforces strict linting rules defined in `analysis_options.yaml`:
 2. The app uses Material 3 (Material You) design with dark theme
 3. All new code must pass `flutter analyze` before merging
 4. Tests are run automatically on PRs to master and develop branches via GitHub Actions
+
+## CI/CD Pipeline
+
+### Overview
+- **Android:** GitHub Actions → Play Store (Production)
+- **iOS:** Xcode Cloud → App Store
+
+### Release Workflow
+1. Work on `develop` branch
+2. Bump version in `pubspec.yaml` (e.g., `3.0.4+35`)
+3. Update release notes:
+   - Android: `android/fastlane/metadata/android/{locale}/changelogs/default.txt`
+   - iOS: `ios/fastlane/metadata/{locale}/release_notes.txt`
+4. Merge `develop` → `master`
+5. CI automatically: builds → deploys → creates GitHub release
+
+### Fastlane Lanes
+
+| Platform | Lane | Purpose | Trigger |
+|----------|------|---------|---------|
+| Android | `upload_metadata` | Store listing only | Manual |
+| Android | `deploy_internal` | Internal track (draft) | Manual |
+| Android | `deploy_production` | Production track | CI |
+| iOS | `upload_metadata` | Store listing only | Manual |
+| iOS | `deploy_production` | App Store | Xcode Cloud |
+
+### Store Metadata Locations
+
+| Platform | Content | Path |
+|----------|---------|------|
+| Android | Description | `android/fastlane/metadata/android/{locale}/full_description.txt` |
+| Android | Release Notes | `android/fastlane/metadata/android/{locale}/changelogs/default.txt` |
+| Android | Screenshots | `android/fastlane/metadata/android/{locale}/images/` |
+| iOS | Description | `ios/fastlane/metadata/{locale}/description.txt` |
+| iOS | Release Notes | `ios/fastlane/metadata/{locale}/release_notes.txt` |
+
+### GitHub Secrets Required
+- `PLAY_STORE_JSON_KEY` - Base64-encoded Play Store service account JSON
+- `ANDROID_KEYSTORE_BASE64` - Base64-encoded upload keystore
+- `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`
+- `GOOGLE_MAPS_API_KEY_ANDROID`
+
+### Xcode Cloud Environment Variables
+- `GOOGLE_MAPS_API_KEY_IOS` - Set as secret in Xcode Cloud workflow
+
+### Caveats
+1. **Version must be bumped** before merging to master (Play Store rejects duplicate version codes)
+2. **Metadata updates** (descriptions, screenshots) can be deployed separately via `fastlane upload_metadata` without version bump
+3. **iOS release notes** use a single `release_notes.txt` per locale (overwrites each release)
+4. **Android changelogs** use `default.txt` for "What's New" text
+5. **APIKey.plist** (iOS) and **key.properties** (Android) are in `.gitignore` - CI creates them from secrets
+6. **iOS version sync** - `ci_post_clone.sh` uses `agvtool` to set iOS CFBundleShortVersionString and CFBundleVersion from `pubspec.yaml`

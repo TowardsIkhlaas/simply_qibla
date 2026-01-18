@@ -6,9 +6,16 @@ set -e
 # The default execution directory of this script is the ci_scripts directory.
 cd $CI_PRIMARY_REPOSITORY_PATH # change working directory to the root of your cloned repo.
 
-echo "=== Creating APIKey.plist ==="
-echo "CI_PRIMARY_REPOSITORY_PATH: $CI_PRIMARY_REPOSITORY_PATH"
-echo "Target path: $CI_PRIMARY_REPOSITORY_PATH/ios/Runner/APIKey.plist"
+# Extract version and build number from pubspec.yaml
+VERSION=$(grep "^version:" pubspec.yaml | sed 's/version: //' | tr -d ' ')
+VERSION_NAME=$(echo $VERSION | cut -d'+' -f1)
+BUILD_NUMBER=$(echo $VERSION | cut -d'+' -f2)
+
+# Set iOS version and build number using agvtool
+cd ios
+agvtool new-marketing-version $VERSION_NAME
+agvtool new-version -all $BUILD_NUMBER
+cd ..
 
 # Create APIKey.plist with Google Maps API key from Xcode Cloud environment variable
 cat > "$CI_PRIMARY_REPOSITORY_PATH/ios/Runner/APIKey.plist" << EOF
@@ -21,11 +28,6 @@ cat > "$CI_PRIMARY_REPOSITORY_PATH/ios/Runner/APIKey.plist" << EOF
 </dict>
 </plist>
 EOF
-
-# Verify file was created
-echo "=== Verifying APIKey.plist ==="
-ls -la "$CI_PRIMARY_REPOSITORY_PATH/ios/Runner/APIKey.plist"
-cat "$CI_PRIMARY_REPOSITORY_PATH/ios/Runner/APIKey.plist"
 
 # Install Flutter using git.
 git clone https://github.com/flutter/flutter.git --depth 1 -b stable $HOME/flutter
@@ -43,9 +45,5 @@ brew install cocoapods
 
 # Install CocoaPods dependencies.
 cd ios && pod install # run `pod install` in the `ios` directory.
-
-# Final verification
-echo "=== Final verification of APIKey.plist ==="
-ls -la "$CI_PRIMARY_REPOSITORY_PATH/ios/Runner/APIKey.plist"
 
 exit 0

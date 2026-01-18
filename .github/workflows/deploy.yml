@@ -90,8 +90,7 @@ jobs:
           PLAY_STORE_JSON_KEY_PATH: ${{ github.workspace }}/android/play-store-key.json
         run: |
           cd android
-          # TODO: Change to deploy_production after testing
-          bundle exec fastlane deploy_internal
+          bundle exec fastlane deploy_production
 
       # ===== Create GitHub Release =====
       - name: Create GitHub Release
@@ -105,7 +104,7 @@ jobs:
             Build: ${{ steps.version.outputs.version_code }}
 
             ### Deployed to:
-            - Google Play Store (Internal Testing)
+            - Google Play Store (Production)
 
             iOS deployment via Xcode Cloud.
           draft: false
