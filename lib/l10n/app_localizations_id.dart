@@ -117,5 +117,5 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingSupportBody =>
-      'SimplyQibla bebas iklan dan bersumber terbuka. Jika Anda menyukai aplikasi ini, mohon dukung melalui tautan dalam aplikasi. Dukungan Anda akan digunakan untuk menjalankan aplikasi, dan kelebihannya akan disumbangkan ke badan amal terdaftar.';
+      'SimplyQibla bebas iklan dan bersumber terbuka. Jika Anda menyukai aplikasi ini, mohon ikuti kami melalui tautan dalam aplikasi. JazakAllahu Khayran!';
 }
