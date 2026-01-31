@@ -10,7 +10,7 @@ import 'package:simply_qibla/styles/style.dart';
 import 'package:simply_qibla/theme/theme.dart';
 import 'package:simply_qibla/widgets/link_icon_button.dart';
 
-void showInfoModal(BuildContext context, String version, String buildNumber) {
+void showAboutModal(BuildContext context, String version, String buildNumber) {
   showAboutDialog(
     context: context,
     applicationName: AppLocalizations.of(context)!.appNamePascalCase,

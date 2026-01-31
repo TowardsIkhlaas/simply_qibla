@@ -114,4 +114,13 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get onboardingSupportBody =>
       'SimplyQibla bebas iklan dan bersumber terbuka. Jika Anda menyukai aplikasi ini, mohon ikuti kami melalui tautan dalam aplikasi. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Pengaturan';
+
+  @override
+  String get settingsCompassToggle => 'Kompas';
+
+  @override
+  String get aboutButtonText => 'Tentang';
 }

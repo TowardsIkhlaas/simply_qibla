@@ -113,4 +113,13 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get onboardingSupportBody =>
       'SimplyQibla tiada iklan dan sumber terbuka. Jika anda suka, sila ikuti kami melalui pautan dalam aplikasi. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Tetapan';
+
+  @override
+  String get settingsCompassToggle => 'Kompas';
+
+  @override
+  String get aboutButtonText => 'Perihal';
 }

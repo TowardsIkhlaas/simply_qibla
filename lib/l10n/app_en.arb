@@ -131,5 +131,17 @@
   "onboardingSupportBody": "SimplyQibla is ad-free and open-source. If you like what you see, please follow us through the in-app links. JazakAllahu Khayran!",
   "@onboardingSupportBody": {
     "description": "Body text encouraging users to support the project and explaining how donations will be used."
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title for the settings modal."
+  },
+  "settingsCompassToggle": "Compass",
+  "@settingsCompassToggle": {
+    "description": "Toggle label for enabling/disabling the compass in settings."
+  },
+  "aboutButtonText": "About",
+  "@aboutButtonText": {
+    "description": "Button text to open the about dialog."
   }
 }

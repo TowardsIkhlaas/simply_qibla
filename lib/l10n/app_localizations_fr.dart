@@ -116,4 +116,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get onboardingSupportBody =>
       'SimplyQibla est sans publicité et open-source. Si vous aimez ce que vous voyez, veuillez nous suivre via les liens dans l\'application. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Paramètres';
+
+  @override
+  String get settingsCompassToggle => 'Boussole';
+
+  @override
+  String get aboutButtonText => 'À propos';
 }

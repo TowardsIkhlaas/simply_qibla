@@ -21,3 +21,14 @@ Future<int> getLaunchCount() async {
 
   return launchCount;
 }
+
+Future<bool> getCompassEnabled() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.reload();
+  return prefs.getBool('compassEnabled') ?? true;
+}
+
+Future<void> setCompassEnabled(bool value) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('compassEnabled', value);
+}

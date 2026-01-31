@@ -9,6 +9,7 @@ class MapPageState extends State<MapPage> {
   bool _isCameraMoving = false;
   bool _enableLocationButton = true;
   bool _isMapCenteredOnUser = false;
+  bool _compassEnabled = true;
   CenterConsoleState _centerConsoleState = CenterConsoleState.idle;
   final Set<Polyline> _polylines = <Polyline>{};
   CameraPosition _currentCameraPosition = const CameraPosition(
@@ -16,13 +17,28 @@ class MapPageState extends State<MapPage> {
     zoom: MapConstants.zoomLevel,
   );
 
+  @override
+  void initState() {
+    super.initState();
+    _loadCompassSetting();
+  }
+
+  void _loadCompassSetting() async {
+    bool compassEnabled = await getCompassEnabled();
+    setState(() {
+      _compassEnabled = compassEnabled;
+    });
+  }
+
   // Build Method
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: const SQAppBar(),
+      appBar: SQAppBar(
+        onCompassSettingChanged: _loadCompassSetting,
+      ),
       body: buildMapBody(context),
       bottomNavigationBar: buildBottomBar(context),
     );
@@ -224,37 +240,43 @@ class MapPageState extends State<MapPage> {
               onCameraIdle: _onCameraIdle,
             ),
             Center(
-              child: StreamBuilder<CompassEvent>(
-                stream: FlutterCompass.events,
-                builder: (BuildContext context,
-                    AsyncSnapshot<CompassEvent> snapshot) {
-                  if (snapshot.hasError) {
-                    return Icon(
+              child: _compassEnabled
+                  ? StreamBuilder<CompassEvent>(
+                      stream: FlutterCompass.events,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<CompassEvent> snapshot) {
+                        if (snapshot.hasError) {
+                          return Icon(
+                            TablerIcons.circle_dot,
+                            size: AppDimensions.iconSizeLg,
+                            color: Colors.black,
+                          );
+                        }
+
+                        if (snapshot.connectionState == ConnectionState.waiting ||
+                            !snapshot.hasData) {
+                          return Icon(
+                            TablerIcons.circle_dot,
+                            size: AppDimensions.iconSizeLg,
+                            color: Colors.black,
+                          );
+                        }
+
+                        double heading = snapshot.data!.heading ?? 0;
+                        return Transform.rotate(
+                          angle: heading * (pi / 180),
+                          child: UserLocationIcon(
+                            primaryColor:
+                                _isMapCenteredOnUser ? Colors.blueAccent : Colors.grey,
+                          ),
+                        );
+                      },
+                    )
+                  : Icon(
                       TablerIcons.circle_dot,
                       size: AppDimensions.iconSizeLg,
-                      color: Colors.black,
-                    );
-                  }
-
-                  if (snapshot.connectionState == ConnectionState.waiting ||
-                      !snapshot.hasData) {
-                    return Icon(
-                      TablerIcons.circle_dot,
-                      size: AppDimensions.iconSizeLg,
-                      color: Colors.black,
-                    );
-                  }
-
-                  double heading = snapshot.data!.heading ?? 0;
-                  return Transform.rotate(
-                    angle: heading * (pi / 180),
-                    child: UserLocationIcon(
-                      primaryColor:
-                          _isMapCenteredOnUser ? Colors.blueAccent : Colors.grey,
+                      color: _isMapCenteredOnUser ? Colors.blueAccent : Colors.grey,
                     ),
-                  );
-                },
-              ),
             ),
           ],
         ),

@@ -32,5 +32,8 @@
   "onboardingSupportTitle": "Apoie nossa missão!",
   "onboardingUsageBody": "Salaam! Para usar o aplicativo, mantenha seu dispositivo plano e gire-o para alinhar com os marcos próximos mostrados no mapa, como ruas e edifícios ao seu redor.",
   "onboardingLocationBody": "As permissões de localização são necessárias para que o aplicativo funcione de forma ideal, mas não são obrigatórias. Fique tranquilo, seus dados não são coletados nem vendidos.",
-  "onboardingSupportBody": "SimplyQibla é livre de anúncios e open-source. Se você gostou, siga-nos pelos links do aplicativo. JazakAllahu Khayran!"
+  "onboardingSupportBody": "SimplyQibla é livre de anúncios e open-source. Se você gostou, siga-nos pelos links do aplicativo. JazakAllahu Khayran!",
+  "settingsTitle": "Configurações",
+  "settingsCompassToggle": "Bússola",
+  "aboutButtonText": "Sobre"
 }

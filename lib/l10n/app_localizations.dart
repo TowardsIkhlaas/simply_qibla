@@ -307,6 +307,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'SimplyQibla is ad-free and open-source. If you like what you see, please follow us through the in-app links. JazakAllahu Khayran!'**
   String get onboardingSupportBody;
+
+  /// Title for the settings modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// Toggle label for enabling/disabling the compass in settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass'**
+  String get settingsCompassToggle;
+
+  /// Button text to open the about dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutButtonText;
 }
 
 class _AppLocalizationsDelegate

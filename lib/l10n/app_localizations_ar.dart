@@ -112,4 +112,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get onboardingSupportBody =>
       'سمبلي قبلة خالي من الإعلانات ومفتوح المصدر. إذا أعجبك ما تراه، يرجى متابعتنا من خلال الروابط داخل التطبيق. جزاك الله خيرًا!';
+
+  @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get settingsCompassToggle => 'البوصلة';
+
+  @override
+  String get aboutButtonText => 'حول';
 }

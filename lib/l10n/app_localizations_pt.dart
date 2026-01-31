@@ -114,6 +114,15 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get onboardingSupportBody =>
       'SimplyQibla é livre de anúncios e open-source. Se você gostou, siga-nos pelos links do aplicativo. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Configurações';
+
+  @override
+  String get settingsCompassToggle => 'Bússola';
+
+  @override
+  String get aboutButtonText => 'Sobre';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -226,6 +235,15 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get onboardingSupportBody =>
       'SimplyQibla é livre de anúncios e open-source. Se você gostou, siga-nos pelos links do aplicativo. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Configurações';
+
+  @override
+  String get settingsCompassToggle => 'Bússola';
+
+  @override
+  String get aboutButtonText => 'Sobre';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -339,4 +357,13 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
   @override
   String get onboardingSupportBody =>
       'SimplyQibla é livre de anúncios e de código aberto. Se gosta da aplicação, siga-nos através dos links na aplicação. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Definições';
+
+  @override
+  String get settingsCompassToggle => 'Bússola';
+
+  @override
+  String get aboutButtonText => 'Sobre';
 }
