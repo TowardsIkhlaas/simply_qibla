@@ -70,14 +70,6 @@ Widget _buildButtonColumn(BuildContext context) {
         ),
         _buildLinkIconButton(
           onPressed: () async =>
-              launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
-          labelText: AppLocalizations.of(context)!.donateButtonText,
-          icon: TablerIcons.coffee,
-          foregroundColor: AppThemes.donationServicePrimaryColor,
-          backgroundColor: AppThemes.donationServiceSecondaryColor,
-        ),
-        _buildLinkIconButton(
-          onPressed: () async =>
               launchUrlHelper(Uri.parse(AppStrings.githubUriPath)),
           labelText: AppLocalizations.of(context)!.githubButtonText,
           icon: TablerIcons.brand_github,

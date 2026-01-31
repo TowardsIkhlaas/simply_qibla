@@ -79,13 +79,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get supportAppealText =>
-      'Diese App verursacht Kosten für Betrieb und Wartung (Google Maps API). Bitte unterstützen Sie das Projekt über die untenstehenden Buttons (überschüssige Beträge werden an registrierte Wohltätigkeitsorganisationen gespendet).';
+      'Bitte folgen Sie uns über die Schaltflächen unten.';
 
   @override
-  String get githubButtonText => 'Support auf GitHub';
-
-  @override
-  String get donateButtonText => 'Support auf Ko-Fi';
+  String get githubButtonText => 'Bewerten Sie uns auf GitHub';
 
   @override
   String get socialInstagramButtonText => 'Folgen Sie uns auf Instagram';

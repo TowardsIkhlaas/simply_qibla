@@ -88,17 +88,13 @@
   "@thankYouText": {
     "description": "Gratitude message shown to users, thanking them for using the app."
   },
-  "supportAppealText": "This app costs to run and maintain (Google Maps API). Please consider supporting the project through the buttons below (excess amounts will be donated to registered charities).",
+  "supportAppealText": "Please follow us through the buttons below.",
   "@supportAppealText": {
-    "description": "Appeal asking users to support the app through donations, mentioning that excess funds will be donated to charity."
+    "description": "Appeal asking users to follow the project through social buttons."
   },
-  "githubButtonText": "Support us on GitHub",
+  "githubButtonText": "Star us on GitHub",
   "@githubButtonText": {
-    "description": "Button text that directs users to GitHub to support the project."
-  },
-  "donateButtonText": "Support us on Ko-Fi",
-  "@donateButtonText": {
-    "description": "Button text that directs users to Ko-Fi to support the project."
+    "description": "Button text that directs users to GitHub to star the project."
   },
   "socialInstagramButtonText": "Follow us on Instagram",
   "@socialInstagramButtonText": {

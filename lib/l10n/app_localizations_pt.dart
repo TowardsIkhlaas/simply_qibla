@@ -79,14 +79,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get thankYouText => 'JazakAllahu Khayran por usar este aplicativo!';
 
   @override
-  String get supportAppealText =>
-      'Este aplicativo tem custos para operar e manter (Google Maps API). Considere apoiar o projeto pelos botões abaixo (valores excedentes serão doados a instituições de caridade registradas).';
+  String get supportAppealText => 'Por favor, siga-nos pelos botões abaixo.';
 
   @override
-  String get githubButtonText => 'Apoie-nos no GitHub';
-
-  @override
-  String get donateButtonText => 'Apoie-nos no Ko-Fi';
+  String get githubButtonText => 'Dê-nos uma estrela no GitHub';
 
   @override
   String get socialInstagramButtonText => 'Siga-nos no Instagram';
@@ -195,14 +191,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get thankYouText => 'JazakAllahu Khayran por usar este aplicativo!';
 
   @override
-  String get supportAppealText =>
-      'Este aplicativo tem custos para operar e manter (Google Maps API). Considere apoiar o projeto pelos botões abaixo (valores excedentes serão doados a instituições de caridade registradas).';
+  String get supportAppealText => 'Por favor, siga-nos pelos botões abaixo.';
 
   @override
-  String get githubButtonText => 'Apoie-nos no GitHub';
-
-  @override
-  String get donateButtonText => 'Apoie-nos no Ko-Fi';
+  String get githubButtonText => 'Dê-nos uma estrela no GitHub';
 
   @override
   String get socialInstagramButtonText => 'Siga-nos no Instagram';
@@ -311,13 +303,10 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
 
   @override
   String get supportAppealText =>
-      'Esta aplicação tem custos de funcionamento e manutenção (Google Maps API). Considere apoiar o projeto através dos botões abaixo (valores excedentes serão doados a instituições de caridade registadas).';
+      'Por favor, siga-nos através dos botões abaixo.';
 
   @override
-  String get githubButtonText => 'Apoie-nos no GitHub';
-
-  @override
-  String get donateButtonText => 'Apoie-nos no Ko-Fi';
+  String get githubButtonText => 'Dê-nos uma estrela no GitHub';
 
   @override
   String get socialInstagramButtonText => 'Siga-nos no Instagram';

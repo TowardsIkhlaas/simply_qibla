@@ -77,14 +77,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thankYouText => 'جزاك الله خيرًا لاستخدامك هذا التطبيق!';
 
   @override
-  String get supportAppealText =>
-      'يتطلب تشغيل هذا التطبيق وصيانته (Google Maps API). يرجى النظر في دعم المشروع من خلال الأزرار أدناه (سيتم التبرع بالمبالغ الزائدة للجمعيات الخيرية المسجلة).';
+  String get supportAppealText => 'يرجى متابعتنا من خلال الأزرار أدناه.';
 
   @override
-  String get githubButtonText => 'ادعمنا على GitHub';
-
-  @override
-  String get donateButtonText => 'ادعمنا على Ko-Fi';
+  String get githubButtonText => 'قيمنا بنجمة على GitHub';
 
   @override
   String get socialInstagramButtonText => 'تابعنا على Instagram';

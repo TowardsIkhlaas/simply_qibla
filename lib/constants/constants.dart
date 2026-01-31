@@ -24,7 +24,6 @@ class AppStrings {
 
   static const String githubUriPath =
       'https://github.com/TowardsIkhlaas/simply_qibla/blob/master/.github/CONTRIBUTING.md';
-  static const String donateUriPath = 'https://ko-fi.com/TowardsIkhlaas';
   static const String socialInstagramUriPath = 'https://www.instagram.com/towardsikhlaas';
   static const String shareContentText =
       'As salaam alaykum warahmatullahi wabarakatuh! Check out this beautiful and accurate Qibla app';

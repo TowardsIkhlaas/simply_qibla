@@ -242,23 +242,17 @@ abstract class AppLocalizations {
   /// **'JazakAllahu Khayran for using this app!'**
   String get thankYouText;
 
-  /// Appeal asking users to support the app through donations, mentioning that excess funds will be donated to charity.
+  /// Appeal asking users to follow the project through social buttons.
   ///
   /// In en, this message translates to:
-  /// **'This app costs to run and maintain (Google Maps API). Please consider supporting the project through the buttons below (excess amounts will be donated to registered charities).'**
+  /// **'Please follow us through the buttons below.'**
   String get supportAppealText;
 
-  /// Button text that directs users to GitHub to support the project.
+  /// Button text that directs users to GitHub to star the project.
   ///
   /// In en, this message translates to:
-  /// **'Support us on GitHub'**
+  /// **'Star us on GitHub'**
   String get githubButtonText;
-
-  /// Button text that directs users to Ko-Fi to support the project.
-  ///
-  /// In en, this message translates to:
-  /// **'Support us on Ko-Fi'**
-  String get donateButtonText;
 
   /// Button text encouraging users to follow the project on Instagram.
   ///
