@@ -38,10 +38,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     PageDecoration pageDecoration = PageDecoration(
       titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
           ),
       bodyTextStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
           ),
       bodyPadding: const EdgeInsets.symmetric(horizontal: AppPadding.standard),
       imagePadding: const EdgeInsets.all(AppPadding.standard),
@@ -80,18 +80,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
       skip: Text(
         AppLocalizations.of(context)!.skipText,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.primaryContainer,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       next: Icon(
         Icons.arrow_forward,
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: Theme.of(context).colorScheme.primary,
         semanticLabel: 'Next page',
       ),
       done: Text(
         AppLocalizations.of(context)!.doneText,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.primaryContainer,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       curve: Curves.fastLinearToSlowEaseIn,
@@ -103,9 +103,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
       ),
       dotsDecorator: DotsDecorator(
         size: const Size(10.0, 10.0),
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.primaryContainer,
         activeSize: const Size(22.0, 10.0),
-        activeColor: Theme.of(context).colorScheme.primaryContainer,
+        activeColor: Theme.of(context).colorScheme.primary,
         activeShape: const RoundedRectangleBorder(
           borderRadius:
               BorderRadius.all(Radius.circular(AppDimensions.borderRadiusXl)),
