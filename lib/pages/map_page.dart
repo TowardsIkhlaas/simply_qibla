@@ -21,7 +21,14 @@ import 'package:simply_qibla/widgets/user_location_icon.dart';
 part 'map_page_state.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+  const MapPage({
+    super.key,
+    this.onThemeChanged,
+    this.onColorChanged,
+  });
+
+  final ValueChanged<String>? onThemeChanged;
+  final ValueChanged<String>? onColorChanged;
 
   @override
   MapPageState createState() => MapPageState();

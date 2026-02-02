@@ -7,9 +7,13 @@ class SQAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SQAppBar({
     super.key,
     this.onCompassSettingChanged,
+    this.onThemeChanged,
+    this.onColorChanged,
   });
 
   final VoidCallback? onCompassSettingChanged;
+  final ValueChanged<String>? onThemeChanged;
+  final ValueChanged<String>? onColorChanged;
 
   @override
   Size get preferredSize => const Size.fromHeight(AppDimensions.appBarPreferredSize);
@@ -28,6 +32,8 @@ class SQAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.only(right: AppPadding.appBarActionRight),
               child: SettingsButton(
                 onCompassSettingChanged: onCompassSettingChanged,
+                onThemeChanged: onThemeChanged,
+                onColorChanged: onColorChanged,
               ),
             )
           ],

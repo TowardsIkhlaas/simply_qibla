@@ -8,9 +8,13 @@ class SettingsButton extends StatefulWidget {
   const SettingsButton({
     super.key,
     this.onCompassSettingChanged,
+    this.onThemeChanged,
+    this.onColorChanged,
   });
 
   final VoidCallback? onCompassSettingChanged;
+  final ValueChanged<String>? onThemeChanged;
+  final ValueChanged<String>? onColorChanged;
 
   @override
   State<SettingsButton> createState() => _SettingsButtonState();
@@ -43,12 +47,14 @@ class _SettingsButtonState extends State<SettingsButton> {
         _version,
         _buildNumber,
         onCompassSettingChanged: widget.onCompassSettingChanged,
+        onThemeChanged: widget.onThemeChanged,
+        onColorChanged: widget.onColorChanged,
       ),
       highlightColor: Colors.grey,
-      icon: const Icon(
+      icon: Icon(
         TablerIcons.settings,
         size: AppDimensions.iconSizeMd,
-        color: Colors.white,
+        color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.white,
         semanticLabel: 'Settings Button',
       ),
     );
