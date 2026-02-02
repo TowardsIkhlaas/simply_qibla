@@ -38,6 +38,8 @@ class MapPageState extends State<MapPage> {
       resizeToAvoidBottomInset: false,
       appBar: SQAppBar(
         onCompassSettingChanged: _loadCompassSetting,
+        onThemeChanged: widget.onThemeChanged,
+        onColorChanged: widget.onColorChanged,
       ),
       body: buildMapBody(context),
       bottomNavigationBar: buildBottomBar(context),
@@ -307,6 +309,7 @@ class MapPageState extends State<MapPage> {
             children: <Widget>[
               FloatingActionButton(
                 heroTag: 'mapTypeToggle',
+                elevation: 0,
                 onPressed: () => <void>{
                   setState(() {
                     _currentMapType = (_currentMapType == MapType.normal)
@@ -333,6 +336,7 @@ class MapPageState extends State<MapPage> {
               ),
               FloatingActionButton(
                 heroTag: 'centerMapToUser',
+                elevation: 0,
                 onPressed: _enableLocationButton
                     ? () async => centerMapToUserLocation()
                     : null,
