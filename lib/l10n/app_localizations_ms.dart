@@ -122,4 +122,31 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get aboutButtonText => 'Perihal';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get themeSystem => 'Sistem';
+
+  @override
+  String get themeLight => 'Cerah';
+
+  @override
+  String get themeDark => 'Gelap';
+
+  @override
+  String get settingsColorLabel => 'Warna';
+
+  @override
+  String get colorDefault => 'Lalai';
+
+  @override
+  String get colorDynamic => 'Dinamik';
+
+  @override
+  String get colorMadinah => 'Madinah';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
 }

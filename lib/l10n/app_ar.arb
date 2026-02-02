@@ -35,5 +35,14 @@
   "onboardingSupportBody": "سمبلي قبلة خالي من الإعلانات ومفتوح المصدر. إذا أعجبك ما تراه، يرجى متابعتنا من خلال الروابط داخل التطبيق. جزاك الله خيرًا!",
   "settingsTitle": "الإعدادات",
   "settingsCompassToggle": "البوصلة",
-  "aboutButtonText": "حول"
+  "aboutButtonText": "حول",
+  "settingsThemeLabel": "المظهر",
+  "themeSystem": "النظام",
+  "themeLight": "فاتح",
+  "themeDark": "داكن",
+  "settingsColorLabel": "اللون",
+  "colorDefault": "افتراضي",
+  "colorDynamic": "ديناميكي",
+  "colorMadinah": "المدينة",
+  "colorAqsa": "الأقصى"
 }

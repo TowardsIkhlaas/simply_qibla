@@ -35,5 +35,14 @@
   "onboardingSupportBody": "SimplyQibla est sans publicité et open-source. Si vous aimez ce que vous voyez, veuillez nous suivre via les liens dans l'application. JazakAllahu Khayran!",
   "settingsTitle": "Paramètres",
   "settingsCompassToggle": "Boussole",
-  "aboutButtonText": "À propos"
+  "aboutButtonText": "À propos",
+  "settingsThemeLabel": "Thème",
+  "themeSystem": "Système",
+  "themeLight": "Clair",
+  "themeDark": "Sombre",
+  "settingsColorLabel": "Couleur",
+  "colorDefault": "Par défaut",
+  "colorDynamic": "Dynamique",
+  "colorMadinah": "Médine",
+  "colorAqsa": "Al-Aqsa"
 }

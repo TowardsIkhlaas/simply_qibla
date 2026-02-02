@@ -35,5 +35,14 @@
   "onboardingSupportBody": "SimplyQibla bebas iklan dan bersumber terbuka. Jika Anda menyukai aplikasi ini, mohon ikuti kami melalui tautan dalam aplikasi. JazakAllahu Khayran!",
   "settingsTitle": "Pengaturan",
   "settingsCompassToggle": "Kompas",
-  "aboutButtonText": "Tentang"
+  "aboutButtonText": "Tentang",
+  "settingsThemeLabel": "Tema",
+  "themeSystem": "Sistem",
+  "themeLight": "Terang",
+  "themeDark": "Gelap",
+  "settingsColorLabel": "Warna",
+  "colorDefault": "Bawaan",
+  "colorDynamic": "Dinamis",
+  "colorMadinah": "Madinah",
+  "colorAqsa": "Al-Aqsa"
 }

@@ -325,6 +325,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'About'**
   String get aboutButtonText;
+
+  /// Label for the theme setting in settings modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeLabel;
+
+  /// Option to follow system theme.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// Light theme option.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// Dark theme option.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// Label for the color setting in settings modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get settingsColorLabel;
+
+  /// Default color scheme option.
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get colorDefault;
+
+  /// Dynamic color scheme option (Material You).
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic'**
+  String get colorDynamic;
+
+  /// Green color theme inspired by Madinah.
+  ///
+  /// In en, this message translates to:
+  /// **'Madinah'**
+  String get colorMadinah;
+
+  /// Blue color theme inspired by Al-Aqsa.
+  ///
+  /// In en, this message translates to:
+  /// **'Al-Aqsa'**
+  String get colorAqsa;
 }
 
 class _AppLocalizationsDelegate

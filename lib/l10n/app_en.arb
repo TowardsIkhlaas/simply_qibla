@@ -143,5 +143,41 @@
   "aboutButtonText": "About",
   "@aboutButtonText": {
     "description": "Button text to open the about dialog."
+  },
+  "settingsThemeLabel": "Theme",
+  "@settingsThemeLabel": {
+    "description": "Label for the theme setting in settings modal."
+  },
+  "themeSystem": "System",
+  "@themeSystem": {
+    "description": "Option to follow system theme."
+  },
+  "themeLight": "Light",
+  "@themeLight": {
+    "description": "Light theme option."
+  },
+  "themeDark": "Dark",
+  "@themeDark": {
+    "description": "Dark theme option."
+  },
+  "settingsColorLabel": "Color",
+  "@settingsColorLabel": {
+    "description": "Label for the color setting in settings modal."
+  },
+  "colorDefault": "Default",
+  "@colorDefault": {
+    "description": "Default color scheme option."
+  },
+  "colorDynamic": "Dynamic",
+  "@colorDynamic": {
+    "description": "Dynamic color scheme option (Material You)."
+  },
+  "colorMadinah": "Madinah",
+  "@colorMadinah": {
+    "description": "Green color theme inspired by Madinah."
+  },
+  "colorAqsa": "Al-Aqsa",
+  "@colorAqsa": {
+    "description": "Blue color theme inspired by Al-Aqsa."
   }
 }

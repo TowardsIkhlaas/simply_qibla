@@ -121,4 +121,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get aboutButtonText => 'حول';
+
+  @override
+  String get settingsThemeLabel => 'المظهر';
+
+  @override
+  String get themeSystem => 'النظام';
+
+  @override
+  String get themeLight => 'فاتح';
+
+  @override
+  String get themeDark => 'داكن';
+
+  @override
+  String get settingsColorLabel => 'اللون';
+
+  @override
+  String get colorDefault => 'افتراضي';
+
+  @override
+  String get colorDynamic => 'ديناميكي';
+
+  @override
+  String get colorMadinah => 'المدينة';
+
+  @override
+  String get colorAqsa => 'الأقصى';
 }

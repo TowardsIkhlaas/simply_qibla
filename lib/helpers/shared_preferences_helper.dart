@@ -32,3 +32,25 @@ Future<void> setCompassEnabled(bool value) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool('compassEnabled', value);
 }
+
+Future<String> getThemeMode() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.reload();
+  return prefs.getString('themeMode') ?? 'system';
+}
+
+Future<void> setThemeMode(String mode) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('themeMode', mode);
+}
+
+Future<String> getColorMode() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.reload();
+  return prefs.getString('colorMode') ?? 'default';
+}
+
+Future<void> setColorMode(String mode) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('colorMode', mode);
+}

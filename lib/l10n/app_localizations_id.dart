@@ -123,4 +123,31 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get aboutButtonText => 'Tentang';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get themeSystem => 'Sistem';
+
+  @override
+  String get themeLight => 'Terang';
+
+  @override
+  String get themeDark => 'Gelap';
+
+  @override
+  String get settingsColorLabel => 'Warna';
+
+  @override
+  String get colorDefault => 'Bawaan';
+
+  @override
+  String get colorDynamic => 'Dinamis';
+
+  @override
+  String get colorMadinah => 'Madinah';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
 }

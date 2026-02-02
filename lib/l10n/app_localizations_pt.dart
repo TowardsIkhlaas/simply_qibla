@@ -123,6 +123,33 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get aboutButtonText => 'Sobre';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get themeSystem => 'Sistema';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Escuro';
+
+  @override
+  String get settingsColorLabel => 'Cor';
+
+  @override
+  String get colorDefault => 'Padrão';
+
+  @override
+  String get colorDynamic => 'Dinâmico';
+
+  @override
+  String get colorMadinah => 'Medina';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -244,6 +271,33 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get aboutButtonText => 'Sobre';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get themeSystem => 'Sistema';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Escuro';
+
+  @override
+  String get settingsColorLabel => 'Cor';
+
+  @override
+  String get colorDefault => 'Padrão';
+
+  @override
+  String get colorDynamic => 'Dinâmico';
+
+  @override
+  String get colorMadinah => 'Medina';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -366,4 +420,31 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
 
   @override
   String get aboutButtonText => 'Sobre';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get themeSystem => 'Sistema';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Escuro';
+
+  @override
+  String get settingsColorLabel => 'Cor';
+
+  @override
+  String get colorDefault => 'Predefinição';
+
+  @override
+  String get colorDynamic => 'Dinâmico';
+
+  @override
+  String get colorMadinah => 'Medina';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
 }

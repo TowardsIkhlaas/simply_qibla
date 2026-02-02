@@ -121,4 +121,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutButtonText => 'About';
+
+  @override
+  String get settingsThemeLabel => 'Theme';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get settingsColorLabel => 'Color';
+
+  @override
+  String get colorDefault => 'Default';
+
+  @override
+  String get colorDynamic => 'Dynamic';
+
+  @override
+  String get colorMadinah => 'Madinah';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
 }
