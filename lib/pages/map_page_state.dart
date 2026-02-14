@@ -8,7 +8,6 @@ class MapPageState extends State<MapPage> {
   MapType _currentMapType = MapType.normal;
   bool _isCameraMoving = false;
   bool _enableLocationButton = true;
-  bool _isMapCenteredOnUser = false;
   bool _compassEnabled = true;
   CenterConsoleState _centerConsoleState = CenterConsoleState.idle;
   final Set<Polyline> _polylines = <Polyline>{};
@@ -16,6 +15,16 @@ class MapPageState extends State<MapPage> {
     target: MapConstants.defaultPosition,
     zoom: MapConstants.zoomLevel,
   );
+
+  // Location tracking state
+  LocationTrackingMode _locationTrackingMode = LocationTrackingMode.idle;
+  StreamSubscription<CompassEvent>? _compassSubscription;
+  double _lastAppliedBearing = 0.0;
+  DateTime _lastBearingUpdateTime = DateTime.now();
+  double _zoomBeforeRotation = MapConstants.zoomLevel;
+  bool _isProgrammaticCameraMove = false;
+  bool _pendingBearingReset = false; // Deferred bearing reset after drag exit from rotation mode
+  LatLng? _lastPolylineTarget; // Track last polyline position to avoid redraws on bearing changes
 
   @override
   void initState() {
@@ -28,6 +37,176 @@ class MapPageState extends State<MapPage> {
     setState(() {
       _compassEnabled = compassEnabled;
     });
+  }
+
+  @override
+  void dispose() {
+    unawaited(_compassSubscription?.cancel());
+    super.dispose();
+  }
+
+  // Location Tracking Mode Methods
+
+  Future<void> _onLocationFabPressed() async {
+    switch (_locationTrackingMode) {
+      case LocationTrackingMode.idle:
+        await _centerAndTrack();
+      case LocationTrackingMode.centered:
+        _enableRotationMode();
+      case LocationTrackingMode.rotating:
+        _disableRotationMode();
+    }
+  }
+
+  Future<void> _centerAndTrack() async {
+    try {
+      setState(() {
+        _centerConsoleState = CenterConsoleState.centering;
+        _enableLocationButton = false;
+      });
+
+      Position currentLocation = await _determinePosition();
+
+      userLocation = LatLng(
+        currentLocation.latitude,
+        currentLocation.longitude,
+      );
+
+      _isProgrammaticCameraMove = true;
+      await mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: userLocation!, zoom: MapConstants.zoomLevel),
+        ),
+      );
+
+      setState(() {
+        _centerConsoleState = CenterConsoleState.idle;
+        _enableLocationButton = true;
+        _locationTrackingMode = LocationTrackingMode.centered;
+      });
+    } catch (e, stackTrace) {
+      setState(() {
+        _centerConsoleState = CenterConsoleState.idle;
+        _enableLocationButton = true;
+        _locationTrackingMode = LocationTrackingMode.idle;
+      });
+
+      if (!kReleaseMode) {
+        developer.log(
+          'Error getting user location: $e',
+          name: 'location.error',
+          error: stackTrace,
+        );
+      }
+    }
+  }
+
+  void _enableRotationMode() {
+    if (userLocation == null || !_compassEnabled) return;
+
+    setState(() {
+      _zoomBeforeRotation = _currentCameraPosition.zoom;
+      _locationTrackingMode = LocationTrackingMode.rotating;
+    });
+
+    // Zoom in for rotation mode
+    _isProgrammaticCameraMove = true;
+    unawaited(mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: userLocation!,
+          zoom: CompassConstants.rotationZoomLevel,
+          bearing: _lastAppliedBearing,
+        ),
+      ),
+    ));
+
+    // Start listening to compass events
+    unawaited(_compassSubscription?.cancel());
+    _compassSubscription = FlutterCompass.events?.listen((CompassEvent event) {
+      if (event.heading != null) {
+        _applyBearingWithThrottle(event.heading!);
+      }
+    });
+  }
+
+  void _disableRotationMode({bool deferBearingReset = false}) {
+    unawaited(_compassSubscription?.cancel());
+    _compassSubscription = null;
+
+    // Reset map bearing and zoom (defer if exiting via drag - will be done in onCameraIdle)
+    if (userLocation != null && !deferBearingReset) {
+      _isProgrammaticCameraMove = true;
+      unawaited(mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: _currentCameraPosition.target,
+            zoom: _zoomBeforeRotation,
+            bearing: 0,
+          ),
+        ),
+      ));
+    }
+
+    // Stay in centered mode if still at user location
+    final bool stillCentered = _isCenteredOnUserLocation();
+    setState(() {
+      _locationTrackingMode =
+          stillCentered ? LocationTrackingMode.centered : LocationTrackingMode.idle;
+      _lastAppliedBearing = 0.0;
+    });
+  }
+
+  bool _isCenteredOnUserLocation() {
+    if (userLocation == null) return false;
+    final double latDiff =
+        (_currentCameraPosition.target.latitude - userLocation!.latitude).abs();
+    final double lngDiff =
+        (_currentCameraPosition.target.longitude - userLocation!.longitude).abs();
+    return latDiff < CompassConstants.positionThreshold &&
+        lngDiff < CompassConstants.positionThreshold;
+  }
+
+  bool _hasPositionChangedSignificantly(LatLng newTarget) {
+    if (_lastPolylineTarget == null) return true;
+    final double latDiff =
+        (newTarget.latitude - _lastPolylineTarget!.latitude).abs();
+    final double lngDiff =
+        (newTarget.longitude - _lastPolylineTarget!.longitude).abs();
+    return latDiff > CompassConstants.positionThreshold ||
+        lngDiff > CompassConstants.positionThreshold;
+  }
+
+  void _applyBearingWithThrottle(double heading) {
+    if (_locationTrackingMode != LocationTrackingMode.rotating ||
+        userLocation == null) {
+      return;
+    }
+
+    final DateTime now = DateTime.now();
+    final int elapsedMs = now.difference(_lastBearingUpdateTime).inMilliseconds;
+
+    // Time throttle
+    if (elapsedMs < CompassConstants.updateIntervalMs) return;
+
+    // Bearing threshold (handle 360° wrap)
+    double diff = (heading - _lastAppliedBearing).abs();
+    if (diff > 180) diff = 360 - diff;
+    if (diff < CompassConstants.bearingThreshold) return;
+
+    _lastAppliedBearing = heading;
+    _lastBearingUpdateTime = now;
+    _isProgrammaticCameraMove = true;
+
+    unawaited(mapController.moveCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: userLocation!,
+          zoom: _currentCameraPosition.zoom,
+          bearing: heading,
+        ),
+      ),
+    ));
   }
 
   // Build Method
@@ -59,6 +238,7 @@ class MapPageState extends State<MapPage> {
   }
 
   void animateToLocation(LatLng coordinates) async {
+    _isProgrammaticCameraMove = true;
     await mapController.animateCamera(
       CameraUpdate.newCameraPosition(
           CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
@@ -67,7 +247,9 @@ class MapPageState extends State<MapPage> {
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _enableLocationButton = true;
-      _isMapCenteredOnUser = coordinates == userLocation;
+      _locationTrackingMode = coordinates == userLocation
+          ? LocationTrackingMode.centered
+          : LocationTrackingMode.idle;
     });
   }
 
@@ -117,34 +299,7 @@ class MapPageState extends State<MapPage> {
   }
 
   Future<void> centerMapToUserLocation() async {
-    try {
-      setState(() {
-        _centerConsoleState = CenterConsoleState.centering;
-        _enableLocationButton = false;
-      });
-
-      Position currentLocation = await _determinePosition();
-
-      userLocation = LatLng(
-        currentLocation.latitude,
-        currentLocation.longitude,
-      );
-
-      animateToLocation(userLocation!);
-    } catch (e, stackTrace) {
-      setState(() {
-        _centerConsoleState = CenterConsoleState.idle;
-        _enableLocationButton = true;
-      });
-
-      if (!kReleaseMode) {
-        developer.log(
-          'Error getting user location: $e',
-          name: 'location.error',
-          error: stackTrace,
-        );
-      }
-    }
+    await _centerAndTrack();
   }
 
   Future<void> _requestReview() async {
@@ -197,26 +352,86 @@ class MapPageState extends State<MapPage> {
   }
 
   void _onCameraMoveStarted() {
+    // If not a programmatic move and we're in centered mode, user gestured - exit to idle
+    // Note: In rotation mode, we detect drags in _onCameraMove by position change
+    if (!_isProgrammaticCameraMove &&
+        _locationTrackingMode == LocationTrackingMode.centered) {
+      setState(() {
+        _locationTrackingMode = LocationTrackingMode.idle;
+      });
+    }
+
     setState(() {
       _isCameraMoving = true;
-      _polylines.clear();
-      _isMapCenteredOnUser = false;
+      // Don't clear polylines in rotation mode - we're only changing bearing, not position
+      if (_locationTrackingMode != LocationTrackingMode.rotating) {
+        _polylines.clear();
+      }
     });
   }
 
   void _onCameraMove(CameraPosition position) {
+    // In rotation mode, detect user drag by position change (not just bearing)
+    if (_locationTrackingMode == LocationTrackingMode.rotating &&
+        userLocation != null) {
+      final double latDiff =
+          (position.target.latitude - userLocation!.latitude).abs();
+      final double lngDiff =
+          (position.target.longitude - userLocation!.longitude).abs();
+      // Use a larger threshold to avoid false triggers from floating point drift
+      if (latDiff > CompassConstants.dragDetectionThreshold ||
+          lngDiff > CompassConstants.dragDetectionThreshold) {
+        // Update position BEFORE disabling so animation uses correct target
+        _currentCameraPosition = position;
+        // Defer bearing reset until drag completes (in onCameraIdle)
+        _pendingBearingReset = true;
+        _disableRotationMode(deferBearingReset: true);
+        return;
+      }
+    }
+
     setState(() {
-      _centerConsoleState = CenterConsoleState.dragging;
+      // Don't show "dragging" state in rotation mode - we're only changing bearing
+      if (_locationTrackingMode != LocationTrackingMode.rotating) {
+        _centerConsoleState = CenterConsoleState.dragging;
+      }
       _currentCameraPosition = position;
     });
   }
 
   void _onCameraIdle() {
+    // Don't reset programmatic flag in rotation mode - we're constantly making programmatic moves
+    if (_locationTrackingMode != LocationTrackingMode.rotating) {
+      _isProgrammaticCameraMove = false;
+    }
+
+    // Handle deferred bearing reset after drag exit from rotation mode
+    if (_pendingBearingReset) {
+      _pendingBearingReset = false;
+      _isProgrammaticCameraMove = true;
+      unawaited(mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: _currentCameraPosition.target,
+            zoom: _zoomBeforeRotation,
+            bearing: 0,
+          ),
+        ),
+      ));
+    }
+
+    // Only redraw polyline if position changed significantly (not just bearing)
+    final bool shouldUpdatePolyline =
+        _hasPositionChangedSignificantly(_currentCameraPosition.target);
+
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _isCameraMoving = false;
-      _updatePolyline(
-          _currentCameraPosition.target, MapConstants.qiblaPosition);
+      if (shouldUpdatePolyline) {
+        _lastPolylineTarget = _currentCameraPosition.target;
+        _updatePolyline(
+            _currentCameraPosition.target, MapConstants.qiblaPosition);
+      }
     });
   }
 
@@ -265,11 +480,18 @@ class MapPageState extends State<MapPage> {
                         }
 
                         double heading = snapshot.data!.heading ?? 0;
+                        // In rotation mode, icon doesn't rotate - map does
+                        double iconRotation =
+                            _locationTrackingMode == LocationTrackingMode.rotating
+                                ? 0
+                                : heading * (pi / 180);
                         return Transform.rotate(
-                          angle: heading * (pi / 180),
+                          angle: iconRotation,
                           child: UserLocationIcon(
                             primaryColor:
-                                _isMapCenteredOnUser ? Colors.blueAccent : Colors.blueGrey,
+                                _locationTrackingMode != LocationTrackingMode.idle
+                                    ? Colors.blueAccent
+                                    : Colors.blueGrey,
                           ),
                         );
                       },
@@ -277,7 +499,9 @@ class MapPageState extends State<MapPage> {
                   : Icon(
                       TablerIcons.circle_dot,
                       size: AppDimensions.iconSizeLg,
-                      color: _isMapCenteredOnUser ? Colors.blueAccent : Colors.grey,
+                      color: _locationTrackingMode != LocationTrackingMode.idle
+                          ? Colors.blueAccent
+                          : Colors.grey,
                     ),
             ),
           ],
@@ -337,11 +561,19 @@ class MapPageState extends State<MapPage> {
               FloatingActionButton(
                 heroTag: 'centerMapToUser',
                 elevation: 0,
-                onPressed: _enableLocationButton
-                    ? () async => centerMapToUserLocation()
+                backgroundColor: _locationTrackingMode == LocationTrackingMode.rotating
+                    ? Theme.of(context).colorScheme.primary
                     : null,
-                child: const Icon(
-                  TablerIcons.current_location,
+                foregroundColor: _locationTrackingMode == LocationTrackingMode.rotating
+                    ? Theme.of(context).colorScheme.onPrimary
+                    : null,
+                onPressed: _enableLocationButton
+                    ? () async => _onLocationFabPressed()
+                    : null,
+                child: Icon(
+                  _locationTrackingMode != LocationTrackingMode.idle
+                      ? TablerIcons.compass
+                      : TablerIcons.current_location,
                   size: AppDimensions.iconSizeLg,
                   semanticLabel: 'Center map to current location',
                 ),
