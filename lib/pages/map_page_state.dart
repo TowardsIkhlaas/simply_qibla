@@ -1,5 +1,106 @@
 part of 'map_page.dart';
 
+/// Manages polyline creation and clearing on the map.
+class PolylineManager {
+  static const String _polylineId = 'polyline_center_to_qibla';
+
+  final Set<Polyline> _polylines = <Polyline>{};
+  LatLng? _lastTarget;
+
+  Set<Polyline> get polylines => _polylines;
+
+  bool hasPositionChangedSignificantly(LatLng newTarget) {
+    if (_lastTarget == null) return true;
+    final double latDiff = (newTarget.latitude - _lastTarget!.latitude).abs();
+    final double lngDiff = (newTarget.longitude - _lastTarget!.longitude).abs();
+    return latDiff > CompassConstants.positionThreshold ||
+        lngDiff > CompassConstants.positionThreshold;
+  }
+
+  void updatePolyline(LatLng from) {
+    _lastTarget = from;
+    final Polyline polyline = Polyline(
+      polylineId: const PolylineId(_polylineId),
+      width: MapConstants.polylineWidth,
+      color: Colors.amber,
+      points: <LatLng>[from, MapConstants.qiblaPosition],
+      geodesic: true,
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
+    );
+    _polylines
+      ..removeWhere((Polyline p) => p.polylineId.value == _polylineId)
+      ..add(polyline);
+  }
+
+  void clear() {
+    _polylines.clear();
+  }
+}
+
+/// Factory methods for bottom bar widgets.
+class BottomBarWidgets {
+  static Widget buildMapTypeFab({
+    required MapType currentType,
+    required ValueChanged<MapType> onToggle,
+  }) {
+    return FloatingActionButton(
+      heroTag: 'mapTypeToggle',
+      elevation: 0,
+      onPressed: () => onToggle(
+        currentType == MapType.normal ? MapType.hybrid : MapType.normal,
+      ),
+      child: const Icon(
+        TablerIcons.map,
+        size: AppDimensions.iconSizeLg,
+        semanticLabel: 'Toggle map type',
+      ),
+    );
+  }
+
+  static Widget buildLocationFab({
+    required BuildContext context,
+    required LocationTrackingMode trackingMode,
+    required bool isCompassAvailable,
+    required bool enabled,
+    required Animation<double> needleAnimation,
+    required VoidCallback onPressed,
+  }) {
+    return FloatingActionButton(
+      heroTag: 'centerMapToUser',
+      elevation: 0,
+      backgroundColor: trackingMode == LocationTrackingMode.rotating
+          ? Theme.of(context).colorScheme.primary
+          : null,
+      foregroundColor: trackingMode == LocationTrackingMode.rotating
+          ? Theme.of(context).colorScheme.onPrimary
+          : null,
+      onPressed: enabled ? onPressed : null,
+      child: AnimatedBuilder(
+        animation: needleAnimation,
+        builder: (BuildContext context, Widget? child) {
+          final double rotation =
+              (trackingMode == LocationTrackingMode.centered && isCompassAvailable)
+                  ? needleAnimation.value
+                  : 0;
+          return Transform.rotate(
+            angle: rotation,
+            child: Icon(
+              trackingMode == LocationTrackingMode.idle
+                  ? TablerIcons.current_location
+                  : (isCompassAvailable
+                      ? TablerIcons.compass
+                      : TablerIcons.current_location),
+              size: AppDimensions.iconSizeLg,
+              semanticLabel: 'Center map to current location',
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
 class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   // State Declaration and Variables
 
@@ -10,7 +111,7 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   bool _enableLocationButton = true;
   bool _compassEnabled = true;
   CenterConsoleState _centerConsoleState = CenterConsoleState.idle;
-  final Set<Polyline> _polylines = <Polyline>{};
+  final PolylineManager _polylineManager = PolylineManager();
   CameraPosition _currentCameraPosition = const CameraPosition(
     target: MapConstants.defaultPosition,
     zoom: MapConstants.zoomLevel,
@@ -24,7 +125,6 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   double _zoomBeforeRotation = MapConstants.zoomLevel;
   bool _isProgrammaticCameraMove = false;
   bool _pendingBearingReset = false; // Deferred bearing reset after drag exit from rotation mode
-  LatLng? _lastPolylineTarget; // Track last polyline position to avoid redraws on bearing changes
 
   // Compass needle animation for FAB icon
   late AnimationController _compassNeedleController;
@@ -33,7 +133,6 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   // Compass heading state (replaces StreamBuilder)
   bool _compassHardwareAvailable = false;
   double _currentHeading = 0;
-  StreamSubscription<CompassEvent>? _compassHeadingSubscription;
 
   // Computed property: compass is available only if enabled AND hardware works
   bool get _isCompassAvailable => _compassEnabled && _compassHardwareAvailable;
@@ -81,18 +180,25 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
       }
     });
 
-    // Compass heading subscription (replaces StreamBuilder)
-    _compassHeadingSubscription = FlutterCompass.events?.listen(
+    // Unified compass subscription: updates heading for UI and applies bearing in rotation mode
+    _compassSubscription = FlutterCompass.events?.listen(
       (CompassEvent event) {
-        final bool hasHeading = event.heading != null;
-        final double heading = event.heading ?? 0;
+        final double? heading = event.heading;
+        final bool available = heading != null;
 
-        // Only rebuild if values changed
-        if (hasHeading != _compassHardwareAvailable || heading != _currentHeading) {
+        // Always update hardware availability and heading for UI
+        if (available != _compassHardwareAvailable ||
+            (heading ?? 0) != _currentHeading) {
           setState(() {
-            _compassHardwareAvailable = hasHeading;
-            _currentHeading = heading;
+            _compassHardwareAvailable = available;
+            _currentHeading = heading ?? 0;
           });
+        }
+
+        // Apply bearing only in rotation mode (with throttling)
+        if (_locationTrackingMode == LocationTrackingMode.rotating &&
+            heading != null) {
+          _applyBearingWithThrottle(heading);
         }
       },
       onError: (_) {
@@ -115,7 +221,6 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     _compassNeedleController.dispose();
-    unawaited(_compassHeadingSubscription?.cancel());
     unawaited(_compassSubscription?.cancel());
     super.dispose();
   }
@@ -200,20 +305,9 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
         ),
       ),
     ));
-
-    // Start listening to compass events
-    unawaited(_compassSubscription?.cancel());
-    _compassSubscription = FlutterCompass.events?.listen((CompassEvent event) {
-      if (event.heading != null) {
-        _applyBearingWithThrottle(event.heading!);
-      }
-    });
   }
 
   void _disableRotationMode({bool deferBearingReset = false}) {
-    unawaited(_compassSubscription?.cancel());
-    _compassSubscription = null;
-
     // Reset map bearing and zoom (defer if exiting via drag - will be done in onCameraIdle)
     if (userLocation != null && !deferBearingReset) {
       _isProgrammaticCameraMove = true;
@@ -250,16 +344,6 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
         (_currentCameraPosition.target.longitude - userLocation!.longitude).abs();
     return latDiff < CompassConstants.positionThreshold &&
         lngDiff < CompassConstants.positionThreshold;
-  }
-
-  bool _hasPositionChangedSignificantly(LatLng newTarget) {
-    if (_lastPolylineTarget == null) return true;
-    final double latDiff =
-        (newTarget.latitude - _lastPolylineTarget!.latitude).abs();
-    final double lngDiff =
-        (newTarget.longitude - _lastPolylineTarget!.longitude).abs();
-    return latDiff > CompassConstants.positionThreshold ||
-        lngDiff > CompassConstants.positionThreshold;
   }
 
   void _applyBearingWithThrottle(double heading) {
@@ -423,24 +507,6 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
     snackbarKey.currentState?.showSnackBar(snackBar);
   }
 
-  void _updatePolyline(LatLng from, LatLng to) {
-    const String polylineIdVal = 'polyline_center_to_qibla';
-    final Polyline polyline = Polyline(
-      polylineId: const PolylineId(polylineIdVal),
-      width: MapConstants.polylineWidth,
-      color: Colors.amber,
-      points: <LatLng>[from, to],
-      geodesic: true,
-      startCap: Cap.roundCap,
-      endCap: Cap.roundCap,
-    );
-    setState(() {
-      _polylines.removeWhere(
-          (Polyline poly) => poly.polylineId.value == polylineIdVal);
-      _polylines.add(polyline);
-    });
-  }
-
   void _onCameraMoveStarted() {
     // If not a programmatic move and we're in centered mode, user gestured - exit to idle
     // Note: In rotation mode, we detect drags in _onCameraMove by position change
@@ -456,7 +522,7 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
       // Only clear polylines on user-initiated moves (not programmatic or rotation mode)
       if (_locationTrackingMode != LocationTrackingMode.rotating &&
           !_isProgrammaticCameraMove) {
-        _polylines.clear();
+        _polylineManager.clear();
       }
     });
   }
@@ -513,16 +579,15 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
 
     // Only redraw polyline if position changed significantly (not just bearing)
     final bool shouldUpdatePolyline =
-        _hasPositionChangedSignificantly(_currentCameraPosition.target);
+        _polylineManager.hasPositionChangedSignificantly(_currentCameraPosition.target);
+
+    if (shouldUpdatePolyline) {
+      _polylineManager.updatePolyline(_currentCameraPosition.target);
+    }
 
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _isCameraMoving = false;
-      if (shouldUpdatePolyline) {
-        _lastPolylineTarget = _currentCameraPosition.target;
-        _updatePolyline(
-            _currentCameraPosition.target, MapConstants.qiblaPosition);
-      }
     });
   }
 
@@ -538,7 +603,7 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
               compassEnabled: true,
               rotateGesturesEnabled: false,
               myLocationButtonEnabled: false,
-              polylines: _polylines,
+              polylines: _polylineManager.polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
               initialCameraPosition: _currentCameraPosition,
@@ -595,21 +660,9 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              FloatingActionButton(
-                heroTag: 'mapTypeToggle',
-                elevation: 0,
-                onPressed: () => <void>{
-                  setState(() {
-                    _currentMapType = (_currentMapType == MapType.normal)
-                        ? MapType.hybrid
-                        : MapType.normal;
-                  })
-                },
-                child: const Icon(
-                  TablerIcons.map,
-                  size: AppDimensions.iconSizeLg,
-                  semanticLabel: 'Toggle map type',
-                ),
+              BottomBarWidgets.buildMapTypeFab(
+                currentType: _currentMapType,
+                onToggle: (MapType type) => setState(() => _currentMapType = type),
               ),
               Expanded(
                 child: Padding(
@@ -622,41 +675,13 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-              FloatingActionButton(
-                heroTag: 'centerMapToUser',
-                elevation: 0,
-                backgroundColor: _locationTrackingMode == LocationTrackingMode.rotating
-                    ? Theme.of(context).colorScheme.primary
-                    : null,
-                foregroundColor: _locationTrackingMode == LocationTrackingMode.rotating
-                    ? Theme.of(context).colorScheme.onPrimary
-                    : null,
-                onPressed: _enableLocationButton
-                    ? () async => _onLocationFabPressed()
-                    : null,
-                child: AnimatedBuilder(
-                  animation: _compassNeedleAnimation,
-                  builder: (BuildContext context, Widget? child) {
-                    // Only animate needle when compass is available AND in centered mode
-                    final double rotation =
-                        (_locationTrackingMode == LocationTrackingMode.centered &&
-                                _isCompassAvailable)
-                            ? _compassNeedleAnimation.value
-                            : 0;
-                    return Transform.rotate(
-                      angle: rotation,
-                      child: Icon(
-                        _locationTrackingMode == LocationTrackingMode.idle
-                            ? TablerIcons.current_location
-                            : (_isCompassAvailable
-                                ? TablerIcons.compass
-                                : TablerIcons.current_location),
-                        size: AppDimensions.iconSizeLg,
-                        semanticLabel: 'Center map to current location',
-                      ),
-                    );
-                  },
-                ),
+              BottomBarWidgets.buildLocationFab(
+                context: context,
+                trackingMode: _locationTrackingMode,
+                isCompassAvailable: _isCompassAvailable,
+                enabled: _enableLocationButton,
+                needleAnimation: _compassNeedleAnimation,
+                onPressed: _onLocationFabPressed,
               ),
             ],
           ),
