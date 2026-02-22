@@ -1,6 +1,6 @@
 part of 'map_page.dart';
 
-class MapPageState extends State<MapPage> {
+class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   // State Declaration and Variables
 
   late GoogleMapController mapController;
@@ -26,10 +26,83 @@ class MapPageState extends State<MapPage> {
   bool _pendingBearingReset = false; // Deferred bearing reset after drag exit from rotation mode
   LatLng? _lastPolylineTarget; // Track last polyline position to avoid redraws on bearing changes
 
+  // Compass needle animation for FAB icon
+  late AnimationController _compassNeedleController;
+  late Animation<double> _compassNeedleAnimation;
+
+  // Compass heading state (replaces StreamBuilder)
+  bool _compassHardwareAvailable = false;
+  double _currentHeading = 0;
+  StreamSubscription<CompassEvent>? _compassHeadingSubscription;
+
+  // Computed property: compass is available only if enabled AND hardware works
+  bool get _isCompassAvailable => _compassEnabled && _compassHardwareAvailable;
+
   @override
   void initState() {
     super.initState();
     _loadCompassSetting();
+
+    _compassNeedleController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+
+    _compassNeedleAnimation = TweenSequence<double>(<TweenSequenceItem<double>>[
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: 0, end: 45 * (pi / 180))
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 100,
+      ),
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: 45 * (pi / 180), end: -120 * (pi / 180))
+            .chain(CurveTween(curve: Curves.easeInOut)),
+        weight: 80,
+      ),
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: -120 * (pi / 180), end: 0)
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 100,
+      ),
+    ]).animate(_compassNeedleController);
+
+    // Loop animation with 2-second pause (only when compass available)
+    _compassNeedleController.addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed &&
+          _locationTrackingMode == LocationTrackingMode.centered &&
+          _isCompassAvailable) {
+        Future<void>.delayed(const Duration(seconds: 2), () {
+          if (_locationTrackingMode == LocationTrackingMode.centered &&
+              _isCompassAvailable &&
+              mounted) {
+            unawaited(_compassNeedleController.forward(from: 0));
+          }
+        });
+      }
+    });
+
+    // Compass heading subscription (replaces StreamBuilder)
+    _compassHeadingSubscription = FlutterCompass.events?.listen(
+      (CompassEvent event) {
+        final bool hasHeading = event.heading != null;
+        final double heading = event.heading ?? 0;
+
+        // Only rebuild if values changed
+        if (hasHeading != _compassHardwareAvailable || heading != _currentHeading) {
+          setState(() {
+            _compassHardwareAvailable = hasHeading;
+            _currentHeading = heading;
+          });
+        }
+      },
+      onError: (_) {
+        if (_compassHardwareAvailable) {
+          setState(() {
+            _compassHardwareAvailable = false;
+          });
+        }
+      },
+    );
   }
 
   void _loadCompassSetting() async {
@@ -41,6 +114,8 @@ class MapPageState extends State<MapPage> {
 
   @override
   void dispose() {
+    _compassNeedleController.dispose();
+    unawaited(_compassHeadingSubscription?.cancel());
     unawaited(_compassSubscription?.cancel());
     super.dispose();
   }
@@ -84,6 +159,11 @@ class MapPageState extends State<MapPage> {
         _enableLocationButton = true;
         _locationTrackingMode = LocationTrackingMode.centered;
       });
+
+      // Play compass needle animation (only when compass available)
+      if (_isCompassAvailable) {
+        unawaited(_compassNeedleController.forward(from: 0));
+      }
     } catch (e, stackTrace) {
       setState(() {
         _centerConsoleState = CenterConsoleState.idle;
@@ -102,7 +182,7 @@ class MapPageState extends State<MapPage> {
   }
 
   void _enableRotationMode() {
-    if (userLocation == null || !_compassEnabled) return;
+    if (userLocation == null || !_isCompassAvailable) return;
 
     setState(() {
       _zoomBeforeRotation = _currentCameraPosition.zoom;
@@ -155,6 +235,11 @@ class MapPageState extends State<MapPage> {
           stillCentered ? LocationTrackingMode.centered : LocationTrackingMode.idle;
       _lastAppliedBearing = 0.0;
     });
+
+    // Play compass needle animation when returning to centered mode (only when compass available)
+    if (stillCentered && _isCompassAvailable) {
+      unawaited(_compassNeedleController.forward(from: 0));
+    }
   }
 
   bool _isCenteredOnUserLocation() {
@@ -244,13 +329,18 @@ class MapPageState extends State<MapPage> {
           CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
     );
 
+    final bool isCentered = coordinates == userLocation;
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _enableLocationButton = true;
-      _locationTrackingMode = coordinates == userLocation
-          ? LocationTrackingMode.centered
-          : LocationTrackingMode.idle;
+      _locationTrackingMode =
+          isCentered ? LocationTrackingMode.centered : LocationTrackingMode.idle;
     });
+
+    // Play compass needle animation when centered on user location (only when compass available)
+    if (isCentered && _isCompassAvailable) {
+      unawaited(_compassNeedleController.forward(from: 0));
+    }
   }
 
   Future<Position> _determinePosition() async {
@@ -363,8 +453,9 @@ class MapPageState extends State<MapPage> {
 
     setState(() {
       _isCameraMoving = true;
-      // Don't clear polylines in rotation mode - we're only changing bearing, not position
-      if (_locationTrackingMode != LocationTrackingMode.rotating) {
+      // Only clear polylines on user-initiated moves (not programmatic or rotation mode)
+      if (_locationTrackingMode != LocationTrackingMode.rotating &&
+          !_isProgrammaticCameraMove) {
         _polylines.clear();
       }
     });
@@ -457,44 +548,17 @@ class MapPageState extends State<MapPage> {
               onCameraIdle: _onCameraIdle,
             ),
             Center(
-              child: _compassEnabled
-                  ? StreamBuilder<CompassEvent>(
-                      stream: FlutterCompass.events,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<CompassEvent> snapshot) {
-                        if (snapshot.hasError) {
-                          return Icon(
-                            TablerIcons.circle_dot,
-                            size: AppDimensions.iconSizeLg,
-                            color: Colors.black,
-                          );
-                        }
-
-                        if (snapshot.connectionState == ConnectionState.waiting ||
-                            !snapshot.hasData) {
-                          return Icon(
-                            TablerIcons.circle_dot,
-                            size: AppDimensions.iconSizeLg,
-                            color: Colors.black,
-                          );
-                        }
-
-                        double heading = snapshot.data!.heading ?? 0;
-                        // In rotation mode, icon doesn't rotate - map does
-                        double iconRotation =
-                            _locationTrackingMode == LocationTrackingMode.rotating
-                                ? 0
-                                : heading * (pi / 180);
-                        return Transform.rotate(
-                          angle: iconRotation,
-                          child: UserLocationIcon(
-                            primaryColor:
-                                _locationTrackingMode != LocationTrackingMode.idle
-                                    ? Colors.blueAccent
-                                    : Colors.blueGrey,
-                          ),
-                        );
-                      },
+              child: _isCompassAvailable
+                  ? Transform.rotate(
+                      angle: _locationTrackingMode == LocationTrackingMode.rotating
+                          ? 0
+                          : _currentHeading * (pi / 180),
+                      child: UserLocationIcon(
+                        primaryColor:
+                            _locationTrackingMode != LocationTrackingMode.idle
+                                ? Colors.blueAccent
+                                : Colors.blueGrey,
+                      ),
                     )
                   : Icon(
                       TablerIcons.circle_dot,
@@ -570,12 +634,28 @@ class MapPageState extends State<MapPage> {
                 onPressed: _enableLocationButton
                     ? () async => _onLocationFabPressed()
                     : null,
-                child: Icon(
-                  _locationTrackingMode != LocationTrackingMode.idle
-                      ? TablerIcons.compass
-                      : TablerIcons.current_location,
-                  size: AppDimensions.iconSizeLg,
-                  semanticLabel: 'Center map to current location',
+                child: AnimatedBuilder(
+                  animation: _compassNeedleAnimation,
+                  builder: (BuildContext context, Widget? child) {
+                    // Only animate needle when compass is available AND in centered mode
+                    final double rotation =
+                        (_locationTrackingMode == LocationTrackingMode.centered &&
+                                _isCompassAvailable)
+                            ? _compassNeedleAnimation.value
+                            : 0;
+                    return Transform.rotate(
+                      angle: rotation,
+                      child: Icon(
+                        _locationTrackingMode == LocationTrackingMode.idle
+                            ? TablerIcons.current_location
+                            : (_isCompassAvailable
+                                ? TablerIcons.compass
+                                : TablerIcons.current_location),
+                        size: AppDimensions.iconSizeLg,
+                        semanticLabel: 'Center map to current location',
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
