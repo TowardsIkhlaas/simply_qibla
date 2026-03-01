@@ -10,7 +10,7 @@ import 'package:simply_qibla/styles/style.dart';
 import 'package:simply_qibla/theme/theme.dart';
 import 'package:simply_qibla/widgets/link_icon_button.dart';
 
-void showInfoModal(BuildContext context, String version, String buildNumber) {
+void showAboutModal(BuildContext context, String version, String buildNumber) {
   showAboutDialog(
     context: context,
     applicationName: AppLocalizations.of(context)!.appNamePascalCase,
@@ -67,14 +67,6 @@ Widget _buildButtonColumn(BuildContext context) {
           },
           labelText: AppLocalizations.of(context)!.shareButtonText,
           icon: Platform.isIOS ? TablerIcons.share_2 : TablerIcons.share,
-        ),
-        _buildLinkIconButton(
-          onPressed: () async =>
-              launchUrlHelper(Uri.parse(AppStrings.donateUriPath)),
-          labelText: AppLocalizations.of(context)!.donateButtonText,
-          icon: TablerIcons.coffee,
-          foregroundColor: AppThemes.donationServicePrimaryColor,
-          backgroundColor: AppThemes.donationServiceSecondaryColor,
         ),
         _buildLinkIconButton(
           onPressed: () async =>

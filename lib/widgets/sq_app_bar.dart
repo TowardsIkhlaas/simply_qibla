@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:simply_qibla/styles/style.dart';
-import 'package:simply_qibla/widgets/info_button.dart';
+import 'package:simply_qibla/widgets/settings_button.dart';
 import 'package:simply_qibla/widgets/sq_app_bar_title.dart';
 
 class SQAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const SQAppBar({super.key});
+  const SQAppBar({
+    super.key,
+    this.onCompassSettingChanged,
+    this.onThemeChanged,
+    this.onColorChanged,
+  });
+
+  final VoidCallback? onCompassSettingChanged;
+  final ValueChanged<String>? onThemeChanged;
+  final ValueChanged<String>? onColorChanged;
 
   @override
   Size get preferredSize => const Size.fromHeight(AppDimensions.appBarPreferredSize);
@@ -18,10 +27,14 @@ class SQAppBar extends StatelessWidget implements PreferredSizeWidget {
           elevation: 0.0,
           title: const SQAppBarTitle(),
           titleSpacing: AppPadding.standard,
-          actions: const <Widget>[
+          actions: <Widget>[
             Padding(
-              padding: EdgeInsets.only(right: AppPadding.appBarActionRight),
-              child: InfoButton(),
+              padding: const EdgeInsets.only(right: AppPadding.appBarActionRight),
+              child: SettingsButton(
+                onCompassSettingChanged: onCompassSettingChanged,
+                onThemeChanged: onThemeChanged,
+                onColorChanged: onColorChanged,
+              ),
             )
           ],
         ),

@@ -13,6 +13,20 @@ class MapConstants {
   );
 }
 
+enum LocationTrackingMode {
+  idle, // Default - map not following user
+  centered, // Map centered on user, not rotating
+  rotating, // Map rotating with compass heading
+}
+
+class CompassConstants {
+  static const double bearingThreshold = 1.5; // Min degrees to trigger update
+  static const int updateIntervalMs = 16; // ~60 fps max
+  static const double rotationZoomLevel = 20.0; // Fixed zoom level in rotation mode
+  static const double positionThreshold = 0.00001; // ~1 meter, for polyline redraw
+  static const double dragDetectionThreshold = 0.0001; // ~11 meters, for drag detection in rotation mode
+}
+
 enum CenterConsoleState {
   centering,
   dragging,
@@ -24,7 +38,6 @@ class AppStrings {
 
   static const String githubUriPath =
       'https://github.com/TowardsIkhlaas/simply_qibla/blob/master/.github/CONTRIBUTING.md';
-  static const String donateUriPath = 'https://ko-fi.com/TowardsIkhlaas';
   static const String socialInstagramUriPath = 'https://www.instagram.com/towardsikhlaas';
   static const String shareContentText =
       'As salaam alaykum warahmatullahi wabarakatuh! Check out this beautiful and accurate Qibla app';

@@ -242,23 +242,17 @@ abstract class AppLocalizations {
   /// **'JazakAllahu Khayran for using this app!'**
   String get thankYouText;
 
-  /// Appeal asking users to support the app through donations, mentioning that excess funds will be donated to charity.
+  /// Appeal asking users to follow the project through social buttons.
   ///
   /// In en, this message translates to:
-  /// **'This app costs to run and maintain (Google Maps API). Please consider supporting the project through the buttons below (excess amounts will be donated to registered charities).'**
+  /// **'Please follow us through the buttons below.'**
   String get supportAppealText;
 
-  /// Button text that directs users to GitHub to support the project.
+  /// Button text that directs users to GitHub to star the project.
   ///
   /// In en, this message translates to:
-  /// **'Support us on GitHub'**
+  /// **'Star us on GitHub'**
   String get githubButtonText;
-
-  /// Button text that directs users to Ko-Fi to support the project.
-  ///
-  /// In en, this message translates to:
-  /// **'Support us on Ko-Fi'**
-  String get donateButtonText;
 
   /// Button text encouraging users to follow the project on Instagram.
   ///
@@ -311,8 +305,140 @@ abstract class AppLocalizations {
   /// Body text encouraging users to support the project and explaining how donations will be used.
   ///
   /// In en, this message translates to:
-  /// **'SimplyQibla is ad-free and open-source. If you like what you see, please support us through the in-app links. Your support will be used to run the app, and excess will be donated to registered charities.'**
+  /// **'SimplyQibla is ad-free and open-source. If you like what you see, please follow us through the in-app links. JazakAllahu Khayran!'**
   String get onboardingSupportBody;
+
+  /// Title for the settings modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// Toggle label for enabling/disabling the compass in settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass'**
+  String get settingsCompassToggle;
+
+  /// Button text to open the about dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutButtonText;
+
+  /// Label for the theme setting in settings modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeLabel;
+
+  /// Option to follow system theme.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// Light theme option.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// Dark theme option.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// Label for the color setting in settings modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get settingsColorLabel;
+
+  /// Default color scheme option.
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get colorDefault;
+
+  /// Dynamic color scheme option (Material You).
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic'**
+  String get colorDynamic;
+
+  /// Green color theme inspired by Madinah.
+  ///
+  /// In en, this message translates to:
+  /// **'Madinah'**
+  String get colorMadinah;
+
+  /// Blue color theme inspired by Al-Aqsa.
+  ///
+  /// In en, this message translates to:
+  /// **'Al-Aqsa'**
+  String get colorAqsa;
+
+  /// Title for What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Fresh Updates for You!'**
+  String get whatsNewTitle;
+
+  /// Section header for new features in What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'New Features'**
+  String get whatsNewNewFeatures;
+
+  /// Section header for improvements in What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Improvements'**
+  String get whatsNewImprovements;
+
+  /// Section header for bug fixes in What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Bug Fixes'**
+  String get whatsNewBugFixes;
+
+  /// Button text to dismiss What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Bismillah!'**
+  String get whatsNewGotIt;
+
+  /// Release note for compass rotation feature.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass-based map rotation mode'**
+  String get whatsNewFeatureCompassRotation;
+
+  /// Release note for new color themes.
+  ///
+  /// In en, this message translates to:
+  /// **'New color themes: Madinah & Al-Aqsa'**
+  String get whatsNewFeatureColorThemes;
+
+  /// Release note for polyline improvement.
+  ///
+  /// In en, this message translates to:
+  /// **'Smoother Qibla direction line'**
+  String get whatsNewImprovementPolyline;
+
+  /// Release note for compass toggle option.
+  ///
+  /// In en, this message translates to:
+  /// **'Option to enable or disable compass'**
+  String get whatsNewImprovementCompassToggle;
+
+  /// Release note for general improvements.
+  ///
+  /// In en, this message translates to:
+  /// **'General improvements'**
+  String get whatsNewImprovementGeneral;
 }
 
 class _AppLocalizationsDelegate

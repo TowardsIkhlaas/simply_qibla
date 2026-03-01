@@ -50,7 +50,7 @@ class _CoordinatesFormBarState extends State<CoordinatesFormBar> {
           Expanded(
             child: SizedBox(
               height: AppDimensions.pillBarSize,
-              child: ElevatedButton.icon(
+              child: FilledButton.tonalIcon(
                 icon: const Icon(
                   TablerIcons.search,
                   size: AppDimensions.iconSizeSm,

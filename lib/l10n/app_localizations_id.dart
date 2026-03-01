@@ -79,14 +79,10 @@ class AppLocalizationsId extends AppLocalizations {
       'JazakAllahu Khayran telah menggunakan aplikasi ini!';
 
   @override
-  String get supportAppealText =>
-      'Aplikasi ini memerlukan biaya untuk dijalankan dan dipelihara (Google Maps API). Mohon pertimbangkan untuk mendukung proyek ini melalui tombol di bawah (dana lebih akan disumbangkan ke badan amal terdaftar).';
+  String get supportAppealText => 'Silakan ikuti kami melalui tombol di bawah.';
 
   @override
-  String get githubButtonText => 'Dukung kami di GitHub';
-
-  @override
-  String get donateButtonText => 'Dukung kami di Ko-Fi';
+  String get githubButtonText => 'Beri kami bintang di GitHub';
 
   @override
   String get socialInstagramButtonText => 'Ikuti kami di Instagram';
@@ -117,5 +113,73 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingSupportBody =>
-      'SimplyQibla bebas iklan dan bersumber terbuka. Jika Anda menyukai aplikasi ini, mohon dukung melalui tautan dalam aplikasi. Dukungan Anda akan digunakan untuk menjalankan aplikasi, dan kelebihannya akan disumbangkan ke badan amal terdaftar.';
+      'SimplyQibla bebas iklan dan bersumber terbuka. Jika Anda menyukai aplikasi ini, mohon ikuti kami melalui tautan dalam aplikasi. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Pengaturan';
+
+  @override
+  String get settingsCompassToggle => 'Kompas';
+
+  @override
+  String get aboutButtonText => 'Tentang';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get themeSystem => 'Sistem';
+
+  @override
+  String get themeLight => 'Terang';
+
+  @override
+  String get themeDark => 'Gelap';
+
+  @override
+  String get settingsColorLabel => 'Warna';
+
+  @override
+  String get colorDefault => 'Bawaan';
+
+  @override
+  String get colorDynamic => 'Dinamis';
+
+  @override
+  String get colorMadinah => 'Madinah';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Pembaruan Terbaru untuk Anda!';
+
+  @override
+  String get whatsNewNewFeatures => 'Fitur Baru';
+
+  @override
+  String get whatsNewImprovements => 'Peningkatan';
+
+  @override
+  String get whatsNewBugFixes => 'Perbaikan Bug';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Mode rotasi peta berbasis kompas';
+
+  @override
+  String get whatsNewFeatureColorThemes => 'Tema warna baru: Madinah & Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline => 'Garis arah kiblat lebih halus';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Opsi untuk mengaktifkan atau menonaktifkan kompas';
+
+  @override
+  String get whatsNewImprovementGeneral => 'Peningkatan umum';
 }

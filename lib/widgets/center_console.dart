@@ -20,6 +20,7 @@ class CenterConsole extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     Color consoleColor;
     String text;
     int distanceAway = calculateDistance(
@@ -37,7 +38,7 @@ class CenterConsole extends StatelessWidget {
         text = AppLocalizations.of(context)!.centerConsoleDraggingText;
         break;
       case CenterConsoleState.idle:
-        consoleColor = Theme.of(context).colorScheme.primaryContainer;
+        consoleColor = colorScheme.primary;
         text =
             '$formattedDistance ${AppLocalizations.of(context)!.centerConsoleIdleText}';
         break;

@@ -79,13 +79,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get supportAppealText =>
-      'Diese App verursacht Kosten für Betrieb und Wartung (Google Maps API). Bitte unterstützen Sie das Projekt über die untenstehenden Buttons (überschüssige Beträge werden an registrierte Wohltätigkeitsorganisationen gespendet).';
+      'Bitte folgen Sie uns über die Schaltflächen unten.';
 
   @override
-  String get githubButtonText => 'Support auf GitHub';
-
-  @override
-  String get donateButtonText => 'Support auf Ko-Fi';
+  String get githubButtonText => 'Bewerten Sie uns auf GitHub';
 
   @override
   String get socialInstagramButtonText => 'Folgen Sie uns auf Instagram';
@@ -117,5 +114,73 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingSupportBody =>
-      'SimplyQibla ist werbefrei und Open-Source. Wenn Ihnen gefällt, was Sie sehen, unterstützen Sie uns bitte über die In-App-Links. Ihre Unterstützung wird verwendet, um die App zu betreiben, und Überschüsse werden an registrierte Wohltätigkeitsorganisationen gespendet.';
+      'SimplyQibla ist werbefrei und Open-Source. Wenn Ihnen gefällt, was Sie sehen, folgen Sie uns bitte über die In-App-Links. JazakAllahu Khayran!';
+
+  @override
+  String get settingsTitle => 'Einstellungen';
+
+  @override
+  String get settingsCompassToggle => 'Kompass';
+
+  @override
+  String get aboutButtonText => 'Über';
+
+  @override
+  String get settingsThemeLabel => 'Design';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Hell';
+
+  @override
+  String get themeDark => 'Dunkel';
+
+  @override
+  String get settingsColorLabel => 'Farbe';
+
+  @override
+  String get colorDefault => 'Standard';
+
+  @override
+  String get colorDynamic => 'Dynamisch';
+
+  @override
+  String get colorMadinah => 'Medina';
+
+  @override
+  String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Frische Updates für dich!';
+
+  @override
+  String get whatsNewNewFeatures => 'Neue Funktionen';
+
+  @override
+  String get whatsNewImprovements => 'Verbesserungen';
+
+  @override
+  String get whatsNewBugFixes => 'Fehlerbehebungen';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Kompassbasierter Kartenrotationsmodus';
+
+  @override
+  String get whatsNewFeatureColorThemes => 'Neue Farbthemen: Medina & Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline => 'Glattere Qibla-Richtungslinie';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Option zum Aktivieren oder Deaktivieren des Kompasses';
+
+  @override
+  String get whatsNewImprovementGeneral => 'Allgemeine Verbesserungen';
 }
