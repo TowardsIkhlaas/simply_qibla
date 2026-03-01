@@ -8,17 +8,22 @@ class SQAppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color iconColor =
+        Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.white;
+    final Color textColor =
+        Theme.of(context).appBarTheme.titleTextStyle?.color ?? Colors.white;
+
     return Row(
       children: <Widget>[
-        const Icon(
+        Icon(
           TablerIcons.location,
           size: AppDimensions.iconSizeLg,
-          color: Colors.white,
+          color: iconColor,
         ),
         Text(
           AppLocalizations.of(context)!.appNamePascalCase,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Colors.white,
+                color: textColor,
               ),
         )
       ],

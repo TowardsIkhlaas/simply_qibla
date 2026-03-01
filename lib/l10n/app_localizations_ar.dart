@@ -77,14 +77,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thankYouText => 'جزاك الله خيرًا لاستخدامك هذا التطبيق!';
 
   @override
-  String get supportAppealText =>
-      'يتطلب تشغيل هذا التطبيق وصيانته (Google Maps API). يرجى النظر في دعم المشروع من خلال الأزرار أدناه (سيتم التبرع بالمبالغ الزائدة للجمعيات الخيرية المسجلة).';
+  String get supportAppealText => 'يرجى متابعتنا من خلال الأزرار أدناه.';
 
   @override
-  String get githubButtonText => 'ادعمنا على GitHub';
-
-  @override
-  String get donateButtonText => 'ادعمنا على Ko-Fi';
+  String get githubButtonText => 'قيمنا بنجمة على GitHub';
 
   @override
   String get socialInstagramButtonText => 'تابعنا على Instagram';
@@ -115,5 +111,78 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingSupportBody =>
-      'سمبلي قبلة خالي من الإعلانات ومفتوح المصدر. إذا أعجبك ما تراه، يرجى دعمنا من خلال الروابط داخل التطبيق. سيتم استخدام دعمك لتشغيل التطبيق، وسيتم التبرع بالفائض للجمعيات الخيرية المسجلة.';
+      'سمبلي قبلة خالي من الإعلانات ومفتوح المصدر. إذا أعجبك ما تراه، يرجى متابعتنا من خلال الروابط داخل التطبيق. جزاك الله خيرًا!';
+
+  @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get settingsCompassToggle => 'البوصلة';
+
+  @override
+  String get aboutButtonText => 'حول';
+
+  @override
+  String get settingsThemeLabel => 'المظهر';
+
+  @override
+  String get themeSystem => 'النظام';
+
+  @override
+  String get themeLight => 'فاتح';
+
+  @override
+  String get themeDark => 'داكن';
+
+  @override
+  String get settingsColorLabel => 'اللون';
+
+  @override
+  String get colorDefault => 'افتراضي';
+
+  @override
+  String get colorDynamic => 'ديناميكي';
+
+  @override
+  String get colorMadinah => 'المدينة';
+
+  @override
+  String get colorAqsa => 'الأقصى';
+
+  @override
+  String get whatsNewTitle => 'تحديثات جديدة لك!';
+
+  @override
+  String get whatsNewNewFeatures => 'ميزات جديدة';
+
+  @override
+  String get whatsNewImprovements => 'تحسينات';
+
+  @override
+  String get whatsNewBugFixes => 'إصلاحات';
+
+  @override
+  String get whatsNewGotIt => 'بسم الله!';
+
+  @override
+  String get whatsNewFeatureCompassRotation => 'وضع تدوير الخريطة بالبوصلة';
+
+  @override
+  String get whatsNewFeatureColorThemes => 'ألوان جديدة: المدينة والأقصى';
+
+  @override
+  String get whatsNewImprovementPolyline => 'خط اتجاه القبلة أكثر سلاسة';
+
+  @override
+  String get whatsNewImprovementCompassToggle => 'خيار تفعيل أو تعطيل البوصلة';
+
+  @override
+  String get whatsNewImprovementGeneral => 'تحسينات عامة';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'دعم الوضع الفاتح والداكن';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'تحسين التباين في صفحة التعريف للمظاهر المختلفة';
 }

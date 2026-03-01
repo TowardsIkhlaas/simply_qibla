@@ -48,5 +48,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Generated fastlane changelogs (keep only default.txt)
+# Generated fastlane files
 android/fastlane/metadata/android/*/changelogs/[0-9]*.txt
+ios/fastlane/README.md
+ios/fastlane/report.xml

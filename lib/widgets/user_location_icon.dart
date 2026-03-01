@@ -30,7 +30,7 @@ class LocationIconPainter extends CustomPainter {
     // Draw direction cone with adjusted dimensions
     final ui.Path conePath = Path();
     final double coneWidth = size.width;
-    final double coneHeight = size.height * 0.8;
+    final double coneHeight = size.height * 0.7;
     final double coneYOffset = size.height * 0.20;
 
     conePath.moveTo(center.dx, center.dy - coneHeight / 2 + coneYOffset);
@@ -73,7 +73,7 @@ class LocationIconPainter extends CustomPainter {
     canvas.drawCircle(center, outerCircleRadius, outerCirclePaint);
 
     // Draw inner colored circle
-    final double innerCircleRadius = size.width * 0.13;
+    final double innerCircleRadius = size.width * 0.15;
     final ui.Paint innerCirclePaint = Paint()
       ..color = primaryColor
       ..style = PaintingStyle.fill;

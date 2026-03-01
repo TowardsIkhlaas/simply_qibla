@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
@@ -13,6 +14,8 @@ import 'package:simply_qibla/pages/onboarding_page.dart';
 import 'package:simply_qibla/theme/theme.dart';
 
 bool hasSeenOnboarding = false;
+String initialThemeMode = 'system';
+String initialColorMode = 'default';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,24 +35,90 @@ Future<void> main() async {
   }
 
   hasSeenOnboarding = await getOnboardingStatus();
+  initialThemeMode = await getThemeMode();
+  initialColorMode = await getColorMode();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late String _themeMode;
+  late String _colorMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeMode = initialThemeMode;
+    _colorMode = initialColorMode;
+  }
+
+  ThemeMode _getThemeMode() {
+    switch (_themeMode) {
+      case 'light':
+        return ThemeMode.light;
+      case 'dark':
+        return ThemeMode.dark;
+      default:
+        return ThemeMode.system;
+    }
+  }
+
+  void _onThemeChanged(String mode) {
+    setState(() {
+      _themeMode = mode;
+    });
+  }
+
+  void _onColorChanged(String mode) {
+    setState(() {
+      _colorMode = mode;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateTitle: (BuildContext context) {
-        return AppLocalizations.of(context)!.appNamePascalCase;
+    final AppColorTheme colorTheme = AppColorTheme.fromKey(_colorMode);
+
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        // Only pass dynamic colors when on Android and dynamic theme is selected
+        final bool useDynamicColor =
+            Platform.isAndroid && colorTheme == AppColorTheme.dynamic;
+        final ColorScheme? effectiveLightDynamic =
+            useDynamicColor ? lightDynamic : null;
+        final ColorScheme? effectiveDarkDynamic =
+            useDynamicColor ? darkDynamic : null;
+
+        return MaterialApp(
+          onGenerateTitle: (BuildContext context) {
+            return AppLocalizations.of(context)!.appNamePascalCase;
+          },
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          themeMode: _getThemeMode(),
+          theme: AppThemes.buildLightTheme(
+            effectiveLightDynamic,
+            colorTheme: colorTheme,
+          ),
+          darkTheme: AppThemes.buildDarkTheme(
+            effectiveDarkDynamic,
+            colorTheme: colorTheme,
+          ),
+          home: hasSeenOnboarding
+              ? MapPage(
+                  onThemeChanged: _onThemeChanged,
+                  onColorChanged: _onColorChanged,
+                )
+              : const OnboardingPage(),
+          scaffoldMessengerKey: snackbarKey,
+        );
       },
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      themeMode: ThemeMode.dark,
-      darkTheme: AppThemes.darkTheme,
-      home: hasSeenOnboarding ? const MapPage() : const OnboardingPage(),
-      scaffoldMessengerKey: snackbarKey,
     );
   }
 }

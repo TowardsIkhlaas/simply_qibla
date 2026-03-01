@@ -1,6 +1,107 @@
 part of 'map_page.dart';
 
-class MapPageState extends State<MapPage> {
+/// Manages polyline creation and clearing on the map.
+class PolylineManager {
+  static const String _polylineId = 'polyline_center_to_qibla';
+
+  final Set<Polyline> _polylines = <Polyline>{};
+  LatLng? _lastTarget;
+
+  Set<Polyline> get polylines => _polylines;
+
+  bool hasPositionChangedSignificantly(LatLng newTarget) {
+    if (_lastTarget == null) return true;
+    final double latDiff = (newTarget.latitude - _lastTarget!.latitude).abs();
+    final double lngDiff = (newTarget.longitude - _lastTarget!.longitude).abs();
+    return latDiff > CompassConstants.positionThreshold ||
+        lngDiff > CompassConstants.positionThreshold;
+  }
+
+  void updatePolyline(LatLng from) {
+    _lastTarget = from;
+    final Polyline polyline = Polyline(
+      polylineId: const PolylineId(_polylineId),
+      width: MapConstants.polylineWidth,
+      color: Colors.amber,
+      points: <LatLng>[from, MapConstants.qiblaPosition],
+      geodesic: true,
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
+    );
+    _polylines
+      ..removeWhere((Polyline p) => p.polylineId.value == _polylineId)
+      ..add(polyline);
+  }
+
+  void clear() {
+    _polylines.clear();
+  }
+}
+
+/// Factory methods for bottom bar widgets.
+class BottomBarWidgets {
+  static Widget buildMapTypeFab({
+    required MapType currentType,
+    required ValueChanged<MapType> onToggle,
+  }) {
+    return FloatingActionButton(
+      heroTag: 'mapTypeToggle',
+      elevation: 0,
+      onPressed: () => onToggle(
+        currentType == MapType.normal ? MapType.hybrid : MapType.normal,
+      ),
+      child: const Icon(
+        TablerIcons.map,
+        size: AppDimensions.iconSizeLg,
+        semanticLabel: 'Toggle map type',
+      ),
+    );
+  }
+
+  static Widget buildLocationFab({
+    required BuildContext context,
+    required LocationTrackingMode trackingMode,
+    required bool isCompassAvailable,
+    required bool enabled,
+    required Animation<double> needleAnimation,
+    required VoidCallback onPressed,
+  }) {
+    return FloatingActionButton(
+      heroTag: 'centerMapToUser',
+      elevation: 0,
+      backgroundColor: trackingMode == LocationTrackingMode.rotating
+          ? Theme.of(context).colorScheme.primary
+          : null,
+      foregroundColor: trackingMode == LocationTrackingMode.rotating
+          ? Theme.of(context).colorScheme.onPrimary
+          : null,
+      onPressed: enabled ? onPressed : null,
+      child: AnimatedBuilder(
+        animation: needleAnimation,
+        builder: (BuildContext context, Widget? child) {
+          final double rotation =
+              (trackingMode == LocationTrackingMode.centered && isCompassAvailable)
+                  ? needleAnimation.value
+                  : 0;
+          return Transform.rotate(
+            angle: rotation,
+            child: Icon(
+              trackingMode == LocationTrackingMode.idle
+                  ? TablerIcons.current_location
+                  : (isCompassAvailable
+                      ? TablerIcons.compass
+                      : TablerIcons.current_location),
+              size: AppDimensions.iconSizeLg,
+              semanticLabel: 'Center map to current location',
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   // State Declaration and Variables
 
   late GoogleMapController mapController;
@@ -8,13 +109,274 @@ class MapPageState extends State<MapPage> {
   MapType _currentMapType = MapType.normal;
   bool _isCameraMoving = false;
   bool _enableLocationButton = true;
-  bool _isMapCenteredOnUser = false;
+  bool _compassEnabled = true;
   CenterConsoleState _centerConsoleState = CenterConsoleState.idle;
-  final Set<Polyline> _polylines = <Polyline>{};
+  final PolylineManager _polylineManager = PolylineManager();
   CameraPosition _currentCameraPosition = const CameraPosition(
     target: MapConstants.defaultPosition,
     zoom: MapConstants.zoomLevel,
   );
+
+  // Location tracking state
+  LocationTrackingMode _locationTrackingMode = LocationTrackingMode.idle;
+  StreamSubscription<CompassEvent>? _compassSubscription;
+  double _lastAppliedBearing = 0.0;
+  DateTime _lastBearingUpdateTime = DateTime.now();
+  double _zoomBeforeRotation = MapConstants.zoomLevel;
+  bool _isProgrammaticCameraMove = false;
+  bool _pendingBearingReset = false; // Deferred bearing reset after drag exit from rotation mode
+
+  // Compass needle animation for FAB icon
+  late AnimationController _compassNeedleController;
+  late Animation<double> _compassNeedleAnimation;
+
+  // Compass heading state (replaces StreamBuilder)
+  bool _compassHardwareAvailable = false;
+  double _currentHeading = 0;
+
+  // Computed property: compass is available only if enabled AND hardware works
+  bool get _isCompassAvailable => _compassEnabled && _compassHardwareAvailable;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCompassSetting();
+
+    _compassNeedleController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+
+    _compassNeedleAnimation = TweenSequence<double>(<TweenSequenceItem<double>>[
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: 0, end: 45 * (pi / 180))
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 100,
+      ),
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: 45 * (pi / 180), end: -120 * (pi / 180))
+            .chain(CurveTween(curve: Curves.easeInOut)),
+        weight: 80,
+      ),
+      TweenSequenceItem<double>(
+        tween: Tween<double>(begin: -120 * (pi / 180), end: 0)
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 100,
+      ),
+    ]).animate(_compassNeedleController);
+
+    // Loop animation with 2-second pause (only when compass available)
+    _compassNeedleController.addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed &&
+          _locationTrackingMode == LocationTrackingMode.centered &&
+          _isCompassAvailable) {
+        Future<void>.delayed(const Duration(seconds: 2), () {
+          if (_locationTrackingMode == LocationTrackingMode.centered &&
+              _isCompassAvailable &&
+              mounted) {
+            unawaited(_compassNeedleController.forward(from: 0));
+          }
+        });
+      }
+    });
+
+    // Unified compass subscription: updates heading for UI and applies bearing in rotation mode
+    _compassSubscription = FlutterCompass.events?.listen(
+      (CompassEvent event) {
+        final double? heading = event.heading;
+        final bool available = heading != null;
+
+        // Always update hardware availability and heading for UI
+        if (available != _compassHardwareAvailable ||
+            (heading ?? 0) != _currentHeading) {
+          setState(() {
+            _compassHardwareAvailable = available;
+            _currentHeading = heading ?? 0;
+          });
+        }
+
+        // Apply bearing only in rotation mode (with throttling)
+        if (_locationTrackingMode == LocationTrackingMode.rotating &&
+            heading != null) {
+          _applyBearingWithThrottle(heading);
+        }
+      },
+      onError: (_) {
+        if (_compassHardwareAvailable) {
+          setState(() {
+            _compassHardwareAvailable = false;
+          });
+        }
+      },
+    );
+  }
+
+  void _loadCompassSetting() async {
+    bool compassEnabled = await getCompassEnabled();
+    setState(() {
+      _compassEnabled = compassEnabled;
+    });
+  }
+
+  @override
+  void dispose() {
+    _compassNeedleController.dispose();
+    unawaited(_compassSubscription?.cancel());
+    super.dispose();
+  }
+
+  // Location Tracking Mode Methods
+
+  Future<void> _onLocationFabPressed() async {
+    switch (_locationTrackingMode) {
+      case LocationTrackingMode.idle:
+        await _centerAndTrack();
+      case LocationTrackingMode.centered:
+        _enableRotationMode();
+      case LocationTrackingMode.rotating:
+        _disableRotationMode();
+    }
+  }
+
+  Future<void> _centerAndTrack() async {
+    try {
+      setState(() {
+        _centerConsoleState = CenterConsoleState.centering;
+        _enableLocationButton = false;
+      });
+
+      Position currentLocation = await _determinePosition();
+
+      userLocation = LatLng(
+        currentLocation.latitude,
+        currentLocation.longitude,
+      );
+
+      _isProgrammaticCameraMove = true;
+      await mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: userLocation!, zoom: MapConstants.zoomLevel),
+        ),
+      );
+
+      setState(() {
+        _centerConsoleState = CenterConsoleState.idle;
+        _enableLocationButton = true;
+        _locationTrackingMode = LocationTrackingMode.centered;
+      });
+
+      // Play compass needle animation (only when compass available)
+      if (_isCompassAvailable) {
+        unawaited(_compassNeedleController.forward(from: 0));
+      }
+    } catch (e, stackTrace) {
+      setState(() {
+        _centerConsoleState = CenterConsoleState.idle;
+        _enableLocationButton = true;
+        _locationTrackingMode = LocationTrackingMode.idle;
+      });
+
+      if (!kReleaseMode) {
+        developer.log(
+          'Error getting user location: $e',
+          name: 'location.error',
+          error: stackTrace,
+        );
+      }
+    }
+  }
+
+  void _enableRotationMode() {
+    if (userLocation == null || !_isCompassAvailable) return;
+
+    setState(() {
+      _zoomBeforeRotation = _currentCameraPosition.zoom;
+      _locationTrackingMode = LocationTrackingMode.rotating;
+    });
+
+    // Zoom in for rotation mode
+    _isProgrammaticCameraMove = true;
+    unawaited(mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: userLocation!,
+          zoom: CompassConstants.rotationZoomLevel,
+          bearing: _lastAppliedBearing,
+        ),
+      ),
+    ));
+  }
+
+  void _disableRotationMode({bool deferBearingReset = false}) {
+    // Reset map bearing and zoom (defer if exiting via drag - will be done in onCameraIdle)
+    if (userLocation != null && !deferBearingReset) {
+      _isProgrammaticCameraMove = true;
+      unawaited(mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: _currentCameraPosition.target,
+            zoom: _zoomBeforeRotation,
+            bearing: 0,
+          ),
+        ),
+      ));
+    }
+
+    // Stay in centered mode if still at user location
+    final bool stillCentered = _isCenteredOnUserLocation();
+    setState(() {
+      _locationTrackingMode =
+          stillCentered ? LocationTrackingMode.centered : LocationTrackingMode.idle;
+      _lastAppliedBearing = 0.0;
+    });
+
+    // Play compass needle animation when returning to centered mode (only when compass available)
+    if (stillCentered && _isCompassAvailable) {
+      unawaited(_compassNeedleController.forward(from: 0));
+    }
+  }
+
+  bool _isCenteredOnUserLocation() {
+    if (userLocation == null) return false;
+    final double latDiff =
+        (_currentCameraPosition.target.latitude - userLocation!.latitude).abs();
+    final double lngDiff =
+        (_currentCameraPosition.target.longitude - userLocation!.longitude).abs();
+    return latDiff < CompassConstants.positionThreshold &&
+        lngDiff < CompassConstants.positionThreshold;
+  }
+
+  void _applyBearingWithThrottle(double heading) {
+    if (_locationTrackingMode != LocationTrackingMode.rotating ||
+        userLocation == null) {
+      return;
+    }
+
+    final DateTime now = DateTime.now();
+    final int elapsedMs = now.difference(_lastBearingUpdateTime).inMilliseconds;
+
+    // Time throttle
+    if (elapsedMs < CompassConstants.updateIntervalMs) return;
+
+    // Bearing threshold (handle 360° wrap)
+    double diff = (heading - _lastAppliedBearing).abs();
+    if (diff > 180) diff = 360 - diff;
+    if (diff < CompassConstants.bearingThreshold) return;
+
+    _lastAppliedBearing = heading;
+    _lastBearingUpdateTime = now;
+    _isProgrammaticCameraMove = true;
+
+    unawaited(mapController.moveCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: userLocation!,
+          zoom: _currentCameraPosition.zoom,
+          bearing: heading,
+        ),
+      ),
+    ));
+  }
 
   // Build Method
 
@@ -22,7 +384,11 @@ class MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: const SQAppBar(),
+      appBar: SQAppBar(
+        onCompassSettingChanged: _loadCompassSetting,
+        onThemeChanged: widget.onThemeChanged,
+        onColorChanged: widget.onColorChanged,
+      ),
       body: buildMapBody(context),
       bottomNavigationBar: buildBottomBar(context),
     );
@@ -38,19 +404,45 @@ class MapPageState extends State<MapPage> {
       centerMapToUserLocation();
     }
     _requestReview();
+    unawaited(_checkAndShowWhatsNew());
+  }
+
+  Future<void> _checkAndShowWhatsNew() async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final String currentVersion = packageInfo.version;
+    final String? lastSeenVersion = await getLastSeenVersion();
+
+    if (shouldShowWhatsNew(
+      hasSeenOnboarding: hasSeenOnboarding,
+      lastSeenVersion: lastSeenVersion,
+      currentVersion: currentVersion,
+    )) {
+      if (mounted) {
+        await showWhatsNewModal(context);
+        await setLastSeenVersion(currentVersion);
+      }
+    }
   }
 
   void animateToLocation(LatLng coordinates) async {
+    _isProgrammaticCameraMove = true;
     await mapController.animateCamera(
       CameraUpdate.newCameraPosition(
           CameraPosition(target: coordinates, zoom: MapConstants.zoomLevel)),
     );
 
+    final bool isCentered = coordinates == userLocation;
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _enableLocationButton = true;
-      _isMapCenteredOnUser = coordinates == userLocation;
+      _locationTrackingMode =
+          isCentered ? LocationTrackingMode.centered : LocationTrackingMode.idle;
     });
+
+    // Play compass needle animation when centered on user location (only when compass available)
+    if (isCentered && _isCompassAvailable) {
+      unawaited(_compassNeedleController.forward(from: 0));
+    }
   }
 
   Future<Position> _determinePosition() async {
@@ -99,34 +491,7 @@ class MapPageState extends State<MapPage> {
   }
 
   Future<void> centerMapToUserLocation() async {
-    try {
-      setState(() {
-        _centerConsoleState = CenterConsoleState.centering;
-        _enableLocationButton = false;
-      });
-
-      Position currentLocation = await _determinePosition();
-
-      userLocation = LatLng(
-        currentLocation.latitude,
-        currentLocation.longitude,
-      );
-
-      animateToLocation(userLocation!);
-    } catch (e, stackTrace) {
-      setState(() {
-        _centerConsoleState = CenterConsoleState.idle;
-        _enableLocationButton = true;
-      });
-
-      if (!kReleaseMode) {
-        developer.log(
-          'Error getting user location: $e',
-          name: 'location.error',
-          error: stackTrace,
-        );
-      }
-    }
+    await _centerAndTrack();
   }
 
   Future<void> _requestReview() async {
@@ -160,45 +525,87 @@ class MapPageState extends State<MapPage> {
     snackbarKey.currentState?.showSnackBar(snackBar);
   }
 
-  void _updatePolyline(LatLng from, LatLng to) {
-    const String polylineIdVal = 'polyline_center_to_qibla';
-    final Polyline polyline = Polyline(
-      polylineId: const PolylineId(polylineIdVal),
-      width: MapConstants.polylineWidth,
-      color: Colors.amber,
-      points: <LatLng>[from, to],
-      geodesic: true,
-      startCap: Cap.roundCap,
-      endCap: Cap.roundCap,
-    );
-    setState(() {
-      _polylines.removeWhere(
-          (Polyline poly) => poly.polylineId.value == polylineIdVal);
-      _polylines.add(polyline);
-    });
-  }
-
   void _onCameraMoveStarted() {
+    // If not a programmatic move and we're in centered mode, user gestured - exit to idle
+    // Note: In rotation mode, we detect drags in _onCameraMove by position change
+    if (!_isProgrammaticCameraMove &&
+        _locationTrackingMode == LocationTrackingMode.centered) {
+      setState(() {
+        _locationTrackingMode = LocationTrackingMode.idle;
+      });
+    }
+
     setState(() {
       _isCameraMoving = true;
-      _polylines.clear();
-      _isMapCenteredOnUser = false;
+      // Only clear polylines on user-initiated moves (not programmatic or rotation mode)
+      if (_locationTrackingMode != LocationTrackingMode.rotating &&
+          !_isProgrammaticCameraMove) {
+        _polylineManager.clear();
+      }
     });
   }
 
   void _onCameraMove(CameraPosition position) {
+    // In rotation mode, detect user drag by position change (not just bearing)
+    if (_locationTrackingMode == LocationTrackingMode.rotating &&
+        userLocation != null) {
+      final double latDiff =
+          (position.target.latitude - userLocation!.latitude).abs();
+      final double lngDiff =
+          (position.target.longitude - userLocation!.longitude).abs();
+      // Use a larger threshold to avoid false triggers from floating point drift
+      if (latDiff > CompassConstants.dragDetectionThreshold ||
+          lngDiff > CompassConstants.dragDetectionThreshold) {
+        // Update position BEFORE disabling so animation uses correct target
+        _currentCameraPosition = position;
+        // Defer bearing reset until drag completes (in onCameraIdle)
+        _pendingBearingReset = true;
+        _disableRotationMode(deferBearingReset: true);
+        return;
+      }
+    }
+
     setState(() {
-      _centerConsoleState = CenterConsoleState.dragging;
+      // Don't show "dragging" state in rotation mode - we're only changing bearing
+      if (_locationTrackingMode != LocationTrackingMode.rotating) {
+        _centerConsoleState = CenterConsoleState.dragging;
+      }
       _currentCameraPosition = position;
     });
   }
 
   void _onCameraIdle() {
+    // Don't reset programmatic flag in rotation mode - we're constantly making programmatic moves
+    if (_locationTrackingMode != LocationTrackingMode.rotating) {
+      _isProgrammaticCameraMove = false;
+    }
+
+    // Handle deferred bearing reset after drag exit from rotation mode
+    if (_pendingBearingReset) {
+      _pendingBearingReset = false;
+      _isProgrammaticCameraMove = true;
+      unawaited(mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: _currentCameraPosition.target,
+            zoom: _zoomBeforeRotation,
+            bearing: 0,
+          ),
+        ),
+      ));
+    }
+
+    // Only redraw polyline if position changed significantly (not just bearing)
+    final bool shouldUpdatePolyline =
+        _polylineManager.hasPositionChangedSignificantly(_currentCameraPosition.target);
+
+    if (shouldUpdatePolyline) {
+      _polylineManager.updatePolyline(_currentCameraPosition.target);
+    }
+
     setState(() {
       _centerConsoleState = CenterConsoleState.idle;
       _isCameraMoving = false;
-      _updatePolyline(
-          _currentCameraPosition.target, MapConstants.qiblaPosition);
     });
   }
 
@@ -214,7 +621,7 @@ class MapPageState extends State<MapPage> {
               compassEnabled: true,
               rotateGesturesEnabled: false,
               myLocationButtonEnabled: false,
-              polylines: _polylines,
+              polylines: _polylineManager.polylines,
               mapType: _currentMapType,
               zoomControlsEnabled: false,
               initialCameraPosition: _currentCameraPosition,
@@ -224,37 +631,25 @@ class MapPageState extends State<MapPage> {
               onCameraIdle: _onCameraIdle,
             ),
             Center(
-              child: StreamBuilder<CompassEvent>(
-                stream: FlutterCompass.events,
-                builder: (BuildContext context,
-                    AsyncSnapshot<CompassEvent> snapshot) {
-                  if (snapshot.hasError) {
-                    return Icon(
+              child: _isCompassAvailable
+                  ? Transform.rotate(
+                      angle: _locationTrackingMode == LocationTrackingMode.rotating
+                          ? 0
+                          : _currentHeading * (pi / 180),
+                      child: UserLocationIcon(
+                        primaryColor:
+                            _locationTrackingMode != LocationTrackingMode.idle
+                                ? Colors.blueAccent
+                                : Colors.blueGrey,
+                      ),
+                    )
+                  : Icon(
                       TablerIcons.circle_dot,
                       size: AppDimensions.iconSizeLg,
-                      color: Colors.black,
-                    );
-                  }
-
-                  if (snapshot.connectionState == ConnectionState.waiting ||
-                      !snapshot.hasData) {
-                    return Icon(
-                      TablerIcons.circle_dot,
-                      size: AppDimensions.iconSizeLg,
-                      color: Colors.black,
-                    );
-                  }
-
-                  double heading = snapshot.data!.heading ?? 0;
-                  return Transform.rotate(
-                    angle: heading * (pi / 180),
-                    child: UserLocationIcon(
-                      primaryColor:
-                          _isMapCenteredOnUser ? Colors.blueAccent : Colors.grey,
+                      color: _locationTrackingMode != LocationTrackingMode.idle
+                          ? Colors.blueAccent
+                          : Colors.grey,
                     ),
-                  );
-                },
-              ),
             ),
           ],
         ),
@@ -283,20 +678,9 @@ class MapPageState extends State<MapPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              FloatingActionButton(
-                heroTag: 'mapTypeToggle',
-                onPressed: () => <void>{
-                  setState(() {
-                    _currentMapType = (_currentMapType == MapType.normal)
-                        ? MapType.hybrid
-                        : MapType.normal;
-                  })
-                },
-                child: const Icon(
-                  TablerIcons.map,
-                  size: AppDimensions.iconSizeLg,
-                  semanticLabel: 'Toggle map type',
-                ),
+              BottomBarWidgets.buildMapTypeFab(
+                currentType: _currentMapType,
+                onToggle: (MapType type) => setState(() => _currentMapType = type),
               ),
               Expanded(
                 child: Padding(
@@ -309,16 +693,13 @@ class MapPageState extends State<MapPage> {
                   ),
                 ),
               ),
-              FloatingActionButton(
-                heroTag: 'centerMapToUser',
-                onPressed: _enableLocationButton
-                    ? () async => centerMapToUserLocation()
-                    : null,
-                child: const Icon(
-                  TablerIcons.current_location,
-                  size: AppDimensions.iconSizeLg,
-                  semanticLabel: 'Center map to current location',
-                ),
+              BottomBarWidgets.buildLocationFab(
+                context: context,
+                trackingMode: _locationTrackingMode,
+                isCompassAvailable: _isCompassAvailable,
+                enabled: _enableLocationButton,
+                needleAnimation: _compassNeedleAnimation,
+                onPressed: _onLocationFabPressed,
               ),
             ],
           ),

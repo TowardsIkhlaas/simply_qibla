@@ -88,17 +88,13 @@
   "@thankYouText": {
     "description": "Gratitude message shown to users, thanking them for using the app."
   },
-  "supportAppealText": "This app costs to run and maintain (Google Maps API). Please consider supporting the project through the buttons below (excess amounts will be donated to registered charities).",
+  "supportAppealText": "Please follow us through the buttons below.",
   "@supportAppealText": {
-    "description": "Appeal asking users to support the app through donations, mentioning that excess funds will be donated to charity."
+    "description": "Appeal asking users to follow the project through social buttons."
   },
-  "githubButtonText": "Support us on GitHub",
+  "githubButtonText": "Star us on GitHub",
   "@githubButtonText": {
-    "description": "Button text that directs users to GitHub to support the project."
-  },
-  "donateButtonText": "Support us on Ko-Fi",
-  "@donateButtonText": {
-    "description": "Button text that directs users to Ko-Fi to support the project."
+    "description": "Button text that directs users to GitHub to star the project."
   },
   "socialInstagramButtonText": "Follow us on Instagram",
   "@socialInstagramButtonText": {
@@ -132,8 +128,104 @@
   "@onboardingLocationBody": {
     "description": "Body text explaining why location permissions are requested and reassuring users about data privacy."
   },
-  "onboardingSupportBody": "SimplyQibla is ad-free and open-source. If you like what you see, please support us through the in-app links. Your support will be used to run the app, and excess will be donated to registered charities.",
+  "onboardingSupportBody": "SimplyQibla is ad-free and open-source. If you like what you see, please follow us through the in-app links. JazakAllahu Khayran!",
   "@onboardingSupportBody": {
     "description": "Body text encouraging users to support the project and explaining how donations will be used."
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title for the settings modal."
+  },
+  "settingsCompassToggle": "Compass",
+  "@settingsCompassToggle": {
+    "description": "Toggle label for enabling/disabling the compass in settings."
+  },
+  "aboutButtonText": "About",
+  "@aboutButtonText": {
+    "description": "Button text to open the about dialog."
+  },
+  "settingsThemeLabel": "Theme",
+  "@settingsThemeLabel": {
+    "description": "Label for the theme setting in settings modal."
+  },
+  "themeSystem": "System",
+  "@themeSystem": {
+    "description": "Option to follow system theme."
+  },
+  "themeLight": "Light",
+  "@themeLight": {
+    "description": "Light theme option."
+  },
+  "themeDark": "Dark",
+  "@themeDark": {
+    "description": "Dark theme option."
+  },
+  "settingsColorLabel": "Color",
+  "@settingsColorLabel": {
+    "description": "Label for the color setting in settings modal."
+  },
+  "colorDefault": "Default",
+  "@colorDefault": {
+    "description": "Default color scheme option."
+  },
+  "colorDynamic": "Dynamic",
+  "@colorDynamic": {
+    "description": "Dynamic color scheme option (Material You)."
+  },
+  "colorMadinah": "Madinah",
+  "@colorMadinah": {
+    "description": "Green color theme inspired by Madinah."
+  },
+  "colorAqsa": "Al-Aqsa",
+  "@colorAqsa": {
+    "description": "Blue color theme inspired by Al-Aqsa."
+  },
+  "whatsNewTitle": "Fresh Updates for You!",
+  "@whatsNewTitle": {
+    "description": "Title for What's New modal."
+  },
+  "whatsNewNewFeatures": "New Features",
+  "@whatsNewNewFeatures": {
+    "description": "Section header for new features in What's New modal."
+  },
+  "whatsNewImprovements": "Improvements",
+  "@whatsNewImprovements": {
+    "description": "Section header for improvements in What's New modal."
+  },
+  "whatsNewBugFixes": "Bug Fixes",
+  "@whatsNewBugFixes": {
+    "description": "Section header for bug fixes in What's New modal."
+  },
+  "whatsNewGotIt": "Bismillah!",
+  "@whatsNewGotIt": {
+    "description": "Button text to dismiss What's New modal."
+  },
+  "whatsNewFeatureCompassRotation": "Compass-based map rotation mode",
+  "@whatsNewFeatureCompassRotation": {
+    "description": "Release note for compass rotation feature."
+  },
+  "whatsNewFeatureColorThemes": "New color themes: Madinah & Al-Aqsa",
+  "@whatsNewFeatureColorThemes": {
+    "description": "Release note for new color themes."
+  },
+  "whatsNewImprovementPolyline": "Smoother Qibla direction line",
+  "@whatsNewImprovementPolyline": {
+    "description": "Release note for polyline improvement."
+  },
+  "whatsNewImprovementCompassToggle": "Option to enable or disable compass",
+  "@whatsNewImprovementCompassToggle": {
+    "description": "Release note for compass toggle option."
+  },
+  "whatsNewImprovementGeneral": "General improvements",
+  "@whatsNewImprovementGeneral": {
+    "description": "Release note for general improvements."
+  },
+  "whatsNewFeatureLightDarkMode": "Light and dark mode support",
+  "@whatsNewFeatureLightDarkMode": {
+    "description": "Release note for light and dark mode feature."
+  },
+  "whatsNewFixOnboardingContrast": "Improved onboarding contrast for different themes",
+  "@whatsNewFixOnboardingContrast": {
+    "description": "Release note for onboarding contrast fix."
   }
 }
