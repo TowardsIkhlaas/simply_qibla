@@ -148,4 +148,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get colorAqsa => 'الأقصى';
+
+  @override
+  String get whatsNewTitle => 'تحديثات جديدة لك!';
+
+  @override
+  String get whatsNewNewFeatures => 'ميزات جديدة';
+
+  @override
+  String get whatsNewImprovements => 'تحسينات';
+
+  @override
+  String get whatsNewBugFixes => 'إصلاحات';
+
+  @override
+  String get whatsNewGotIt => 'بسم الله!';
+
+  @override
+  String get whatsNewFeatureCompassRotation => 'وضع تدوير الخريطة بالبوصلة';
+
+  @override
+  String get whatsNewFeatureColorThemes => 'ألوان جديدة: المدينة والأقصى';
+
+  @override
+  String get whatsNewImprovementPolyline => 'خط اتجاه القبلة أكثر سلاسة';
+
+  @override
+  String get whatsNewImprovementCompassToggle => 'خيار تفعيل أو تعطيل البوصلة';
+
+  @override
+  String get whatsNewImprovementGeneral => 'تحسينات عامة';
 }

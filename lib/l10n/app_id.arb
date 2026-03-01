@@ -44,5 +44,15 @@
   "colorDefault": "Bawaan",
   "colorDynamic": "Dinamis",
   "colorMadinah": "Madinah",
-  "colorAqsa": "Al-Aqsa"
+  "colorAqsa": "Al-Aqsa",
+  "whatsNewTitle": "Pembaruan Terbaru untuk Anda!",
+  "whatsNewNewFeatures": "Fitur Baru",
+  "whatsNewImprovements": "Peningkatan",
+  "whatsNewBugFixes": "Perbaikan Bug",
+  "whatsNewGotIt": "Bismillah!",
+  "whatsNewFeatureCompassRotation": "Mode rotasi peta berbasis kompas",
+  "whatsNewFeatureColorThemes": "Tema warna baru: Madinah & Al-Aqsa",
+  "whatsNewImprovementPolyline": "Garis arah kiblat lebih halus",
+  "whatsNewImprovementCompassToggle": "Opsi untuk mengaktifkan atau menonaktifkan kompas",
+  "whatsNewImprovementGeneral": "Peningkatan umum"
 }

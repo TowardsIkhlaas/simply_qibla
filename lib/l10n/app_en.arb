@@ -179,5 +179,45 @@
   "colorAqsa": "Al-Aqsa",
   "@colorAqsa": {
     "description": "Blue color theme inspired by Al-Aqsa."
+  },
+  "whatsNewTitle": "Fresh Updates for You!",
+  "@whatsNewTitle": {
+    "description": "Title for What's New modal."
+  },
+  "whatsNewNewFeatures": "New Features",
+  "@whatsNewNewFeatures": {
+    "description": "Section header for new features in What's New modal."
+  },
+  "whatsNewImprovements": "Improvements",
+  "@whatsNewImprovements": {
+    "description": "Section header for improvements in What's New modal."
+  },
+  "whatsNewBugFixes": "Bug Fixes",
+  "@whatsNewBugFixes": {
+    "description": "Section header for bug fixes in What's New modal."
+  },
+  "whatsNewGotIt": "Bismillah!",
+  "@whatsNewGotIt": {
+    "description": "Button text to dismiss What's New modal."
+  },
+  "whatsNewFeatureCompassRotation": "Compass-based map rotation mode",
+  "@whatsNewFeatureCompassRotation": {
+    "description": "Release note for compass rotation feature."
+  },
+  "whatsNewFeatureColorThemes": "New color themes: Madinah & Al-Aqsa",
+  "@whatsNewFeatureColorThemes": {
+    "description": "Release note for new color themes."
+  },
+  "whatsNewImprovementPolyline": "Smoother Qibla direction line",
+  "@whatsNewImprovementPolyline": {
+    "description": "Release note for polyline improvement."
+  },
+  "whatsNewImprovementCompassToggle": "Option to enable or disable compass",
+  "@whatsNewImprovementCompassToggle": {
+    "description": "Release note for compass toggle option."
+  },
+  "whatsNewImprovementGeneral": "General improvements",
+  "@whatsNewImprovementGeneral": {
+    "description": "Release note for general improvements."
   }
 }

@@ -152,4 +152,38 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Mises à jour fraîches pour vous !';
+
+  @override
+  String get whatsNewNewFeatures => 'Nouvelles fonctionnalités';
+
+  @override
+  String get whatsNewImprovements => 'Améliorations';
+
+  @override
+  String get whatsNewBugFixes => 'Corrections de bugs';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Mode de rotation de carte basé sur la boussole';
+
+  @override
+  String get whatsNewFeatureColorThemes =>
+      'Nouveaux thèmes de couleur : Médine & Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline =>
+      'Ligne de direction Qibla plus fluide';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Option pour activer ou désactiver la boussole';
+
+  @override
+  String get whatsNewImprovementGeneral => 'Améliorations générales';
 }

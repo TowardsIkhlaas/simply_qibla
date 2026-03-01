@@ -150,6 +150,40 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Atualizações fresquinhas para você!';
+
+  @override
+  String get whatsNewNewFeatures => 'Novos Recursos';
+
+  @override
+  String get whatsNewImprovements => 'Melhorias';
+
+  @override
+  String get whatsNewBugFixes => 'Correções de Bugs';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Modo de rotação do mapa baseado em bússola';
+
+  @override
+  String get whatsNewFeatureColorThemes =>
+      'Novos temas de cor: Medina e Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline =>
+      'Linha de direção da Qibla mais suave';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Opção para ativar ou desativar a bússola';
+
+  @override
+  String get whatsNewImprovementGeneral => 'Melhorias gerais';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -298,6 +332,40 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Atualizações fresquinhas para você!';
+
+  @override
+  String get whatsNewNewFeatures => 'Novos Recursos';
+
+  @override
+  String get whatsNewImprovements => 'Melhorias';
+
+  @override
+  String get whatsNewBugFixes => 'Correções de Bugs';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Modo de rotação do mapa baseado em bússola';
+
+  @override
+  String get whatsNewFeatureColorThemes =>
+      'Novos temas de cor: Medina e Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline =>
+      'Linha de direção da Qibla mais suave';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Opção para ativar ou desativar a bússola';
+
+  @override
+  String get whatsNewImprovementGeneral => 'Melhorias gerais';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -447,4 +515,38 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
 
   @override
   String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Atualizações fresquinhas para si!';
+
+  @override
+  String get whatsNewNewFeatures => 'Novas Funcionalidades';
+
+  @override
+  String get whatsNewImprovements => 'Melhorias';
+
+  @override
+  String get whatsNewBugFixes => 'Correções de Erros';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Modo de rotação do mapa baseado na bússola';
+
+  @override
+  String get whatsNewFeatureColorThemes =>
+      'Novos temas de cor: Medina e Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline =>
+      'Linha de direção da Qibla mais suave';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Opção para ativar ou desativar a bússola';
+
+  @override
+  String get whatsNewImprovementGeneral => 'Melhorias gerais';
 }

@@ -9,15 +9,19 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simply_qibla/constants/constants.dart';
 import 'package:simply_qibla/globals/globals.dart';
 import 'package:simply_qibla/helpers/shared_preferences_helper.dart';
+import 'package:simply_qibla/helpers/version_helper.dart';
 import 'package:simply_qibla/l10n/app_localizations.dart';
+import 'package:simply_qibla/main.dart' show hasSeenOnboarding;
 import 'package:simply_qibla/styles/style.dart';
 import 'package:simply_qibla/widgets/center_console.dart';
 import 'package:simply_qibla/widgets/coordinates_form_bar.dart';
 import 'package:simply_qibla/widgets/sq_app_bar.dart';
 import 'package:simply_qibla/widgets/user_location_icon.dart';
+import 'package:simply_qibla/widgets/whats_new_modal.dart';
 
 part 'map_page_state.dart';
 

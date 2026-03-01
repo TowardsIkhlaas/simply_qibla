@@ -379,6 +379,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Al-Aqsa'**
   String get colorAqsa;
+
+  /// Title for What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Fresh Updates for You!'**
+  String get whatsNewTitle;
+
+  /// Section header for new features in What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'New Features'**
+  String get whatsNewNewFeatures;
+
+  /// Section header for improvements in What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Improvements'**
+  String get whatsNewImprovements;
+
+  /// Section header for bug fixes in What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Bug Fixes'**
+  String get whatsNewBugFixes;
+
+  /// Button text to dismiss What's New modal.
+  ///
+  /// In en, this message translates to:
+  /// **'Bismillah!'**
+  String get whatsNewGotIt;
+
+  /// Release note for compass rotation feature.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass-based map rotation mode'**
+  String get whatsNewFeatureCompassRotation;
+
+  /// Release note for new color themes.
+  ///
+  /// In en, this message translates to:
+  /// **'New color themes: Madinah & Al-Aqsa'**
+  String get whatsNewFeatureColorThemes;
+
+  /// Release note for polyline improvement.
+  ///
+  /// In en, this message translates to:
+  /// **'Smoother Qibla direction line'**
+  String get whatsNewImprovementPolyline;
+
+  /// Release note for compass toggle option.
+  ///
+  /// In en, this message translates to:
+  /// **'Option to enable or disable compass'**
+  String get whatsNewImprovementCompassToggle;
+
+  /// Release note for general improvements.
+  ///
+  /// In en, this message translates to:
+  /// **'General improvements'**
+  String get whatsNewImprovementGeneral;
 }
 
 class _AppLocalizationsDelegate

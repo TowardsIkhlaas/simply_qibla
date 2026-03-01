@@ -44,5 +44,15 @@
   "colorDefault": "Padrão",
   "colorDynamic": "Dinâmico",
   "colorMadinah": "Medina",
-  "colorAqsa": "Al-Aqsa"
+  "colorAqsa": "Al-Aqsa",
+  "whatsNewTitle": "Atualizações fresquinhas para você!",
+  "whatsNewNewFeatures": "Novos Recursos",
+  "whatsNewImprovements": "Melhorias",
+  "whatsNewBugFixes": "Correções de Bugs",
+  "whatsNewGotIt": "Bismillah!",
+  "whatsNewFeatureCompassRotation": "Modo de rotação do mapa baseado em bússola",
+  "whatsNewFeatureColorThemes": "Novos temas de cor: Medina e Al-Aqsa",
+  "whatsNewImprovementPolyline": "Linha de direção da Qibla mais suave",
+  "whatsNewImprovementCompassToggle": "Opção para ativar ou desativar a bússola",
+  "whatsNewImprovementGeneral": "Melhorias gerais"
 }

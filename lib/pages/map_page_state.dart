@@ -404,6 +404,24 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
       centerMapToUserLocation();
     }
     _requestReview();
+    unawaited(_checkAndShowWhatsNew());
+  }
+
+  Future<void> _checkAndShowWhatsNew() async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final String currentVersion = packageInfo.version;
+    final String? lastSeenVersion = await getLastSeenVersion();
+
+    if (shouldShowWhatsNew(
+      hasSeenOnboarding: hasSeenOnboarding,
+      lastSeenVersion: lastSeenVersion,
+      currentVersion: currentVersion,
+    )) {
+      if (mounted) {
+        await showWhatsNewModal(context);
+        await setLastSeenVersion(currentVersion);
+      }
+    }
   }
 
   void animateToLocation(LatLng coordinates) async {

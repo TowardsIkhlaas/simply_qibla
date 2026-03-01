@@ -54,3 +54,14 @@ Future<void> setColorMode(String mode) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('colorMode', mode);
 }
+
+Future<String?> getLastSeenVersion() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.reload();
+  return prefs.getString('lastSeenVersion');
+}
+
+Future<void> setLastSeenVersion(String version) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('lastSeenVersion', version);
+}

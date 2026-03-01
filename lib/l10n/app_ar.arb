@@ -44,5 +44,15 @@
   "colorDefault": "افتراضي",
   "colorDynamic": "ديناميكي",
   "colorMadinah": "المدينة",
-  "colorAqsa": "الأقصى"
+  "colorAqsa": "الأقصى",
+  "whatsNewTitle": "تحديثات جديدة لك!",
+  "whatsNewNewFeatures": "ميزات جديدة",
+  "whatsNewImprovements": "تحسينات",
+  "whatsNewBugFixes": "إصلاحات",
+  "whatsNewGotIt": "بسم الله!",
+  "whatsNewFeatureCompassRotation": "وضع تدوير الخريطة بالبوصلة",
+  "whatsNewFeatureColorThemes": "ألوان جديدة: المدينة والأقصى",
+  "whatsNewImprovementPolyline": "خط اتجاه القبلة أكثر سلاسة",
+  "whatsNewImprovementCompassToggle": "خيار تفعيل أو تعطيل البوصلة",
+  "whatsNewImprovementGeneral": "تحسينات عامة"
 }

@@ -148,4 +148,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Fresh Updates for You!';
+
+  @override
+  String get whatsNewNewFeatures => 'New Features';
+
+  @override
+  String get whatsNewImprovements => 'Improvements';
+
+  @override
+  String get whatsNewBugFixes => 'Bug Fixes';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Compass-based map rotation mode';
+
+  @override
+  String get whatsNewFeatureColorThemes =>
+      'New color themes: Madinah & Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline => 'Smoother Qibla direction line';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Option to enable or disable compass';
+
+  @override
+  String get whatsNewImprovementGeneral => 'General improvements';
 }

@@ -149,4 +149,37 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get colorAqsa => 'Al-Aqsa';
+
+  @override
+  String get whatsNewTitle => 'Kemas Kini Terbaru untuk Anda!';
+
+  @override
+  String get whatsNewNewFeatures => 'Ciri Baharu';
+
+  @override
+  String get whatsNewImprovements => 'Penambahbaikan';
+
+  @override
+  String get whatsNewBugFixes => 'Pembaikan Pepijat';
+
+  @override
+  String get whatsNewGotIt => 'Bismillah!';
+
+  @override
+  String get whatsNewFeatureCompassRotation =>
+      'Mod putaran peta berdasarkan kompas';
+
+  @override
+  String get whatsNewFeatureColorThemes =>
+      'Tema warna baharu: Madinah & Al-Aqsa';
+
+  @override
+  String get whatsNewImprovementPolyline => 'Garis arah Qibla lebih lancar';
+
+  @override
+  String get whatsNewImprovementCompassToggle =>
+      'Pilihan untuk mengaktifkan atau menyahaktifkan kompas';
+
+  @override
+  String get whatsNewImprovementGeneral => 'Penambahbaikan umum';
 }

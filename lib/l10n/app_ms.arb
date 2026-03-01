@@ -44,5 +44,15 @@
   "colorDefault": "Lalai",
   "colorDynamic": "Dinamik",
   "colorMadinah": "Madinah",
-  "colorAqsa": "Al-Aqsa"
+  "colorAqsa": "Al-Aqsa",
+  "whatsNewTitle": "Kemas Kini Terbaru untuk Anda!",
+  "whatsNewNewFeatures": "Ciri Baharu",
+  "whatsNewImprovements": "Penambahbaikan",
+  "whatsNewBugFixes": "Pembaikan Pepijat",
+  "whatsNewGotIt": "Bismillah!",
+  "whatsNewFeatureCompassRotation": "Mod putaran peta berdasarkan kompas",
+  "whatsNewFeatureColorThemes": "Tema warna baharu: Madinah & Al-Aqsa",
+  "whatsNewImprovementPolyline": "Garis arah Qibla lebih lancar",
+  "whatsNewImprovementCompassToggle": "Pilihan untuk mengaktifkan atau menyahaktifkan kompas",
+  "whatsNewImprovementGeneral": "Penambahbaikan umum"
 }

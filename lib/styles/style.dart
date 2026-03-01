@@ -1,5 +1,11 @@
 class AppPadding {
+  static const double paddingXxs = 6.0;
+  static const double paddingXs = 12.0;
+  static const double paddingSm = 18.0;
   static const double standard = 20.0;
+  static const double paddingMd = 26.0;
+  static const double paddingLg = 32.0;
+  static const double paddingXl = 50.0;
   static const double appBarTop = 30.0;
   static const double bottomNav = 45.0;
   static const double appBarActionRight = 12.0;
@@ -18,6 +24,7 @@ class AppDimensions {
   static const double borderRadiusLg = 16.0;
   static const double borderRadiusXl = 28.0;
   static const double suggestionsHeightMultiplier = 0.3;
+  static const double lineWidth = 300;
 }
 
 class AppStyles {
