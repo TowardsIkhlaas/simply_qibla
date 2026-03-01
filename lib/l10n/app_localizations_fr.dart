@@ -186,4 +186,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get whatsNewImprovementGeneral => 'Améliorations générales';
+
+  @override
+  String get whatsNewFeatureLightDarkMode =>
+      'Prise en charge des modes clair et sombre';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Meilleur contraste de l\'accueil pour les différents thèmes';
 }

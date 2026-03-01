@@ -178,4 +178,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get whatsNewImprovementGeneral => 'تحسينات عامة';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'دعم الوضع الفاتح والداكن';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'تحسين التباين في صفحة التعريف للمظاهر المختلفة';
 }

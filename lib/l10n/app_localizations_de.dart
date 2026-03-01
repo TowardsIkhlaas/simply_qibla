@@ -183,4 +183,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get whatsNewImprovementGeneral => 'Allgemeine Verbesserungen';
+
+  @override
+  String get whatsNewFeatureLightDarkMode =>
+      'Unterstützung für helles und dunkles Design';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Verbesserter Kontrast beim Onboarding für verschiedene Designs';
 }

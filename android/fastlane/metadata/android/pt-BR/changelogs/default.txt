@@ -1,1 +1,14 @@
-Correções de bugs e melhorias de desempenho.
+Novidades na v3.2.0:
+
+Novos Recursos:
+• Modo de rotação do mapa baseado em bússola
+• Novos temas de cor: Medina e Al-Aqsa
+• Suporte para modo claro e escuro
+
+Melhorias:
+• Linha de direção da Qibla mais suave
+• Opção para ativar ou desativar a bússola
+• Melhorias gerais
+
+Correções de Bugs:
+• Melhor contraste na introdução para diferentes temas

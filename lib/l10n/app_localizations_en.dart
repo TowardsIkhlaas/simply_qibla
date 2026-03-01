@@ -181,4 +181,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsNewImprovementGeneral => 'General improvements';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'Light and dark mode support';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Improved onboarding contrast for different themes';
 }

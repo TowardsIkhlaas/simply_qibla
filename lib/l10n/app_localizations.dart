@@ -439,6 +439,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'General improvements'**
   String get whatsNewImprovementGeneral;
+
+  /// Release note for light and dark mode feature.
+  ///
+  /// In en, this message translates to:
+  /// **'Light and dark mode support'**
+  String get whatsNewFeatureLightDarkMode;
+
+  /// Release note for onboarding contrast fix.
+  ///
+  /// In en, this message translates to:
+  /// **'Improved onboarding contrast for different themes'**
+  String get whatsNewFixOnboardingContrast;
 }
 
 class _AppLocalizationsDelegate

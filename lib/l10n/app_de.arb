@@ -54,5 +54,7 @@
   "whatsNewFeatureColorThemes": "Neue Farbthemen: Medina & Al-Aqsa",
   "whatsNewImprovementPolyline": "Glattere Qibla-Richtungslinie",
   "whatsNewImprovementCompassToggle": "Option zum Aktivieren oder Deaktivieren des Kompasses",
-  "whatsNewImprovementGeneral": "Allgemeine Verbesserungen"
+  "whatsNewImprovementGeneral": "Allgemeine Verbesserungen",
+  "whatsNewFeatureLightDarkMode": "Unterstützung für helles und dunkles Design",
+  "whatsNewFixOnboardingContrast": "Verbesserter Kontrast beim Onboarding für verschiedene Designs"
 }

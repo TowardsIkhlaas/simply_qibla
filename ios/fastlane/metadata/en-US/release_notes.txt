@@ -1,1 +1,14 @@
-Minor fixes and improvements for now, exciting improvements imminent!
+What's New in v3.2.0:
+
+Features:
+• Compass-based map rotation mode
+• New color themes: Madinah & Al-Aqsa
+• Light and dark mode support
+
+Improvements:
+• Smoother Qibla direction line
+• Option to enable or disable compass
+• General improvements
+
+Bug Fixes:
+• Improved onboarding contrast for different themes

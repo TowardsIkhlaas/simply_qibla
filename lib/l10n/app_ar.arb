@@ -54,5 +54,7 @@
   "whatsNewFeatureColorThemes": "ألوان جديدة: المدينة والأقصى",
   "whatsNewImprovementPolyline": "خط اتجاه القبلة أكثر سلاسة",
   "whatsNewImprovementCompassToggle": "خيار تفعيل أو تعطيل البوصلة",
-  "whatsNewImprovementGeneral": "تحسينات عامة"
+  "whatsNewImprovementGeneral": "تحسينات عامة",
+  "whatsNewFeatureLightDarkMode": "دعم الوضع الفاتح والداكن",
+  "whatsNewFixOnboardingContrast": "تحسين التباين في صفحة التعريف للمظاهر المختلفة"
 }

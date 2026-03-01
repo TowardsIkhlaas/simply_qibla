@@ -54,5 +54,7 @@
   "whatsNewFeatureColorThemes": "Tema warna baru: Madinah & Al-Aqsa",
   "whatsNewImprovementPolyline": "Garis arah kiblat lebih halus",
   "whatsNewImprovementCompassToggle": "Opsi untuk mengaktifkan atau menonaktifkan kompas",
-  "whatsNewImprovementGeneral": "Peningkatan umum"
+  "whatsNewImprovementGeneral": "Peningkatan umum",
+  "whatsNewFeatureLightDarkMode": "Dukungan mode terang dan gelap",
+  "whatsNewFixOnboardingContrast": "Kontras halaman pengenalan yang lebih baik untuk berbagai tema"
 }

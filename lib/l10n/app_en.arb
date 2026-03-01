@@ -219,5 +219,13 @@
   "whatsNewImprovementGeneral": "General improvements",
   "@whatsNewImprovementGeneral": {
     "description": "Release note for general improvements."
+  },
+  "whatsNewFeatureLightDarkMode": "Light and dark mode support",
+  "@whatsNewFeatureLightDarkMode": {
+    "description": "Release note for light and dark mode feature."
+  },
+  "whatsNewFixOnboardingContrast": "Improved onboarding contrast for different themes",
+  "@whatsNewFixOnboardingContrast": {
+    "description": "Release note for onboarding contrast fix."
   }
 }

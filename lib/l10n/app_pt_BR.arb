@@ -54,5 +54,7 @@
   "whatsNewFeatureColorThemes": "Novos temas de cor: Medina e Al-Aqsa",
   "whatsNewImprovementPolyline": "Linha de direção da Qibla mais suave",
   "whatsNewImprovementCompassToggle": "Opção para ativar ou desativar a bússola",
-  "whatsNewImprovementGeneral": "Melhorias gerais"
+  "whatsNewImprovementGeneral": "Melhorias gerais",
+  "whatsNewFeatureLightDarkMode": "Suporte para modo claro e escuro",
+  "whatsNewFixOnboardingContrast": "Melhor contraste na introdução para diferentes temas"
 }

@@ -184,6 +184,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get whatsNewImprovementGeneral => 'Melhorias gerais';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'Suporte para modo claro e escuro';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Melhor contraste na introdução para diferentes temas';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -366,6 +373,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get whatsNewImprovementGeneral => 'Melhorias gerais';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'Suporte para modo claro e escuro';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Melhor contraste na introdução para diferentes temas';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -549,4 +563,11 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
 
   @override
   String get whatsNewImprovementGeneral => 'Melhorias gerais';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'Suporte para modo claro e escuro';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Melhor contraste na introdução para diferentes temas';
 }

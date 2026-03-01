@@ -182,4 +182,11 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get whatsNewImprovementGeneral => 'Penambahbaikan umum';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'Sokongan mod cerah dan gelap';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Kontras halaman pengenalan yang lebih baik untuk tema berbeza';
 }

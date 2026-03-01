@@ -182,4 +182,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get whatsNewImprovementGeneral => 'Peningkatan umum';
+
+  @override
+  String get whatsNewFeatureLightDarkMode => 'Dukungan mode terang dan gelap';
+
+  @override
+  String get whatsNewFixOnboardingContrast =>
+      'Kontras halaman pengenalan yang lebih baik untuk berbagai tema';
 }

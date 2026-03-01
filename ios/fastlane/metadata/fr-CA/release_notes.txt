@@ -1,1 +1,14 @@
-Petites corrections et améliorations pour l’instant, des améliorations excitantes s’en viennent bientôt !
+Nouveautés de la v3.2.0 :
+
+Nouvelles fonctionnalités :
+• Mode de rotation de carte basé sur la boussole
+• Nouveaux thèmes de couleur : Médine & Al-Aqsa
+• Prise en charge des modes clair et sombre
+
+Améliorations :
+• Ligne de direction Qibla plus fluide
+• Option pour activer ou désactiver la boussole
+• Améliorations générales
+
+Corrections de bugs :
+• Meilleur contraste de l'accueil pour les différents thèmes
