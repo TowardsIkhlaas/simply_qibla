@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simply_qibla/helpers/shared_preferences_helper.dart';
 import 'package:simply_qibla/l10n/app_localizations.dart';
-import 'package:simply_qibla/pages/map_page.dart';
 import 'package:simply_qibla/styles/style.dart';
 
 class OnboardingPage extends StatefulWidget {
-  const OnboardingPage({super.key});
+  const OnboardingPage({super.key, this.onOnboardingComplete});
+
+  final VoidCallback? onOnboardingComplete;
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
@@ -17,12 +19,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
       GlobalKey<IntroductionScreenState>();
 
   Future<void> _onIntroEnd(BuildContext context) async {
-    setOnboardingStatus(true);
-    if (context.mounted) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute<dynamic>(builder: (_) => const MapPage()),
-      );
-    }
+    await setOnboardingStatus(true);
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    await setLastSeenVersion(packageInfo.version);
+    widget.onOnboardingComplete?.call();
   }
 
   Widget _buildImage(String assetName, [double dim = 350]) {

@@ -194,4 +194,8 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get whatsNewFixOnboardingContrast =>
       'Meilleur contraste de l\'accueil pour les différents thèmes';
+
+  @override
+  String get whatsNewFixFirstOpenSetup =>
+      'Amélioration de la première configuration de l\'application';
 }

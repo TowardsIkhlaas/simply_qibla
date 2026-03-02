@@ -185,4 +185,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get whatsNewFixOnboardingContrast =>
       'تحسين التباين في صفحة التعريف للمظاهر المختلفة';
+
+  @override
+  String get whatsNewFixFirstOpenSetup => 'تحسين تجربة الإعداد عند أول استخدام';
 }

@@ -189,4 +189,8 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get whatsNewFixOnboardingContrast =>
       'Kontras halaman pengenalan yang lebih baik untuk berbagai tema';
+
+  @override
+  String get whatsNewFixFirstOpenSetup =>
+      'Pengalaman pengaturan awal aplikasi yang lebih baik';
 }

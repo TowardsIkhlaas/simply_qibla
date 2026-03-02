@@ -41,6 +41,8 @@ class ReleaseNotes {
         return l10n.whatsNewImprovementGeneral;
       case 'whatsNewFixOnboardingContrast':
         return l10n.whatsNewFixOnboardingContrast;
+      case 'whatsNewFixFirstOpenSetup':
+        return l10n.whatsNewFixFirstOpenSetup;
       default:
         return key;
     }
@@ -49,18 +51,10 @@ class ReleaseNotes {
 
 /// Current release notes to display in the What's New modal.
 const ReleaseNotes currentRelease = ReleaseNotes(
-  version: '3.2.0',
-  features: <String>[
-    'whatsNewFeatureCompassRotation',
-    'whatsNewFeatureColorThemes',
-    'whatsNewFeatureLightDarkMode',
-  ],
-  improvements: <String>[
-    'whatsNewImprovementPolyline',
-    'whatsNewImprovementCompassToggle',
-    'whatsNewImprovementGeneral',
-  ],
+  version: '3.3.0',
+  features: <String>[],
+  improvements: <String>[],
   fixes: <String>[
-    'whatsNewFixOnboardingContrast',
+    'whatsNewFixFirstOpenSetup',
   ],
 );

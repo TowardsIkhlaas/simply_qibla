@@ -56,5 +56,6 @@
   "whatsNewImprovementCompassToggle": "Opção para ativar ou desativar a bússola",
   "whatsNewImprovementGeneral": "Melhorias gerais",
   "whatsNewFeatureLightDarkMode": "Suporte para modo claro e escuro",
-  "whatsNewFixOnboardingContrast": "Melhor contraste na introdução para diferentes temas"
+  "whatsNewFixOnboardingContrast": "Melhor contraste na introdução para diferentes temas",
+  "whatsNewFixFirstOpenSetup": "Melhor experiência na primeira configuração do aplicativo"
 }

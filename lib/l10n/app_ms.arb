@@ -56,5 +56,6 @@
   "whatsNewImprovementCompassToggle": "Pilihan untuk mengaktifkan atau menyahaktifkan kompas",
   "whatsNewImprovementGeneral": "Penambahbaikan umum",
   "whatsNewFeatureLightDarkMode": "Sokongan mod cerah dan gelap",
-  "whatsNewFixOnboardingContrast": "Kontras halaman pengenalan yang lebih baik untuk tema berbeza"
+  "whatsNewFixOnboardingContrast": "Kontras halaman pengenalan yang lebih baik untuk tema berbeza",
+  "whatsNewFixFirstOpenSetup": "Pengalaman persediaan awal aplikasi yang lebih baik"
 }

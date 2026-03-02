@@ -56,5 +56,6 @@
   "whatsNewImprovementCompassToggle": "Option pour activer ou désactiver la boussole",
   "whatsNewImprovementGeneral": "Améliorations générales",
   "whatsNewFeatureLightDarkMode": "Prise en charge des modes clair et sombre",
-  "whatsNewFixOnboardingContrast": "Meilleur contraste de l'accueil pour les différents thèmes"
+  "whatsNewFixOnboardingContrast": "Meilleur contraste de l'accueil pour les différents thèmes",
+  "whatsNewFixFirstOpenSetup": "Amélioration de la première configuration de l'application"
 }

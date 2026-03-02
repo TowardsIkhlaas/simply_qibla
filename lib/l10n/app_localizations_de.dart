@@ -191,4 +191,7 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get whatsNewFixOnboardingContrast =>
       'Verbesserter Kontrast beim Onboarding für verschiedene Designs';
+
+  @override
+  String get whatsNewFixFirstOpenSetup => 'Verbesserte Ersteinrichtung der App';
 }

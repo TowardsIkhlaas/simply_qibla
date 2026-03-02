@@ -227,5 +227,9 @@
   "whatsNewFixOnboardingContrast": "Improved onboarding contrast for different themes",
   "@whatsNewFixOnboardingContrast": {
     "description": "Release note for onboarding contrast fix."
+  },
+  "whatsNewFixFirstOpenSetup": "Improved first-time app setup experience",
+  "@whatsNewFixFirstOpenSetup": {
+    "description": "Release note for first open setup fix."
   }
 }
