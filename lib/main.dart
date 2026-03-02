@@ -115,7 +115,13 @@ class _MyAppState extends State<MyApp> {
                   onThemeChanged: _onThemeChanged,
                   onColorChanged: _onColorChanged,
                 )
-              : const OnboardingPage(),
+              : OnboardingPage(
+                  onOnboardingComplete: () {
+                    setState(() {
+                      hasSeenOnboarding = true;
+                    });
+                  },
+                ),
           scaffoldMessengerKey: snackbarKey,
         );
       },
