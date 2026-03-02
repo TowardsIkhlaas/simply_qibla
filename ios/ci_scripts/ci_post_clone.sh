@@ -6,28 +6,14 @@ set -e
 # The default execution directory of this script is the ci_scripts directory.
 cd $CI_PRIMARY_REPOSITORY_PATH # change working directory to the root of your cloned repo.
 
-# ===== Version Sync from pubspec.yaml =====
+# ===== Version (managed by Flutter) =====
+# Flutter reads version from pubspec.yaml and writes FLUTTER_BUILD_NAME and
+# FLUTTER_BUILD_NUMBER to ios/Flutter/Generated.xcconfig during `flutter pub get`.
+# Info.plist references these via $(FLUTTER_BUILD_NAME) and $(FLUTTER_BUILD_NUMBER).
+# IMPORTANT: Disable "Automatically manage version and build numbers" in the
+# Xcode Cloud workflow settings, otherwise CI_BUILD_NUMBER overrides CFBundleVersion.
 VERSION=$(grep "^version:" pubspec.yaml | sed 's/version: //' | tr -d ' ')
-VERSION_NAME=$(echo $VERSION | cut -d'+' -f1)
-BUILD_NUMBER=$(echo $VERSION | cut -d'+' -f2)
-
-echo "Setting iOS version to $VERSION_NAME ($BUILD_NUMBER) from pubspec.yaml"
-
-cd ios
-agvtool new-marketing-version $VERSION_NAME
-agvtool new-version -all $BUILD_NUMBER
-
-# Verify version was set correctly
-ACTUAL_VERSION=$(agvtool what-marketing-version -terse1)
-ACTUAL_BUILD=$(agvtool what-version -terse)
-echo "Verified: iOS version is now $ACTUAL_VERSION ($ACTUAL_BUILD)"
-
-if [ "$ACTUAL_VERSION" != "$VERSION_NAME" ] || [ "$ACTUAL_BUILD" != "$BUILD_NUMBER" ]; then
-  echo "ERROR: Version mismatch! Expected $VERSION_NAME ($BUILD_NUMBER) but got $ACTUAL_VERSION ($ACTUAL_BUILD)"
-  exit 1
-fi
-
-cd ..
+echo "pubspec.yaml version: $VERSION (will be applied by flutter pub get)"
 
 # ===== Google Maps API Key =====
 if [ -z "$GOOGLE_MAPS_API_KEY_IOS" ]; then
