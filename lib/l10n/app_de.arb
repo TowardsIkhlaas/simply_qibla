@@ -56,5 +56,6 @@
   "whatsNewImprovementCompassToggle": "Option zum Aktivieren oder Deaktivieren des Kompasses",
   "whatsNewImprovementGeneral": "Allgemeine Verbesserungen",
   "whatsNewFeatureLightDarkMode": "Unterstützung für helles und dunkles Design",
-  "whatsNewFixOnboardingContrast": "Verbesserter Kontrast beim Onboarding für verschiedene Designs"
+  "whatsNewFixOnboardingContrast": "Verbesserter Kontrast beim Onboarding für verschiedene Designs",
+  "whatsNewFixFirstOpenSetup": "Verbesserte Ersteinrichtung der App"
 }

@@ -56,5 +56,6 @@
   "whatsNewImprovementCompassToggle": "خيار تفعيل أو تعطيل البوصلة",
   "whatsNewImprovementGeneral": "تحسينات عامة",
   "whatsNewFeatureLightDarkMode": "دعم الوضع الفاتح والداكن",
-  "whatsNewFixOnboardingContrast": "تحسين التباين في صفحة التعريف للمظاهر المختلفة"
+  "whatsNewFixOnboardingContrast": "تحسين التباين في صفحة التعريف للمظاهر المختلفة",
+  "whatsNewFixFirstOpenSetup": "تحسين تجربة الإعداد عند أول استخدام"
 }

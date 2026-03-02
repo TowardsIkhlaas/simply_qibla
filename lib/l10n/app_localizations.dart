@@ -451,6 +451,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Improved onboarding contrast for different themes'**
   String get whatsNewFixOnboardingContrast;
+
+  /// Release note for first open setup fix.
+  ///
+  /// In en, this message translates to:
+  /// **'Improved first-time app setup experience'**
+  String get whatsNewFixFirstOpenSetup;
 }
 
 class _AppLocalizationsDelegate

@@ -1,14 +1,4 @@
-Neu in v3.2.0:
-
-Neue Funktionen:
-• Kompassbasierter Kartenrotationsmodus
-• Neue Farbthemen: Medina & Al-Aqsa
-• Unterstützung für helles und dunkles Design
-
-Verbesserungen:
-• Glattere Qibla-Richtungslinie
-• Option zum Aktivieren oder Deaktivieren des Kompasses
-• Allgemeine Verbesserungen
+Neu in v3.3.0:
 
 Fehlerbehebungen:
-• Verbesserter Kontrast beim Onboarding für verschiedene Designs
+• Verbesserte Ersteinrichtung der App

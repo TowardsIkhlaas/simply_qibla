@@ -191,6 +191,10 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get whatsNewFixOnboardingContrast =>
       'Melhor contraste na introdução para diferentes temas';
+
+  @override
+  String get whatsNewFixFirstOpenSetup =>
+      'Melhor experiência na primeira configuração do aplicativo';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -380,6 +384,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get whatsNewFixOnboardingContrast =>
       'Melhor contraste na introdução para diferentes temas';
+
+  @override
+  String get whatsNewFixFirstOpenSetup =>
+      'Melhor experiência na primeira configuração do aplicativo';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -570,4 +578,8 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
   @override
   String get whatsNewFixOnboardingContrast =>
       'Melhor contraste na introdução para diferentes temas';
+
+  @override
+  String get whatsNewFixFirstOpenSetup =>
+      'Melhor experiência na primeira configuração da aplicação';
 }

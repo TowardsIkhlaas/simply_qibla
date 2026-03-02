@@ -188,4 +188,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get whatsNewFixOnboardingContrast =>
       'Improved onboarding contrast for different themes';
+
+  @override
+  String get whatsNewFixFirstOpenSetup =>
+      'Improved first-time app setup experience';
 }
