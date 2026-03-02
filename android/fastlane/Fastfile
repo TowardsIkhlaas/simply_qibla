@@ -44,7 +44,9 @@ platform :android do
 
   desc "Upload store listing metadata only (descriptions, screenshots, images)"
   lane :upload_metadata do
+    version_code = get_version_code_from_pubspec
     upload_to_play_store(
+      version_code: version_code,
       skip_upload_apk: true,
       skip_upload_aab: true,
       skip_upload_changelogs: true

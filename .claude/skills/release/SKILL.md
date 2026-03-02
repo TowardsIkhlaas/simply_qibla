@@ -237,34 +237,13 @@ git push origin develop
 
 ### Step 13: Create Pull Request
 
-```bash
-gh pr create \
-  --base master \
-  --head develop \
-  --title "Release v{new_version}" \
-  --body "$(cat <<'EOF'
-## Release v{new_version}
+Use the repo's PR template (`.github/pull_request_template.md`) for the body structure. The title must follow this format:
 
-### Changes
-{formatted release notes with categories}
-
-### Files Updated
-- `pubspec.yaml` - Version bumped to {new_version}+{new_build}
-- `lib/data/release_notes.dart` - In-app What's New content
-- `lib/l10n/app_*.arb` - Localization strings
-- `android/fastlane/metadata/` - Play Store release notes
-- `ios/fastlane/metadata/` - App Store release notes
-
-### Checklist
-- [ ] Version bumped in pubspec.yaml
-- [ ] Release notes added for all 7 locales
-- [ ] In-app What's New modal updated
-- [ ] Store metadata updated
-- [ ] `flutter analyze` passes
-
-EOF
-)"
 ```
+chore(release): Release v{new_version}
+```
+
+The body should fill in the template sections in `.github/pull_request_template.md`:
 
 If a PR already exists from develop to master:
 - Warn the user
