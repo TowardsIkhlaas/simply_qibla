@@ -65,3 +65,23 @@ Future<void> setLastSeenVersion(String version) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('lastSeenVersion', version);
 }
+
+Future<({double lat, double lng})?> getLastLocation() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.reload();
+  final List<String>? parts = prefs.getStringList('lastLocation');
+  if (parts == null || parts.length != 2) return null;
+  final double? latitude = double.tryParse(parts[0]);
+  final double? longitude = double.tryParse(parts[1]);
+  if (latitude == null || longitude == null) return null;
+  return (lat: latitude, lng: longitude);
+}
+
+// Single-key write to keep lat/lng atomic across concurrent callers.
+Future<void> setLastLocation(double latitude, double longitude) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setStringList(
+    'lastLocation',
+    <String>['$latitude', '$longitude'],
+  );
+}
