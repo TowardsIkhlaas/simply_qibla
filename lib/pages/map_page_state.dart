@@ -251,6 +251,7 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
         currentLocation.latitude,
         currentLocation.longitude,
       );
+      unawaited(setLastLocation(userLocation!.latitude, userLocation!.longitude));
 
       _isProgrammaticCameraMove = true;
       await mapController.animateCamera(
@@ -401,7 +402,24 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
     if (userLocation != null) {
       animateToLocation(userLocation!);
     } else {
-      centerMapToUserLocation();
+      final ({double lat, double lng})? cached = await getLastLocation();
+      if (cached != null) {
+        _isProgrammaticCameraMove = true;
+        unawaited(mapController.moveCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: LatLng(cached.lat, cached.lng),
+              zoom: MapConstants.zoomLevel,
+            ),
+          ),
+        ));
+      }
+      // Only auto-center if permission isn't permanently denied;
+      // user can still tap the location FAB to trigger manually
+      final LocationPermission permission = await Geolocator.checkPermission();
+      if (permission != LocationPermission.deniedForever) {
+        centerMapToUserLocation();
+      }
     }
     _requestReview();
     unawaited(_checkAndShowWhatsNew());
@@ -425,6 +443,7 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   }
 
   void animateToLocation(LatLng coordinates) async {
+    unawaited(setLastLocation(coordinates.latitude, coordinates.longitude));
     _isProgrammaticCameraMove = true;
     await mapController.animateCamera(
       CameraUpdate.newCameraPosition(
