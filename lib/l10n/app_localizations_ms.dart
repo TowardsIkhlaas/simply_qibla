@@ -193,4 +193,21 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get whatsNewFixFirstOpenSetup =>
       'Pengalaman persediaan awal aplikasi yang lebih baik';
+
+  @override
+  String get compassAccuracyIndicatorLabel => 'Penunjuk ketepatan kompas';
+
+  @override
+  String get compassAccuracyGood => 'Ketepatan kompas: baik.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Ketepatan kompas: sederhana. Jauhkan diri daripada logam atau elektronik untuk bacaan yang lebih baik.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Ketepatan kompas: lemah. Jauhkan diri daripada logam atau magnet, atau lambaikan peranti anda dalam bentuk angka 8 untuk mengkalibrasi semula.';
+
+  @override
+  String get compassAccuracyUnknown => 'Ketepatan kompas: menunggu bacaan…';
 }

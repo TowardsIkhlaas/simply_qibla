@@ -193,4 +193,21 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get whatsNewFixFirstOpenSetup =>
       'Pengalaman pengaturan awal aplikasi yang lebih baik';
+
+  @override
+  String get compassAccuracyIndicatorLabel => 'Indikator akurasi kompas';
+
+  @override
+  String get compassAccuracyGood => 'Akurasi kompas: baik.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Akurasi kompas: sedang. Menjauhlah dari logam atau elektronik untuk pembacaan yang lebih baik.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Akurasi kompas: buruk. Menjauhlah dari logam atau magnet, atau gerakkan perangkat Anda membentuk angka 8 untuk mengkalibrasi ulang.';
+
+  @override
+  String get compassAccuracyUnknown => 'Akurasi kompas: menunggu pembacaan…';
 }

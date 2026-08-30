@@ -57,5 +57,10 @@
   "whatsNewImprovementGeneral": "Allgemeine Verbesserungen",
   "whatsNewFeatureLightDarkMode": "Unterstützung für helles und dunkles Design",
   "whatsNewFixOnboardingContrast": "Verbesserter Kontrast beim Onboarding für verschiedene Designs",
-  "whatsNewFixFirstOpenSetup": "Verbesserte Ersteinrichtung der App"
+  "whatsNewFixFirstOpenSetup": "Verbesserte Ersteinrichtung der App",
+  "compassAccuracyIndicatorLabel": "Kompassgenauigkeits-Anzeige",
+  "compassAccuracyGood": "Kompassgenauigkeit: gut.",
+  "compassAccuracyModerate": "Kompassgenauigkeit: mittel. Entferne dich von Metall oder Elektronik für eine bessere Messung.",
+  "compassAccuracyPoor": "Kompassgenauigkeit: schlecht. Entferne dich von Metall oder Magneten, oder schwenke das Gerät in einer Acht, um es neu zu kalibrieren.",
+  "compassAccuracyUnknown": "Kompassgenauigkeit: warte auf eine Messung…"
 }

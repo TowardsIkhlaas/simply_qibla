@@ -188,4 +188,21 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get whatsNewFixFirstOpenSetup => 'تحسين تجربة الإعداد عند أول استخدام';
+
+  @override
+  String get compassAccuracyIndicatorLabel => 'مؤشر دقة البوصلة';
+
+  @override
+  String get compassAccuracyGood => 'دقة البوصلة: جيدة.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'دقة البوصلة: متوسطة. ابتعد عن المعادن أو الإلكترونيات للحصول على قراءة أفضل.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'دقة البوصلة: ضعيفة. ابتعد عن المعادن أو المغناطيسات، أو حرك جهازك بحركة الرقم ٨ لإعادة المعايرة.';
+
+  @override
+  String get compassAccuracyUnknown => 'دقة البوصلة: بانتظار القراءة…';
 }

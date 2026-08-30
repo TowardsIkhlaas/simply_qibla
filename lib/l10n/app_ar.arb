@@ -57,5 +57,10 @@
   "whatsNewImprovementGeneral": "تحسينات عامة",
   "whatsNewFeatureLightDarkMode": "دعم الوضع الفاتح والداكن",
   "whatsNewFixOnboardingContrast": "تحسين التباين في صفحة التعريف للمظاهر المختلفة",
-  "whatsNewFixFirstOpenSetup": "تحسين تجربة الإعداد عند أول استخدام"
+  "whatsNewFixFirstOpenSetup": "تحسين تجربة الإعداد عند أول استخدام",
+  "compassAccuracyIndicatorLabel": "مؤشر دقة البوصلة",
+  "compassAccuracyGood": "دقة البوصلة: جيدة.",
+  "compassAccuracyModerate": "دقة البوصلة: متوسطة. ابتعد عن المعادن أو الإلكترونيات للحصول على قراءة أفضل.",
+  "compassAccuracyPoor": "دقة البوصلة: ضعيفة. ابتعد عن المعادن أو المغناطيسات، أو حرك جهازك بحركة الرقم ٨ لإعادة المعايرة.",
+  "compassAccuracyUnknown": "دقة البوصلة: بانتظار القراءة…"
 }
