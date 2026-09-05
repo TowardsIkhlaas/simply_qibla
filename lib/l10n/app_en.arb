@@ -231,5 +231,25 @@
   "whatsNewFixFirstOpenSetup": "Improved first-time app setup experience",
   "@whatsNewFixFirstOpenSetup": {
     "description": "Release note for first open setup fix."
+  },
+  "compassAccuracyIndicatorLabel": "Compass accuracy indicator",
+  "@compassAccuracyIndicatorLabel": {
+    "description": "Accessibility label for the compass accuracy dot shown in the top-right of the map."
+  },
+  "compassAccuracyGood": "Compass accuracy: good.",
+  "@compassAccuracyGood": {
+    "description": "Snackbar shown when the compass reading is confident."
+  },
+  "compassAccuracyModerate": "Compass accuracy: moderate. Move away from metal or electronics for a better reading.",
+  "@compassAccuracyModerate": {
+    "description": "Snackbar shown when the compass reading has some interference."
+  },
+  "compassAccuracyPoor": "Compass accuracy: poor. Move away from metal or magnets, or wave your device in a figure-8 to recalibrate.",
+  "@compassAccuracyPoor": {
+    "description": "Snackbar shown when the compass reading is unreliable."
+  },
+  "compassAccuracyUnknown": "Compass accuracy: waiting for a reading…",
+  "@compassAccuracyUnknown": {
+    "description": "Snackbar shown before the compass has produced its first accuracy sample."
   }
 }

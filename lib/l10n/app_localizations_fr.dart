@@ -198,4 +198,23 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get whatsNewFixFirstOpenSetup =>
       'Amélioration de la première configuration de l\'application';
+
+  @override
+  String get compassAccuracyIndicatorLabel =>
+      'Indicateur de précision de la boussole';
+
+  @override
+  String get compassAccuracyGood => 'Précision de la boussole : bonne.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Précision de la boussole : moyenne. Éloignez-vous du métal ou des appareils électroniques pour une meilleure mesure.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Précision de la boussole : faible. Éloignez-vous du métal ou des aimants, ou agitez l\'appareil en forme de 8 pour le recalibrer.';
+
+  @override
+  String get compassAccuracyUnknown =>
+      'Précision de la boussole : en attente d\'une mesure…';
 }

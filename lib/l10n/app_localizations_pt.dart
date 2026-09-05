@@ -195,6 +195,25 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get whatsNewFixFirstOpenSetup =>
       'Melhor experiência na primeira configuração do aplicativo';
+
+  @override
+  String get compassAccuracyIndicatorLabel =>
+      'Indicador de precisão da bússola';
+
+  @override
+  String get compassAccuracyGood => 'Precisão da bússola: boa.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Precisão da bússola: moderada. Afaste-se de metais ou eletrônicos para uma leitura melhor.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Precisão da bússola: fraca. Afaste-se de metais ou ímãs, ou mova o dispositivo em forma de 8 para recalibrar.';
+
+  @override
+  String get compassAccuracyUnknown =>
+      'Precisão da bússola: aguardando leitura…';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -388,6 +407,25 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get whatsNewFixFirstOpenSetup =>
       'Melhor experiência na primeira configuração do aplicativo';
+
+  @override
+  String get compassAccuracyIndicatorLabel =>
+      'Indicador de precisão da bússola';
+
+  @override
+  String get compassAccuracyGood => 'Precisão da bússola: boa.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Precisão da bússola: moderada. Afaste-se de metais ou eletrônicos para uma leitura melhor.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Precisão da bússola: fraca. Afaste-se de metais ou ímãs, ou mova o dispositivo em forma de 8 para recalibrar.';
+
+  @override
+  String get compassAccuracyUnknown =>
+      'Precisão da bússola: aguardando leitura…';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -582,4 +620,23 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
   @override
   String get whatsNewFixFirstOpenSetup =>
       'Melhor experiência na primeira configuração da aplicação';
+
+  @override
+  String get compassAccuracyIndicatorLabel =>
+      'Indicador de precisão da bússola';
+
+  @override
+  String get compassAccuracyGood => 'Precisão da bússola: boa.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Precisão da bússola: moderada. Afaste-se de metais ou eletrónicos para uma leitura melhor.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Precisão da bússola: fraca. Afaste-se de metais ou ímanes, ou mova o dispositivo em forma de 8 para recalibrar.';
+
+  @override
+  String get compassAccuracyUnknown =>
+      'Precisão da bússola: à espera de leitura…';
 }

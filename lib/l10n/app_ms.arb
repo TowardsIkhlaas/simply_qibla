@@ -57,5 +57,10 @@
   "whatsNewImprovementGeneral": "Penambahbaikan umum",
   "whatsNewFeatureLightDarkMode": "Sokongan mod cerah dan gelap",
   "whatsNewFixOnboardingContrast": "Kontras halaman pengenalan yang lebih baik untuk tema berbeza",
-  "whatsNewFixFirstOpenSetup": "Pengalaman persediaan awal aplikasi yang lebih baik"
+  "whatsNewFixFirstOpenSetup": "Pengalaman persediaan awal aplikasi yang lebih baik",
+  "compassAccuracyIndicatorLabel": "Penunjuk ketepatan kompas",
+  "compassAccuracyGood": "Ketepatan kompas: baik.",
+  "compassAccuracyModerate": "Ketepatan kompas: sederhana. Jauhkan diri daripada logam atau elektronik untuk bacaan yang lebih baik.",
+  "compassAccuracyPoor": "Ketepatan kompas: lemah. Jauhkan diri daripada logam atau magnet, atau lambaikan peranti anda dalam bentuk angka 8 untuk mengkalibrasi semula.",
+  "compassAccuracyUnknown": "Ketepatan kompas: menunggu bacaan…"
 }

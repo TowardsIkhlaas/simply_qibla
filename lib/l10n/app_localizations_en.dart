@@ -192,4 +192,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get whatsNewFixFirstOpenSetup =>
       'Improved first-time app setup experience';
+
+  @override
+  String get compassAccuracyIndicatorLabel => 'Compass accuracy indicator';
+
+  @override
+  String get compassAccuracyGood => 'Compass accuracy: good.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Compass accuracy: moderate. Move away from metal or electronics for a better reading.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Compass accuracy: poor. Move away from metal or magnets, or wave your device in a figure-8 to recalibrate.';
+
+  @override
+  String get compassAccuracyUnknown =>
+      'Compass accuracy: waiting for a reading…';
 }

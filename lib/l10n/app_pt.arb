@@ -57,5 +57,10 @@
   "whatsNewImprovementGeneral": "Melhorias gerais",
   "whatsNewFeatureLightDarkMode": "Suporte para modo claro e escuro",
   "whatsNewFixOnboardingContrast": "Melhor contraste na introdução para diferentes temas",
-  "whatsNewFixFirstOpenSetup": "Melhor experiência na primeira configuração do aplicativo"
+  "whatsNewFixFirstOpenSetup": "Melhor experiência na primeira configuração do aplicativo",
+  "compassAccuracyIndicatorLabel": "Indicador de precisão da bússola",
+  "compassAccuracyGood": "Precisão da bússola: boa.",
+  "compassAccuracyModerate": "Precisão da bússola: moderada. Afaste-se de metais ou eletrônicos para uma leitura melhor.",
+  "compassAccuracyPoor": "Precisão da bússola: fraca. Afaste-se de metais ou ímãs, ou mova o dispositivo em forma de 8 para recalibrar.",
+  "compassAccuracyUnknown": "Precisão da bússola: aguardando leitura…"
 }

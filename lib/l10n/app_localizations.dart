@@ -457,6 +457,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Improved first-time app setup experience'**
   String get whatsNewFixFirstOpenSetup;
+
+  /// Accessibility label for the compass accuracy dot shown in the top-right of the map.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass accuracy indicator'**
+  String get compassAccuracyIndicatorLabel;
+
+  /// Snackbar shown when the compass reading is confident.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass accuracy: good.'**
+  String get compassAccuracyGood;
+
+  /// Snackbar shown when the compass reading has some interference.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass accuracy: moderate. Move away from metal or electronics for a better reading.'**
+  String get compassAccuracyModerate;
+
+  /// Snackbar shown when the compass reading is unreliable.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass accuracy: poor. Move away from metal or magnets, or wave your device in a figure-8 to recalibrate.'**
+  String get compassAccuracyPoor;
+
+  /// Snackbar shown before the compass has produced its first accuracy sample.
+  ///
+  /// In en, this message translates to:
+  /// **'Compass accuracy: waiting for a reading…'**
+  String get compassAccuracyUnknown;
 }
 
 class _AppLocalizationsDelegate

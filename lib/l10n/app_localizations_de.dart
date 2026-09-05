@@ -194,4 +194,22 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get whatsNewFixFirstOpenSetup => 'Verbesserte Ersteinrichtung der App';
+
+  @override
+  String get compassAccuracyIndicatorLabel => 'Kompassgenauigkeits-Anzeige';
+
+  @override
+  String get compassAccuracyGood => 'Kompassgenauigkeit: gut.';
+
+  @override
+  String get compassAccuracyModerate =>
+      'Kompassgenauigkeit: mittel. Entferne dich von Metall oder Elektronik für eine bessere Messung.';
+
+  @override
+  String get compassAccuracyPoor =>
+      'Kompassgenauigkeit: schlecht. Entferne dich von Metall oder Magneten, oder schwenke das Gerät in einer Acht, um es neu zu kalibrieren.';
+
+  @override
+  String get compassAccuracyUnknown =>
+      'Kompassgenauigkeit: warte auf eine Messung…';
 }

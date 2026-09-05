@@ -134,6 +134,14 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
   bool _compassHardwareAvailable = false;
   double _currentHeading = 0;
 
+  // Compass accuracy (interference) state
+  CompassAccuracy _compassAccuracy = CompassAccuracy.unknown;
+  final AccuracyHysteresis _accuracyHysteresis = AccuracyHysteresis();
+  // Debug-only override to preview indicator tiers; unused in release builds
+  // because emulators typically report a fixed accuracy tier regardless of
+  // magnetic field values.
+  CompassAccuracy? _debugAccuracyOverride;
+
   // Computed property: compass is available only if enabled AND hardware works
   bool get _isCompassAvailable => _compassEnabled && _compassHardwareAvailable;
 
@@ -192,6 +200,14 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
           setState(() {
             _compassHardwareAvailable = available;
             _currentHeading = heading ?? 0;
+          });
+        }
+
+        final CompassAccuracy nextAccuracy = _accuracyHysteresis
+            .update(classifyAccuracy(event.accuracy));
+        if (nextAccuracy != _compassAccuracy) {
+          setState(() {
+            _compassAccuracy = nextAccuracy;
           });
         }
 
@@ -526,6 +542,40 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
 
   // Helper Methods
 
+  CompassAccuracy get _effectiveAccuracy =>
+      _debugAccuracyOverride ?? _compassAccuracy;
+
+  void _showCompassAccuracySnackBar() {
+    final AppLocalizations l = AppLocalizations.of(context)!;
+    final String message;
+    switch (_effectiveAccuracy) {
+      case CompassAccuracy.good:
+        message = l.compassAccuracyGood;
+      case CompassAccuracy.moderate:
+        message = l.compassAccuracyModerate;
+      case CompassAccuracy.poor:
+        message = l.compassAccuracyPoor;
+      case CompassAccuracy.unknown:
+        message = l.compassAccuracyUnknown;
+    }
+    _showSnackBar(message);
+  }
+
+  static const List<CompassAccuracy> _debugCycleOrder = <CompassAccuracy>[
+    CompassAccuracy.good,
+    CompassAccuracy.moderate,
+    CompassAccuracy.poor,
+    CompassAccuracy.unknown,
+  ];
+
+  void _cycleDebugAccuracy() {
+    final int currentIndex = _debugCycleOrder.indexOf(_effectiveAccuracy);
+    setState(() {
+      _debugAccuracyOverride =
+          _debugCycleOrder[(currentIndex + 1) % _debugCycleOrder.length];
+    });
+  }
+
   void _showSnackBar(String message,
       {String? actionLabel, VoidCallback? action}) {
     final SnackBar snackBar = SnackBar(
@@ -541,7 +591,9 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
             )
           : null,
     );
-    snackbarKey.currentState?.showSnackBar(snackBar);
+    snackbarKey.currentState
+      ?..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   void _onCameraMoveStarted() {
@@ -670,6 +722,18 @@ class MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
                           : Colors.grey,
                     ),
             ),
+            if (_isCompassAvailable)
+              Positioned(
+                top: 6,
+                right: 6,
+                child: CompassAccuracyIndicator(
+                  accuracy: _effectiveAccuracy,
+                  onTap: _showCompassAccuracySnackBar,
+                  onLongPress: kDebugMode ? _cycleDebugAccuracy : null,
+                  semanticLabel:
+                      AppLocalizations.of(context)!.compassAccuracyIndicatorLabel,
+                ),
+              ),
           ],
         ),
       ),
